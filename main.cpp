@@ -1,6 +1,7 @@
 #include <iostream>
 //#include "test.hpp"
 #include "vectorFromStackOverflow.h"
+#include <vector>
 
 //Allocator instance:-----
 //int main()
@@ -45,7 +46,9 @@
 //
 
 int main() {
-
-
+	ft::Vector<int> a;
+	a.push_back(51);
+	std::cout << a.capacity() << std::endl;
+	std::cout << a[0] << std::endl;
 	return 0;
 }
