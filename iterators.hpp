@@ -52,7 +52,7 @@ public:
 	bool            operator >= (const_iterator const &other) const { return _ptr >= other.getPtr(); }
 	bool            operator <= (const_iterator const &other) const { return _ptr <= other.getPtr(); }
 };
-friend    iterator                operator + (const difference_type &n, const iterator &it) { return it + n; }
+friend	iterator	operator + (const difference_type &n, const iterator &it) { return it + n; }
 
 
 /*******************************************************************************
