@@ -39,6 +39,7 @@ private:
 	unsigned int _size;
 	unsigned int _capacity;
 	T * buffer;
+	;
 };
 
 template<class T>
