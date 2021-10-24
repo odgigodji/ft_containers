@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/namerei/work/ft_containers/main.cpp
+iostream
+-
+test.hpp
+/Users/namerei/work/ft_containers/test.hpp
+
+/Users/namerei/work/ft_containers/test.hpp
+
