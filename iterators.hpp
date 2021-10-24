@@ -70,8 +70,7 @@ public:
 	~const_iterator() {}
 	const_iterator(const const_iterator &other) { *this = other; }
 	const_iterator(const iterator &other) { *this = other; }
-	const_iterator&        operator = (const const_iterator &other)
-	{
+	const_iterator&        operator = (const const_iterator &other) {
 		_ptr = other._ptr;
 		return *this;
 	}
@@ -127,8 +126,7 @@ public:
 	reverse_iterator(pointer ptr) : _ptr(ptr) {}
 	~reverse_iterator() {}
 	reverse_iterator(const reverse_iterator &other) { *this = other; }
-	reverse_iterator&    operator = (const reverse_iterator &other)
-	{
+	reverse_iterator&    operator = (const reverse_iterator &other) {
 		_ptr = other._ptr;
 		return *this;
 	}
@@ -179,8 +177,7 @@ public:
 	~const_reverse_iterator() {}
 	const_reverse_iterator(const const_reverse_iterator &other) { *this = other; }
 	const_reverse_iterator(const reverse_iterator &other) { *this = other; }
-	const_reverse_iterator&        operator = (const const_reverse_iterator &other)
-	{
+	const_reverse_iterator&        operator = (const const_reverse_iterator &other) {
 		if (this != &other)
 			_ptr = other._ptr;
 		return *this;
