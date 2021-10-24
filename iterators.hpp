@@ -16,29 +16,28 @@ private:
 
 public:
 	iterator() : _ptr(nullptr) {}
-	iterator(pointer ptr) : _ptr(ptr) {}
+	explicit iterator(pointer ptr) : _ptr(ptr) {}
 	iterator(const iterator &other) { *this = other; }
-	~iterator() {}
-	iterator&        operator = (const iterator &other)
-	{
+	~iterator() = default;
+	iterator&		operator = (const iterator &other) {
 		_ptr = other._ptr;
 		return *this;
 	}
 
-	pointer            getPtr() const { return _ptr; }
+	pointer			getPtr() const { return _ptr; }
 
-	iterator&        operator ++ () { ++_ptr; return *this; }
-	iterator&        operator -- () { --_ptr; return *this; }
+	iterator&		operator ++ () { ++_ptr; return *this; }
+	iterator&		operator -- () { --_ptr; return *this; }
 	iterator        operator ++ (int) { return iterator(_ptr++); }
 	iterator        operator -- (int) { return iterator(_ptr--); }
-	iterator&        operator += (const difference_type &n) { _ptr += n; return *this; }
-	iterator&        operator -= (const difference_type &n) { _ptr -= n; return *this; }
+	iterator&		operator += (const difference_type &n) { _ptr += n; return *this; }
+	iterator&		operator -= (const difference_type &n) { _ptr -= n; return *this; }
 	iterator        operator + (const difference_type &n) const { return iterator(_ptr + n); }
 	iterator        operator - (const difference_type &n) const { return iterator(_ptr - n); }
-	reference        operator * () { return *_ptr; };
-	difference_type    operator - (iterator const &other) const { return _ptr - other._ptr; }
-	reference        operator [] (const_reference n) const { return _ptr[n]; }
-	pointer            operator -> () { return _ptr; }
+	reference		operator * () { return *_ptr; };
+	difference_type operator - (iterator const &other) const { return _ptr - other._ptr; }
+	reference       operator [] (const_reference n) const { return _ptr[n]; }
+	pointer         operator -> () { return _ptr; }
 
 	bool            operator == (iterator const &other) const { return _ptr == other._ptr; }
 	bool            operator != (iterator const &other) const { return _ptr != other._ptr; }
@@ -111,7 +110,7 @@ public:
 	bool	operator >= (iterator const &other) const { return _ptr >= other.getPtr(); }
 	bool	operator <= (iterator const &other) const { return _ptr <= other.getPtr(); }
 };
-friend    const_iterator            operator + (const difference_type &n, const const_iterator &it) { return it + n; }
+friend	const_iterator	operator + (const difference_type &n, const const_iterator &it) { return it + n; }
 
 
 /*******************************************************************************
