@@ -55,20 +55,21 @@
 //	private:
 //		T*        _ptr{};
 //
-////		iterator() : _ptr(nullptr) {}
-////		explicit iterator(T*  ptr) : _ptr(ptr) {}
-////		iterator(const iterator &other) { *this = other; }
-////		~iterator() = default;
-////		iterator&		operator = (const iterator &other) {
-////			_ptr = other._ptr;
-////			return *this;
-////		}
+//		iterator() : _ptr(nullptr) {}
+//		explicit iterator(T*  ptr) : _ptr(ptr) {}
+//		iterator(const iterator &other) { *this = other; }
+//		~iterator() = default;
+//		iterator&		operator = (const iterator &other) {
+//			_ptr = other._ptr;
+//			return *this;
+//		}
 //	};
 //};
 
 int main() {
-//	ft::vector<int>::iterator a;
-	
+	std::vector<int>::iterator z;
+//	ft::vector<int>::iterator k;
+
 	return 0;
 
 

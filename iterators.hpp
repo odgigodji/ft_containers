@@ -18,7 +18,7 @@ public:
 	typedef Iter	pointer;
 
 private:
-	pointer 		ptr;
+	pointer 		_ptr;
 
 public:
 //	iterator() : _ptr(nullptr) {}
