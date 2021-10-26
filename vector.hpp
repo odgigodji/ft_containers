@@ -2,16 +2,18 @@
 // Created by Nelson Amerei on 10/24/21.
 //
 
-#include <iostream>
+//#include <iostream>
 //#include "iterators.hpp"
 
 #ifndef FT_VECTOR_HPP
 #define FT_VECTOR_HPP
+#include <iostream>
+//#include "iterators.hpp"
 
 namespace ft
 {
 //---------------------------------ft-----------------------------------------//
-template<class Tp,  class Alloc = std::allocator<Tp>>
+template<class Tp,  class Alloc = std::allocator<Tp> >
 	class vector
 	{
 /*******************************************************************************

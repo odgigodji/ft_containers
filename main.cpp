@@ -46,28 +46,29 @@
 //	}
 //
 
-template<class T, class Alloc = std::allocator<T>>
-class tess {
-public:
-	typedef T ass;
-	class iterator  {
-
-	private:
-		T*        _ptr{};
-
-//		iterator() : _ptr(nullptr) {}
-//		explicit iterator(T*  ptr) : _ptr(ptr) {}
-//		iterator(const iterator &other) { *this = other; }
-//		~iterator() = default;
-//		iterator&		operator = (const iterator &other) {
-//			_ptr = other._ptr;
-//			return *this;
-//		}
-	};
-};
+//template<class T, class Alloc = std::allocator<T>>
+//class tess {
+//public:
+//	typedef T ass;
+//	class iterator  {
+//
+//	private:
+//		T*        _ptr{};
+//
+////		iterator() : _ptr(nullptr) {}
+////		explicit iterator(T*  ptr) : _ptr(ptr) {}
+////		iterator(const iterator &other) { *this = other; }
+////		~iterator() = default;
+////		iterator&		operator = (const iterator &other) {
+////			_ptr = other._ptr;
+////			return *this;
+////		}
+//	};
+//};
 
 int main() {
-	ft::vector<int>::iterator a;
+//	ft::vector<int>::iterator a;
+	
 	return 0;
 
 

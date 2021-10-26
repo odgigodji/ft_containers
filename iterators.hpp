@@ -1,59 +1,64 @@
 //
 // Created by Nelson Amerei on 10/24/21.
 //
-#include "vector.hpp"
+
 
 #ifndef FT_CONTAINERS_ITERATORS_HPP
 #define FT_CONTAINERS_ITERATORS_HPP
+#include "vector.hpp"
 
 /*******************************************************************************
 *-----------------------------------Iterator-----------------------------------*
 *******************************************************************************/
 
-class iterator : public ft::iterator_traits<std::random_access_iterator_tag, value_type>
+template<class Iter>
+class iterator
 {
+public:
+	typedef Iter	pointer;
+
 private:
-	pointer        _ptr{};
+	pointer 		ptr;
 
 public:
-	iterator() : _ptr(nullptr) {}
-	explicit iterator(pointer ptr) : _ptr(ptr) {}
-	iterator(const iterator &other) { *this = other; }
-	~iterator() = default;
-	iterator&		operator = (const iterator &other) {
-		_ptr = other._ptr;
-		return *this;
-	}
+//	iterator() : _ptr(nullptr) {}
+//	explicit iterator(pointer ptr) : _ptr(ptr) {}
+//	iterator(const iterator &other) { *this = other; }
+//	~iterator() = default;
+//	iterator&		operator = (const iterator &other) {
+//		_ptr = other._ptr;
+//		return *this;
+//	}
+//
+//	pointer			getPtr() const { return _ptr; }
 
-	pointer			getPtr() const { return _ptr; }
-
-	iterator&		operator ++ () { ++_ptr; return *this; }
-	iterator&		operator -- () { --_ptr; return *this; }
-	iterator        operator ++ (int) { return iterator(_ptr++); }
-	iterator        operator -- (int) { return iterator(_ptr--); }
-	iterator&		operator += (const difference_type &n) { _ptr += n; return *this; }
-	iterator&		operator -= (const difference_type &n) { _ptr -= n; return *this; }
-	iterator        operator + (const difference_type &n) const { return iterator(_ptr + n); }
-	iterator        operator - (const difference_type &n) const { return iterator(_ptr - n); }
-	reference		operator * () { return *_ptr; };
-	difference_type operator - (iterator const &other) const { return _ptr - other._ptr; }
-	reference       operator [] (const_reference n) const { return _ptr[n]; }
-	pointer         operator -> () { return _ptr; }
-
-	bool            operator == (iterator const &other) const { return _ptr == other._ptr; }
-	bool            operator != (iterator const &other) const { return _ptr != other._ptr; }
-	bool            operator > (iterator const &other) const{ return _ptr > other._ptr; }
-	bool            operator < (iterator const &other) const{ return _ptr < other._ptr; }
-	bool            operator >= (iterator const &other) const { return _ptr >= other._ptr; }
-	bool            operator <= (iterator const &other) const { return _ptr <= other._ptr; }
-	bool            operator == (const_iterator const &other) const { return _ptr == other.getPtr(); }
-	bool            operator != (const_iterator const &other) const { return _ptr != other.getPtr(); }
-	bool            operator > (const_iterator const &other) const{ return _ptr > other.getPtr(); }
-	bool            operator < (const_iterator const &other) const{ return _ptr < other.getPtr(); }
-	bool            operator >= (const_iterator const &other) const { return _ptr >= other.getPtr(); }
-	bool            operator <= (const_iterator const &other) const { return _ptr <= other.getPtr(); }
+//	iterator&		operator ++ () { ++_ptr; return *this; }
+//	iterator&		operator -- () { --_ptr; return *this; }
+//	iterator        operator ++ (int) { return iterator(_ptr++); }
+//	iterator        operator -- (int) { return iterator(_ptr--); }
+//	iterator&		operator += (const difference_type &n) { _ptr += n; return *this; }
+//	iterator&		operator -= (const difference_type &n) { _ptr -= n; return *this; }
+//	iterator        operator + (const difference_type &n) const { return iterator(_ptr + n); }
+//	iterator        operator - (const difference_type &n) const { return iterator(_ptr - n); }
+//	reference		operator * () { return *_ptr; };
+//	difference_type operator - (iterator const &other) const { return _ptr - other._ptr; }
+//	reference       operator [] (const_reference n) const { return _ptr[n]; }
+//	pointer         operator -> () { return _ptr; }
+//
+//	bool            operator == (iterator const &other) const { return _ptr == other._ptr; }
+//	bool            operator != (iterator const &other) const { return _ptr != other._ptr; }
+//	bool            operator > (iterator const &other) const{ return _ptr > other._ptr; }
+//	bool            operator < (iterator const &other) const{ return _ptr < other._ptr; }
+//	bool            operator >= (iterator const &other) const { return _ptr >= other._ptr; }
+//	bool            operator <= (iterator const &other) const { return _ptr <= other._ptr; }
+//	bool            operator == (const_iterator const &other) const { return _ptr == other.getPtr(); }
+//	bool            operator != (const_iterator const &other) const { return _ptr != other.getPtr(); }
+//	bool            operator > (const_iterator const &other) const{ return _ptr > other.getPtr(); }
+//	bool            operator < (const_iterator const &other) const{ return _ptr < other.getPtr(); }
+//	bool            operator >= (const_iterator const &other) const { return _ptr >= other.getPtr(); }
+//	bool            operator <= (const_iterator const &other) const { return _ptr <= other.getPtr(); }
 };
-friend	iterator	operator + (const difference_type &n, const iterator &it) { return it + n; }
+//friend	iterator	operator + (const difference_type &n, const iterator &it) { return it + n; }
 
 
 /*******************************************************************************
