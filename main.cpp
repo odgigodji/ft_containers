@@ -4,79 +4,43 @@
 #include <vector>
 #include "vector.hpp"
 
-//Allocator instance:-----
-//int main()
-//{
-//	{
-//		// default allocator for ints
-//		std::allocator<int> alloc;
-//
-//		// demonstrating the few directly usable members
-////		static_assert(std::is_same_v<int, decltype(alloc)::value_type>);
-//		int* p = alloc.allocate(1);  // space for one int
-//		alloc.deallocate(p, 1);      // and it is gone
-//
-//		// Even those can be used through traits though, so no need
-//		using traits_t = std::allocator_traits<decltype(alloc)>; // The matching trait
-//		p = traits_t::allocate(alloc, 1);
-//		traits_t::construct(alloc, p, 7);       // construct the int
-//		std::cout << *p << '\n';
-//		traits_t::deallocate(alloc, p, 1);      // deallocate space for one int
-//	}
-//
-//	{
-//		// default allocator for strings
-//		std::allocator<std::string> alloc;
-//		// matching traits
-//		using traits_t = std::allocator_traits<decltype(alloc)>;
-//
-//		// Rebinding the allocator using the trait for strings gets the same type
-//		traits_t::rebind_alloc<std::string> alloc_ = alloc;
-//
-//		std::string* p = traits_t::allocate(alloc, 2); // space for 2 strings
-//
-//		traits_t::construct(alloc, p, "foo");
-//		traits_t::construct(alloc, p + 1, "bar");
-//
-//		std::cout << p[0] << ' ' << p[1] << '\n';
-//
-//		traits_t::destroy(alloc, p + 1);
-//		traits_t::destroy(alloc, p);
-//		traits_t::deallocate(alloc, p, 2);
-//	}
-//
-
-//template<class T, class Alloc = std::allocator<T>>
-//class tess {
-//public:
-//	typedef T ass;
-//	class iterator  {§
-//
-//	private:
-//		T*        _ptr{};
-//
-//		iterator() : _ptr(nullptr) {}
-//		explicit iterator(T*  ptr) : _ptr(ptr) {}
-//		iterator(const iterator &other) { *this = other; }
-//		~iterator() = default;
-//		iterator&		operator = (const iterator &other) {
-//			_ptr = other._ptr;
-//			return *this;
-//		}
-//	};
-//};
-
 int main() {
+	//ALLOCATORS---------------------------------------------------------------
+	std::allocator<int> alloc;
+
+	int *p = alloc.allocate(1); //space for one int
+	alloc.deallocate(p, 1);		//and it's gone
+
+//	int *z = nullptr;
+	for(int i = 0; i < 2; i++) {
+		alloc.construct(p, 5);
+	}
+
+	for(int i = 2; i < 5; i++) {
+		alloc.construct(p, 3);
+	}
+	for(int i = 0; i < 5; i++) {
+		std::cout << *p << std::endl;
+	}
+
+
+
+
+
+	//ALLOCATORS---------------------------------------------------------------
 	std::vector<int> first;                                // empty vector of ints
 	std::vector<int> second (40,100);                // four ints with value 100
 	std::vector<int> third (second.begin(),second.end());  // iterating through second
 	std::vector<int> fourth (third);
+//	fourth.push_back(51);
+
 
 //	for(int i  = 0; i < 20; i++) {
 //		std::cout << second[0] << std::endl;
 //	}
 
 	ft::vector<int> b(5,50);
+
 
 
 	return 0;

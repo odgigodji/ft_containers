@@ -72,9 +72,10 @@ public:
 	//	2) Constructs a container with n elements. Each element is a copy of val.
 explicit vector( size_type n, const_reference value) :  _size(n),
 				 										_capacity(n) {
+		_arr = _alloc.allocate(n);
 		for(int i = 0; i < n; i++, _arr++) {
 			_alloc.construct(_arr + i, value);
-			std::cout << "test: " << _arr[i] << std::endl;
+			std::cout << "test: " << i << " " << _arr[i] << std::endl;
 		}
 	}
 /*	4) Constructs the container with count default-inserted instances of T.
