@@ -46,10 +46,24 @@
 //	}
 //
 
-template<class T>
+template<class T, class Alloc>
 class tess {
 public:
 	typedef T ass;
+	class iterator : public std::iterator<T, Alloc> {
+
+	private:
+		T*        _ptr{};
+
+		iterator() : _ptr(nullptr) {}
+		explicit iterator(T*  ptr) : _ptr(ptr) {}
+		iterator(const iterator &other) { *this = other; }
+		~iterator() = default;
+		iterator&		operator = (const iterator &other) {
+			_ptr = other._ptr;
+			return *this;
+		}
+	};
 };
 
 int main() {
@@ -62,10 +76,17 @@ int main() {
 //	ft::vector
 
 	std::vector<int>::size_type t;
-	ft::vector<int, int>::const_iterator a;
-	std::vector<int>::const_iterator  b;
+//	ft::vector<int, int>::const_iterator a;
+	std::vector<int>::iterator  b;
 
-	tess<int>::
+	tess<unsigned int, int>::ass r;
+	tess<int>::iterator z;
+
+//	tess<int>::iterator z;
+	r = 51;
+	std::cout << r << std::endl;
+
+
 //	std::vector<int>::ite
 //	ft::vector<int>(4,6) a;
 
