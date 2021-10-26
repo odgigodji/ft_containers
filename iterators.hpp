@@ -1,6 +1,8 @@
 //
 // Created by Nelson Amerei on 10/24/21.
 //
+#include "vector.h"
+
 
 #ifndef FT_CONTAINERS_ITERATORS_HPP
 #define FT_CONTAINERS_ITERATORS_HPP
@@ -75,8 +77,7 @@ public:
 		return *this;
 	}
 
-	const_iterator&        operator = (const iterator &other)
-	{
+	const_iterator&        operator = (const iterator &other) {
 		_ptr = other.getPtr();
 		return *this;
 	}
@@ -183,8 +184,7 @@ public:
 		return *this;
 	}
 
-	const_reverse_iterator&        operator = (const reverse_iterator &other)
-	{
+	const_reverse_iterator&        operator = (const reverse_iterator &other) {
 		_ptr = other.getPtr();
 		return *this;
 	}

@@ -1,7 +1,8 @@
 #include <iostream>
 //#include "test.hpp"
-#include "vectorFromStackOverflow.h"
+//#include "vectorFromStackOverflow.h"
 #include <vector>
+#include "vector.h"
 
 //Allocator instance:-----
 //int main()
@@ -45,10 +46,32 @@
 //	}
 //
 
+template<class T>
+class tess {
+public:
+	typedef T ass;
+};
+
 int main() {
-	ft::Vector<int> a;
-	a.push_back(51);
-	std::cout << a.capacity() << std::endl;
-	std::cout << a[0] << std::endl;
+//	ft::Vector<int> a;
+//	a.push_back(51);
+//	std::cout << a.capacity() << std::endl;
+//	std::cout << a[0] << std::endl;
+
+//	std::vector
+//	ft::vector
+
+	std::vector<int>::size_type t;
+	ft::vector<int, int>::const_iterator a;
+	std::vector<int>::const_iterator  b;
+
+	tess<int>::
+//	std::vector<int>::ite
+//	ft::vector<int>(4,6) a;
+
+//	t = 65;
+//	std::cout << t << std::endl;
 	return 0;
+
+
 }
