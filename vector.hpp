@@ -3,11 +3,15 @@
 //
 
 #include <iostream>
+//#include "iterators.hpp"
+
+#ifndef FT_VECTOR_HPP
+#define FT_VECTOR_HPP
 
 namespace ft
 {
 //---------------------------------ft-----------------------------------------//
-	template<class Tp, class Alloc>
+template<class Tp,  class Alloc = std::allocator<Tp>>
 	class vector
 	{
 /*******************************************************************************
@@ -29,9 +33,9 @@ namespace ft
 *___________________________________Iterators__________________________________*
 *******************************************************************************/
 		class						 iterator;
-		class						 const_iterator;
-		class						 reverse_iterator;
-		class						 const_reverse_iterator;
+//		class						 const_iterator;
+//		class						 reverse_iterator;
+//		class						 const_reverse_iterator;
 
 /*******************************************************************************
 *___________________________________Variables__________________________________*
@@ -92,3 +96,4 @@ namespace ft
 //-----------------------------------ft---------------------------------------//
 }
 
+#endif //FT_VECTOR_HPP
