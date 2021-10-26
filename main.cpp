@@ -50,7 +50,7 @@
 //class tess {
 //public:
 //	typedef T ass;
-//	class iterator  {
+//	class iterator  {§
 //
 //	private:
 //		T*        _ptr{};
@@ -67,8 +67,17 @@
 //};
 
 int main() {
-	std::vector<int>::iterator z;
-//	ft::vector<int>::iterator k;
+	std::vector<int> first;                                // empty vector of ints
+	std::vector<int> second (40,100);                // four ints with value 100
+	std::vector<int> third (second.begin(),second.end());  // iterating through second
+	std::vector<int> fourth (third);
+
+//	for(int i  = 0; i < 20; i++) {
+//		std::cout << second[0] << std::endl;
+//	}
+
+	ft::vector<int> b(5,50);
+
 
 	return 0;
 

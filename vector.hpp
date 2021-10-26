@@ -54,22 +54,34 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 *_________________________________Constructors_________________________________*
 *******************************************************************************/
 
-//	1)Default constructor. Constructs an empty container with a default-constructed allocator.
+/*
+	Parameters:
+	alloc	-	allocator to use for all memory allocations of this container
+	count	-	the size of the container
+	value	-	the value to initialize elements of the container with
+	first, last	-	the range to copy the elements from
+	other	-	another container to be used as source to initialize
+ 	the elements of the container with
+	init	-	initializer list to initialize the elements of the container with
+ */
+
+//	1)Default constructor. Constructs an empty container, with no elements.
+public:
 	vector() : _arr(nullptr), _size(0), _capacity(0) {}
 
-//	2)Constructs an empty container with the given allocator alloc.
-	explicit vector(const Allocator& alloc ) : _arr(nullptr),
-												_size(0),
-												_capacity(0),
-												_alloc(alloc) {}
-
-//	3) Constructs the container with count copies of elements with value value.
-	explicit vector( size_type count, const T& value = T(),
-				 const Allocator& alloc = Allocator()) {
-		_ocunt = count;
+	//	2) Constructs a container with n elements. Each element is a copy of val.
+explicit vector( size_type n, const_reference value) :  _size(n),
+				 										_capacity(n) {
+		for(int i = 0; i < n; i++, _arr++) {
+			_alloc.construct(_arr + i, value);
+			std::cout << "test: " << _arr[i] << std::endl;
+		}
+	}
+/*	4) Constructs the container with count default-inserted instances of T.
+	No copies are made. */
+	explicit vector( size_type count ) {
 
 	}
-
 
 	};
 //-----------------------------------ft---------------------------------------//
