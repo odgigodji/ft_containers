@@ -27,8 +27,6 @@ int main() {
 	std::vector<int> third (second.begin(),second.end());  // iterating through second
 	std::vector<int> fourth (third);
 //	fourth.push_back(51);
-
-
 //	for(int i  = 0; i < 20; i++) {
 //		std::cout << second[0] << std::endl;
 //	}

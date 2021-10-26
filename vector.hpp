@@ -93,13 +93,24 @@ public:
 //4)Copy constructor.Constructs a container with a copy of each of the
 // elements in x, in the same order.
 	vector(const vector& other) {
+		_arr = other._alloc;
+		_size = other._size;
+		_capacity = other.capacity;
 		_arr = _alloc.allocate(_capacity);
 		for(size_t i = 0; i < _size; i++) {
 			_alloc.construct(_arr + i, other._arr[i]);
 		}
-
 	}
 
+
+/*******************************************************************************
+*____________________________________Getters___________________________________*
+*******************************************************************************/
+	allocator_type get_allocator() const { return _alloc; }
+
+	size_t size() const { return _size; }
+
+	size_t capacity() const { return _capacity; }
 	};
 //-----------------------------------ft---------------------------------------//
 }
