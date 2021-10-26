@@ -69,20 +69,20 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 public:
 	vector() : _arr(nullptr), _size(0), _capacity(0) {}
 
-//	2) Constructs a container with n elements. Each element is a copy of val.
-explicit vector(size_type n, const_reference value) :   _size(n),
-														_capacity(n) {
+//	2)Constructs a container with n elements. Each element is a copy of val.
+	vector(size_type n, const_reference value) :	_size(n), _capacity(n)
+	{
 		_arr = _alloc.allocate(n);
 		for(size_t i = 0; i < n; i++) {
 			_alloc.construct(_arr + i, value);
 			std::cout << "test: " << i << " " << _arr[i] << std::endl;
 		}
 	}
-/*	4) Constructs the container with count default-inserted instances of T.
-	No copies are made. */
-	explicit vector( size_type count ) {
 
-	}
+/*	3)Constructs a container with as many elements as the range (first,last),
+ * with each element constructed from its corresponding element
+ * in that range, in the same order. */
+
 
 	};
 //-----------------------------------ft---------------------------------------//

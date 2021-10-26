@@ -8,23 +8,17 @@ int main() {
 	//ALLOCATORS---------------------------------------------------------------
 	std::allocator<int> alloc;
 
-	int *p = alloc.allocate(1); //space for one int
-	alloc.deallocate(p, 1);		//and it's gone
+	int *p = alloc.allocate(5); //space for one int
+//	alloc.deallocate(p, 1);	 	//and it's gone
 
 //	int *z = nullptr;
-	for(int i = 0; i < 2; i++) {
-		alloc.construct(p, 5);
-	}
-
-	for(int i = 2; i < 5; i++) {
-		alloc.construct(p, 3);
-	}
 	for(int i = 0; i < 5; i++) {
-		std::cout << *p << std::endl;
+		alloc.construct(p + i, i);
 	}
 
-
-
+	for(int i = 0; i < 5; i++) {
+		std::cout << p[i] << std::endl;
+	}
 
 
 	//ALLOCATORS---------------------------------------------------------------
