@@ -16,9 +16,9 @@ int main() {
 		alloc.construct(p + i, i);
 	}
 
-	for(int i = 0; i < 5; i++) {
-		std::cout << p[i] << std::endl;
-	}
+//	for(int i = 0; i < 5; i++) {
+//		std::cout << p[i] << std::endl;
+//	}
 
 
 	//ALLOCATORS---------------------------------------------------------------
@@ -32,8 +32,10 @@ int main() {
 //	}
 
 	ft::vector<int> b(5,50);
+//	std::cout << b.size() << std::endl;
 
-//	ft::vector<int> l(b);
+	ft::vector<int> l(b);
+	std::cout << l.size() << " " << l._arr[3] << std::endl;
 
 	return 0;
 

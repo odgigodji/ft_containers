@@ -41,7 +41,8 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 /*******************************************************************************
 *___________________________________Variables__________________________________*
 *******************************************************************************/
-	private:
+//	private:
+	public:
 		allocator_type    			_alloc;
 		pointer           			_arr;
 		size_t            			_size;
@@ -78,25 +79,25 @@ public:
 		}
 	}
 
-//3)Range constructor.Constructs a container with as many elements as the range
+//  3)Range constructor.Constructs a container with as many elements as the range
 // (first,last),with each element constructed from its corresponding
 // element in that range, in the same order.
-	template<class Iter>
-	vector(Iter first, Iter last) : _size(0) {
-		size_t range = last - first;
-		if (range < 0) { throw std::out_of_range("vector"); }
-		_arr = _alloc.allocate(range);
-		_capacity = range;
-		//insert(begin(), first, last)
-	}
+//	template<class Iter>
+//	vector(Iter first, Iter last) : _size(0) {
+//		size_t range = last - first;
+//		if (range < 0) { throw std::out_of_range("vector"); }
+//		_arr = _alloc.allocate(range);
+//		_capacity = range;
+//		//insert(begin(), first, last)
+//	}
 
-//4)Copy constructor.Constructs a container with a copy of each of the
+//  4)Copy constructor.Constructs a container with a copy of each of the
 // elements in x, in the same order.
 	vector(const vector& other) {
-		_arr = static_cast<pointer>(other.get_allocator());
 		_size = other.size();
-		_capacity = other.capacity();
-		_arr = _alloc.allocate(_capacity);
+        _capacity = other.capacity();
+//        _alloc = other.get_allocator();
+        _arr = _alloc.allocate(_capacity);
 		for(size_t i = 0; i < _size; i++) {
 			_alloc.construct(_arr + i, other._arr[i]);
 		}
