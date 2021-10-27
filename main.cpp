@@ -20,12 +20,14 @@ public:
     char *_arr;
     class iterator;
     std::allocator<char> _alloc;
+    unsigned int _size;
 
-    vec(const char *text, int n) {
+    vec(const char *text, unsigned int n) {
         _arr = _alloc.allocate(n);
+        _size = n;
         for(size_t i = 0; i < n; i++) {
-            std::cout << static_cast<char>(*(text + i)) << std::endl;
-            _alloc.construct(_arr + i, *text + i);
+//            std::cout << static_cast<char>(*(text + i)) << std::endl;
+            _alloc.construct(_arr + i, *(text + i));
 //            std::cout << "test: " << i << " " << _arr[i] << std::endl;
         }
     }
@@ -72,12 +74,13 @@ int main() {
 
 //    std::cout << a << std::endl;
 
-    vec a("hello", 5);
-    for (int i =0 ; i< 5; i++) {
-//std::cout << a._arr << std::endl;
-
+    vec a("hello_world", 11);
+    for (int i = 0 ; i< a._size; i++) {
+//        std::cout << i << " ";
+        std::cout << static_cast<char>(*(a._arr + i)) << std::endl;
     }
-    std::cout << std::endl;
+    std::cout << "---end_print---" << std::endl;
+//    vec::iterator z;
 	return 0;
 
 }
