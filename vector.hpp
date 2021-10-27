@@ -34,15 +34,16 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 /*******************************************************************************
 *___________________________________Iterators__________________________________*
 *******************************************************************************/
-//        template<class Iter>
         class						iterator {
         private:
-            pointer 		_ptr;
+            pointer 		        _ptr;
 
         public:
             iterator() : _ptr(nullptr) {}
             explicit iterator(pointer ptr) : _ptr(ptr) {}
             iterator(const iterator &other) { *this = other; }
+
+            reference   operator * () { return *_ptr; };
         };
 //		class						 iterator;
 //		class						 const_iterator;
@@ -126,20 +127,17 @@ public:
 *____________________________________Getters___________________________________*
 *******************************************************************************/
 	allocator_type get_allocator() const { return _alloc; }
-
 	size_type size() const { return _size; }
-
 	size_type capacity() const { return _capacity; }
 
 /*******************************************************************************
-*_______________________________Member functions_______________________________*
+*_______________________________Member_functions_______________________________*
 *******************************************************************************/
-
     iterator    begin()  { return iterator(_arr); }
-
-/*******************************************************************************
-*___________________________________Iterators__________________________________*
-*******************************************************************************/
+    iterator    end() {
+        std::cout << "end: size=" << _size << " _arr + _size =" << *(_arr + 4 ) << std::endl;
+        return iterator(_arr + _size);
+    }
 
 	};
 //-----------------------------------ft---------------------------------------//
