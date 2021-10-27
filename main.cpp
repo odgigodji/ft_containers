@@ -4,21 +4,26 @@
 #include <vector>
 //#include "vector.hpp"
 
-class iterator {
-public:
-    char *_ptr;
 
-    iterator() {
-        _ptr = nullptr;
-    }
-
-};
 
 class vec {
 public:
 
     char *_arr;
-    class iterator;
+
+    class iterator {
+    public:
+        char *_ptr;
+
+        iterator() {
+            _ptr = nullptr;
+        }
+        explicit iterator(char *_arr) {
+            _ptr = _arr;
+        }
+        char&        operator * () { return *_ptr; };
+    };
+
     std::allocator<char> _alloc;
     unsigned int _size;
 
@@ -31,8 +36,10 @@ public:
 //            std::cout << "test: " << i << " " << _arr[i] << std::endl;
         }
     }
-//    iterator  begin() { return iterator(_arr); }
-
+    iterator  begin() const { return iterator(_arr); }
+    iterator  end() const {
+        std::cout << "end: size=" << _size << " _arr + _size =" << _arr + _size - 1 << std::endl;
+        return iterator(_arr + _size - 1); }
 };
 
 
@@ -80,7 +87,13 @@ int main() {
         std::cout << static_cast<char>(*(a._arr + i)) << std::endl;
     }
     std::cout << "---end_print---" << std::endl;
-//    vec::iterator z;
+    std::vector<int>::iterator z0;
+    vec::iterator z = a.begin();
+    std::cout << *z << std::endl;
+
+    z = a.end();
+    std::cout << *z << std::endl;
+//    std::cout << "beg=" << a.begin() << " end=" << a.end() << std::endl;
 	return 0;
 
 }
