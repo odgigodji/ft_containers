@@ -12,5 +12,7 @@ int main() {
     z = a.end();
     std::cout << "main: " << *z << std::endl;
 //    std::
+std::vector<int> a0(5, 42);
+std::cout << a0.size() << std::endl;
     return 0;
 }

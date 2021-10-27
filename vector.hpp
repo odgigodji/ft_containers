@@ -135,8 +135,8 @@ public:
 *******************************************************************************/
     iterator    begin()  { return iterator(_arr); }
     iterator    end() {
-        std::cout << "end: size=" << _size << " _arr + _size =" << *(_arr + 4 ) << std::endl;
-        return iterator(_arr + _size);
+//        std::cout << "end: size=" << _size << " _arr + _size =" << *(_arr + _size - 1 ) << std::endl;
+        return iterator(_arr + _size - 1);
     }
 
 	};
