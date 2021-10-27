@@ -8,7 +8,7 @@
 #ifndef FT_VECTOR_HPP
 #define FT_VECTOR_HPP
 #include <iostream>
-#include "iterators.hpp"
+//#include "iterators.hpp"
 
 namespace ft
 {
@@ -34,7 +34,17 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 /*******************************************************************************
 *___________________________________Iterators__________________________________*
 *******************************************************************************/
-		class						 iterator;
+//        template<class Iter>
+        class						iterator {
+        private:
+            pointer 		_ptr;
+
+        public:
+            iterator() : _ptr(nullptr) {}
+            explicit iterator(pointer ptr) : _ptr(ptr) {}
+            iterator(const iterator &other) { *this = other; }
+        };
+//		class						 iterator;
 //		class						 const_iterator;
 //		class						 reverse_iterator;
 //		class						 const_reverse_iterator;
@@ -125,8 +135,11 @@ public:
 *_______________________________Member functions_______________________________*
 *******************************************************************************/
 
-//    iterator    begin()  { return iterator(_arr); }
+    iterator    begin()  { return iterator(_arr); }
 
+/*******************************************************************************
+*___________________________________Iterators__________________________________*
+*******************************************************************************/
 
 	};
 //-----------------------------------ft---------------------------------------//
