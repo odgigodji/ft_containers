@@ -21,16 +21,16 @@ private:
 	pointer 		_ptr;
 
 public:
-//	iterator() : _ptr(nullptr) {}
-//	explicit iterator(pointer ptr) : _ptr(ptr) {}
-//	iterator(const iterator &other) { *this = other; }
+	iterator() : _ptr(nullptr) {}
+	explicit iterator(pointer ptr) : _ptr(ptr) {}
+	iterator(const iterator &other) { *this = other; }
 //	~iterator() = default;
 //	iterator&		operator = (const iterator &other) {
 //		_ptr = other._ptr;
 //		return *this;
 //	}
 //
-//	pointer			getPtr() const { return _ptr; }
+	pointer			getPtr() const { return _ptr; }
 
 //	iterator&		operator ++ () { ++_ptr; return *this; }
 //	iterator&		operator -- () { --_ptr; return *this; }

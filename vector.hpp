@@ -8,6 +8,7 @@
 #ifndef FT_VECTOR_HPP
 #define FT_VECTOR_HPP
 #include <iostream>
+#include "iterators.hpp"
 
 namespace ft
 {
@@ -52,7 +53,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 /*******************************************************************************
 *===============================MEMBER FUNCTIONS===============================*
 ********************************************************************************
-*_________________________________Constructors_________________________________*
+*__________________________Constructors and destructor_________________________*
 *******************************************************************************/
 
 /*
@@ -82,8 +83,8 @@ public:
 //  3)Range constructor.Constructs a container with as many elements as the range
 // (first,last),with each element constructed from its corresponding
 // element in that range, in the same order.
-//	template<class Iter>
-//	vector(Iter first, Iter last) : _size(0) {
+//	template<class Iter = iterator>
+//	vector(iterator first, iterator last) : _size(0) {
 //		size_t range = last - first;
 //		if (range < 0) { throw std::out_of_range("vector"); }
 //		_arr = _alloc.allocate(range);
@@ -103,6 +104,13 @@ public:
 		}
 	}
 
+//  1)Destructor.
+//    ~vector() {
+////	    _clear
+//	    _arr = nullptr;
+//	}
+
+	//assignation operator overload
 
 /*******************************************************************************
 *____________________________________Getters___________________________________*
@@ -112,6 +120,13 @@ public:
 	size_type size() const { return _size; }
 
 	size_type capacity() const { return _capacity; }
+
+/*******************************************************************************
+*_______________________________Member functions_______________________________*
+*******************************************************************************/
+
+//    iterator    begin()  { return iterator(_arr); }
+
 
 	};
 //-----------------------------------ft---------------------------------------//

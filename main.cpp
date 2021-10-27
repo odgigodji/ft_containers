@@ -35,9 +35,12 @@ int main() {
 //	std::cout << b.size() << std::endl;
 
 	ft::vector<int> l(b);
+//	ft::vector<int> g(5, 5);
 	std::cout << l.size() << " " << l._arr[3] << std::endl;
+//	std::cout << b.begin() << std::endl;
+    int g = 51;
 
+//    std::cout << a << std::endl;
 	return 0;
-
 
 }
