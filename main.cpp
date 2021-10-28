@@ -1,6 +1,7 @@
 #include <vector>
 #include "vector.hpp"
 
+
 int main() {
 
     ft::vector<int> a(5, 50);
@@ -13,13 +14,20 @@ int main() {
 
     z = a.begin();
     std::cout << "first is " << *z << std::endl;
-    z = a.end();
-    std::cout << "last is " << *z << std::endl;
+//    z = a.end();
+//    std::cout << "last is " << *z << std::endl;
 
-    for (int i = 0; i < a.size(); i++) {
-        std::cout << a[i] << std::endl;
-    }
     std::cout << "-------" << std::endl;
-
-    return 0;
+//
+//    for (int i = 0; i < a.size(); i++) {
+//        std::cout << a[i] << std::endl;
+//    }
+    std::cout << "-------" << std::endl;
+//    ++z;
+//    std::cout << "now iter= " << *z << std::endl;
+    for (z = a.begin(); z != a.end(); ++z) {
+        std::cout << *z << std::endl;
+    }
+    std::vector<int> g(5,41);
+     return 0;
 }

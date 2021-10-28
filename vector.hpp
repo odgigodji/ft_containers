@@ -29,7 +29,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		typedef value_type&			reference;
 		typedef const value_type&	const_reference;
 		typedef value_type*			pointer;
-		typedef const value_type*	const_pointer;
+//		typedef const value_type*	const_pointer;
 
 /*******************************************************************************
 *___________________________________Iterators__________________________________*
@@ -46,7 +46,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
                 if (_ptr != rhs._ptr) { _ptr = rhs._ptr; }
                 return *this;
             }
-            const_pointer *getPtr() const { return _ptr; };
+//            const_pointer *getPtr() const { return _ptr; };
             reference   operator * () { return *_ptr; }
 
             iterator&       operator++() { ++_ptr; return *this; }
@@ -63,18 +63,47 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 //            pointer         operator -> () { return _ptr; }
 //
 //            bool            operator == (iterator const &other) const { return _ptr == other._ptr; }
-//            bool            operator != (iterator const &other) const { return _ptr != other._ptr; }
+            bool            operator != (iterator const &other) const { return _ptr != other._ptr; }
 //            bool            operator > (iterator const &other) const{ return _ptr > other._ptr; }
 //            bool            operator < (iterator const &other) const{ return _ptr < other._ptr; }
 //            bool            operator >= (iterator const &other) const { return _ptr >= other._ptr; }
 //            bool            operator <= (iterator const &other) const { return _ptr <= other._ptr; }
+        };
+
+        class				 reverse_iterator {
+        private:
+            pointer 		        _ptr;
+
+        public:
+            reverse_iterator() : _ptr(nullptr) {}
+            explicit reverse_iterator(pointer ptr) : _ptr(ptr) {}
+            reverse_iterator(const reverse_iterator &orig) { _ptr = orig._ptr; }
+            reverse_iterator& operator = (const reverse_iterator &rhs) {
+                if (_ptr != rhs._ptr) { _ptr = rhs._ptr; }
+                return *this;
+            }
+//            const_pointer *getPtr() const { return _ptr; };
+            reference   operator * () { return *_ptr; }
+
+            iterator&       operator++() { ++_ptr; return *this; }
+            iterator&       operator--() { --_ptr; return *this; }
+//            iterator        operator ++ (int) { return iterator(_ptr++); }
+//            iterator        operator -- (int) { return iterator(_ptr--); }
+//            iterator&       operator += (const difference_type &n) { _ptr += n; return *this; }
+//            iterator&       operator -= (const difference_type &n) { _ptr -= n; return *this; }
+//            iterator        operator + (const difference_type &n) const { return iterator(_ptr + n); }
+//            iterator        operator - (const difference_type &n) const { return iterator(_ptr - n); }
+//            reference       operator * () { return *_ptr; };
+//            difference_type operator - (iterator const &other) const { return _ptr - other._ptr; }
+//            reference       operator [] (const_reference n) const { return _ptr[n]; }
+//            pointer         operator -> () { return _ptr; }
 //
-//            bool            operator == (const_iterator const &other) const { return _ptr == other.getPtr(); }
-//            bool            operator != (const_iterator const &other) const { return _ptr != other.getPtr(); }
-//            bool            operator > (const_iterator const &other) const{ return _ptr > other.getPtr(); }
-//            bool            operator < (const_iterator const &other) const{ return _ptr < other.getPtr(); }
-//            bool            operator >= (const_iterator const &other) const { return _ptr >= other.getPtr(); }
-//            bool            operator <= (const_iterator const &other) const { return _ptr <= other.getPtr(); }
+//            bool            operator == (iterator const &other) const { return _ptr == other._ptr; }
+            bool            operator != (iterator const &other) const { return _ptr != other._ptr; }
+//            bool            operator > (iterator const &other) const{ return _ptr > other._ptr; }
+//            bool            operator < (iterator const &other) const{ return _ptr < other._ptr; }
+//            bool            operator >= (iterator const &other) const { return _ptr >= other._ptr; }
+//            bool            operator <= (iterator const &other) const { return _ptr <= other._ptr; }
         };
 //		class						 iterator;
 //		class						 const_iterator;
@@ -118,7 +147,7 @@ public:
 		_arr = _alloc.allocate(n);
 		for(size_t i = 0; i < n; i++) {
 			_alloc.construct(_arr + i, value);
-			std::cout << "test: " << i << " " << _arr[i] << std::endl;
+//			std::cout << "test: " << i << " " << _arr[i] << std::endl;
 		}
 	}
 
@@ -162,14 +191,18 @@ public:
 	size_t capacity() const { return _capacity; }
 
 /*******************************************************************************
-*_______________________________Member_functions_______________________________*
+*_______________________________MEMBER FUNCTIONS_______________________________*
+*__________________________________Iterators___________________________________*
 *******************************************************************************/
     iterator    begin()  { return iterator(_arr); }
     iterator    end() {
 //        std::cout << "end: size=" << _size << " _arr + _size =" << *(_arr + _size - 1 ) << std::endl;
-        return iterator(_arr + _size - 1);
+        return iterator(_arr + _size);
     }
 
+/*******************************************************************************
+*______________________________Element acess___________________________________*
+*******************************************************************************/
     reference operator[] (size_t n) { //fixme
         return _arr[n];
     }
@@ -182,11 +215,11 @@ public:
         }
     }
 
-    void        push_back(const_reference value) {
-        if (_size == _capacity)
-            reserve(_size ? _size * 2 : 1);
-        _alloc.construct(_arr + _size, value);
-        ++_size;
+    void        push_back(reference value) {
+//        if (_size == _capacity)
+//            reserve(_size ? _size * 2 : 1);
+//        _alloc.construct(_arr + _size, value);
+//        ++_size;
     }
 
     //------------end of vector-----------------------------------------------//
