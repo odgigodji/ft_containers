@@ -49,6 +49,32 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
             const_pointer *getPtr() const { return _ptr; };
             reference   operator * () { return *_ptr; }
 
+            iterator&       operator++() { ++_ptr; return *this; }
+            iterator&       operator--() { --_ptr; return *this; }
+//            iterator        operator ++ (int) { return iterator(_ptr++); }
+//            iterator        operator -- (int) { return iterator(_ptr--); }
+//            iterator&       operator += (const difference_type &n) { _ptr += n; return *this; }
+//            iterator&       operator -= (const difference_type &n) { _ptr -= n; return *this; }
+//            iterator        operator + (const difference_type &n) const { return iterator(_ptr + n); }
+//            iterator        operator - (const difference_type &n) const { return iterator(_ptr - n); }
+//            reference       operator * () { return *_ptr; };
+//            difference_type operator - (iterator const &other) const { return _ptr - other._ptr; }
+//            reference       operator [] (const_reference n) const { return _ptr[n]; }
+//            pointer         operator -> () { return _ptr; }
+//
+//            bool            operator == (iterator const &other) const { return _ptr == other._ptr; }
+//            bool            operator != (iterator const &other) const { return _ptr != other._ptr; }
+//            bool            operator > (iterator const &other) const{ return _ptr > other._ptr; }
+//            bool            operator < (iterator const &other) const{ return _ptr < other._ptr; }
+//            bool            operator >= (iterator const &other) const { return _ptr >= other._ptr; }
+//            bool            operator <= (iterator const &other) const { return _ptr <= other._ptr; }
+//
+//            bool            operator == (const_iterator const &other) const { return _ptr == other.getPtr(); }
+//            bool            operator != (const_iterator const &other) const { return _ptr != other.getPtr(); }
+//            bool            operator > (const_iterator const &other) const{ return _ptr > other.getPtr(); }
+//            bool            operator < (const_iterator const &other) const{ return _ptr < other.getPtr(); }
+//            bool            operator >= (const_iterator const &other) const { return _ptr >= other.getPtr(); }
+//            bool            operator <= (const_iterator const &other) const { return _ptr <= other.getPtr(); }
         };
 //		class						 iterator;
 //		class						 const_iterator;
@@ -92,7 +118,7 @@ public:
 		_arr = _alloc.allocate(n);
 		for(size_t i = 0; i < n; i++) {
 			_alloc.construct(_arr + i, value);
-			std::cout << "test: " << i << " " << _arr[i] << std::endl;
+//			std::cout << "test: " << i << " " << _arr[i] << std::endl;
 		}
 	}
 
@@ -144,6 +170,26 @@ public:
         return iterator(_arr + _size - 1);
     }
 
+    reference operator[] (size_type n) { //fixme
+        return _arr[n];
+    }
+
+    void reserve (size_type n) {
+        if (n > _capacity) {
+            //clear
+            _capacity *= 2;
+//            _alloc.allocate(n);
+        }
+    }
+
+    void        push_back(const_reference value) {
+        if (_size == _capacity)
+            reserve(_size ? _size * 2 : 1);
+        _alloc.construct(_arr + _size, value);
+        ++_size;
+    }
+
+    //------------end of vector-----------------------------------------------//
 	};
 //-----------------------------------ft---------------------------------------//
 }
