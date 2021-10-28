@@ -17,7 +17,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 	class vector
 	{
 /*******************************************************************************
-*=================================MEMBER TYPES=================================*
+*=================================MEMBER_TYPES=================================*
 ********************************************************************************
 *___________________________________Typedefs__________________________________*
 *******************************************************************************/
@@ -32,7 +32,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 //		typedef const value_type*	const_pointer;
 
 /*******************************************************************************
-*_______________________________Iterators classes______________________________*
+*_______________________________Iterators_classes______________________________*
 *******************************************************************************/
         class				iterator {
         private:
@@ -47,26 +47,26 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
                 return *this;
             }
 
-            iterator&       operator++() { ++_ptr; return *this; }
-            iterator&       operator--() { --_ptr; return *this; }
-            iterator        operator ++ (int) { return iterator(_ptr++); }
-            iterator        operator -- (int) { return iterator(_ptr--); }
-            iterator&       operator += (const difference_type &n) { _ptr += n; return *this; }
-            iterator&       operator -= (const difference_type &n) { _ptr -= n; return *this; }
-            iterator        operator + (const difference_type &n) const { return iterator(_ptr + n); }
-            iterator        operator - (const difference_type &n) const { return iterator(_ptr - n); }
-            reference       operator * () { return *_ptr; };
+            iterator&	operator++() { ++_ptr; return *this; }
+            iterator&	operator--() { --_ptr; return *this; }
+            iterator 	operator ++ (int) { return iterator(_ptr++); }
+            iterator 	operator -- (int) { return iterator(_ptr--); }
+            iterator&	operator += (const difference_type &n) { _ptr += n; return *this; }
+            iterator&	operator -= (const difference_type &n) { _ptr -= n; return *this; }
+            iterator 	operator + (const difference_type &n) const { return iterator(_ptr + n); }
+            iterator 	operator - (const difference_type &n) const { return iterator(_ptr - n); }
+            reference	operator * () { return *_ptr; };
 //            difference_type operator - (iterator const &other) const { return _ptr - other._ptr; }
             reference       operator [] (const_reference n) const {
             	return _ptr[n];
             }
 //            pointer         operator -> () { return _ptr; }
-            bool            operator == (iterator const &other) const { return _ptr == other._ptr; }
-            bool            operator != (iterator const &other) const { return _ptr != other._ptr; }
-            bool            operator > (iterator const &other) const{ return _ptr > other._ptr; }
-            bool            operator < (iterator const &other) const{ return _ptr < other._ptr; }
-            bool            operator >= (iterator const &other) const { return _ptr >= other._ptr; }
-            bool            operator <= (iterator const &other) const { return _ptr <= other._ptr; }
+            bool		operator == (iterator const &other) const { return _ptr == other._ptr; }
+            bool		operator != (iterator const &other) const { return _ptr != other._ptr; }
+            bool		operator > (iterator const &other) const{ return _ptr > other._ptr; }
+            bool		operator < (iterator const &other) const{ return _ptr < other._ptr; }
+            bool		operator >= (iterator const &other) const { return _ptr >= other._ptr; }
+            bool		operator <= (iterator const &other) const { return _ptr <= other._ptr; }
         };
 
         class				 reverse_iterator {
@@ -116,9 +116,9 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 
 
 /*******************************************************************************
-*===============================MEMBER FUNCTIONS===============================*
+*===============================MEMBER_FUNCTIONS===============================*
 ********************************************************************************
-*__________________________Constructors and destructor_________________________*
+*__________________________Constructors_and_destructor_________________________*
 *******************************************************************************/
 
 /*
@@ -179,7 +179,7 @@ public:
 
 
 /*******************************************************************************
-*_______________________________MEMBER FUNCTIONS_______________________________*
+*_______________________________MEMBER_FUNCTIONS_______________________________*
 *__________________________________Iterators___________________________________*
 *******************************************************************************/
     iterator    		begin()  { return iterator(_arr); }
@@ -190,14 +190,18 @@ public:
 /*******************************************************************************
 *_________________________________Capacity:____________________________________*
 *******************************************************************************/
-	size_t size() const { return _size; }
-
-
+	size_t 	size() const { return _size; }
+	size_t 	max_size() const { return _alloc.max_size(); }
+	void	resize(size_t n) {
+		if (n > _capacity)
+			reserve(_capacity * 2);
+		_size = n;
+	}
 	size_t capacity() const { return _capacity; }
 
 
 /*******************************************************************************
-*______________________________Element acess___________________________________*
+*______________________________Element_access__________________________________*
 *******************************************************************************/
     reference operator[] (size_t n) { //fixme
         return _arr[n];
@@ -217,6 +221,16 @@ public:
 //        _alloc.construct(_arr + _size, value);
 //        ++_size;
     }
+
+/*******************************************************************************
+*__________________________________Modifiers___________________________________*
+*******************************************************************************/
+//Removes all elements from the vector, leaving the container with a size of 0.
+	void clear() {
+		for(int i = 0; i < _size; ++i)
+			_alloc.destroy(_arr + i);
+		_size = 0;
+	}
 
 /*******************************************************************************
 *__________________________________Allocator___________________________________*
