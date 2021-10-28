@@ -41,9 +41,14 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
         public:
             iterator() : _ptr(nullptr) {}
             explicit iterator(pointer ptr) : _ptr(ptr) {}
-            iterator(const iterator &other) { *this = other; }
+            iterator(const iterator &orig) { _ptr = orig._ptr; }
+            iterator& operator = (const iterator &rhs) {
+                if (_ptr != rhs._ptr) { _ptr = rhs._ptr; }
+                return *this;
+            }
+            const_pointer *getPtr() const { return _ptr; };
+            reference   operator * () { return *_ptr; }
 
-            reference   operator * () { return *_ptr; };
         };
 //		class						 iterator;
 //		class						 const_iterator;
