@@ -9,7 +9,7 @@ int main() {
 	*p = 1;
 	*(p + 1) = 2;
 	*(p + 2) = 3;
-	alloc.destroy(p); //--
+//	alloc.destroy(p); //--
 //	alloc.destroy(p + 1);
 	alloc.deallocate(p, 3); // -- free the memory
 	std::cout << p << " " << *p << std::endl;
@@ -98,3 +98,5 @@ int main() {
 
     return 0;
 }
+
+
