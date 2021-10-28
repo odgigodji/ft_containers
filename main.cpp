@@ -4,15 +4,23 @@
 
 int main() {
     std::vector<int>::iterator hh;
+    std::vector<int>::iterator hh2;
+
     std::vector<int> h1(1,42);
     h1.push_back(51);
-//    std::cout << h1[0] << std::endl;
+    std::cout << h1[0] << std::endl;
     hh = h1.begin();
-    hh = hh++;
+//    hh = hh++;
+//	hh += 5;
+//	hh2 = 5 + hh;
+	std::cout << hh[0] << std::endl;
     std::cout << "HH " << *hh << std::endl;
     ft::vector<int> a(5, 50);
     ft::vector<int>::iterator z;
-
+	z++;
+	ft::vector<int>::iterator z1 = z + 5;
+	std::ptrdiff_t r ;
+//	hh + r;
     a[0] = 10;
     a[1] = 20;
     a[2] = 30;
@@ -20,6 +28,10 @@ int main() {
 
     z = a.begin();
     std::cout << "first is " << *z << std::endl;
+    std::cout << z[3] << std::endl;
+//    z = a.end();
+//    z += 3;
+    std::cout << *z << std::endl;
 //    z = a.end();
 //    std::cout << "last is " << *z << std::endl;
 
