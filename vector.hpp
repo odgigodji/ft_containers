@@ -47,7 +47,6 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
                 return *this;
             }
 //            const_pointer *getPtr() const { return _ptr; };
-            reference   operator * () { return *_ptr; }
 
             iterator&       operator++() { ++_ptr; return *this; }
             iterator&       operator--() { --_ptr; return *this; }
@@ -57,17 +56,17 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 //            iterator&       operator -= (const difference_type &n) { _ptr -= n; return *this; }
 //            iterator        operator + (const difference_type &n) const { return iterator(_ptr + n); }
 //            iterator        operator - (const difference_type &n) const { return iterator(_ptr - n); }
-//            reference       operator * () { return *_ptr; };
+            reference       operator * () { return *_ptr; };
 //            difference_type operator - (iterator const &other) const { return _ptr - other._ptr; }
 //            reference       operator [] (const_reference n) const { return _ptr[n]; }
 //            pointer         operator -> () { return _ptr; }
 //
-//            bool            operator == (iterator const &other) const { return _ptr == other._ptr; }
+            bool            operator == (iterator const &other) const { return _ptr == other._ptr; }
             bool            operator != (iterator const &other) const { return _ptr != other._ptr; }
-//            bool            operator > (iterator const &other) const{ return _ptr > other._ptr; }
-//            bool            operator < (iterator const &other) const{ return _ptr < other._ptr; }
-//            bool            operator >= (iterator const &other) const { return _ptr >= other._ptr; }
-//            bool            operator <= (iterator const &other) const { return _ptr <= other._ptr; }
+            bool            operator > (iterator const &other) const{ return _ptr > other._ptr; }
+            bool            operator < (iterator const &other) const{ return _ptr < other._ptr; }
+            bool            operator >= (iterator const &other) const { return _ptr >= other._ptr; }
+            bool            operator <= (iterator const &other) const { return _ptr <= other._ptr; }
         };
 
         class				 reverse_iterator {
