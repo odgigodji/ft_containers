@@ -24,7 +24,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 	public:
 		typedef Tp					value_type;
 		typedef Alloc				allocator_type;
-		typedef std::size_t			size_type;
+//		typedef std::size_t			size_type;
 		typedef std::ptrdiff_t		difference_type;
 		typedef value_type&			reference;
 		typedef const value_type&	const_reference;
@@ -113,12 +113,12 @@ public:
 	vector() : _arr(nullptr), _size(0), _capacity(0) {}
 
 //	2)Fill constructor.Constructs a container with n elements. Each element is a copy of val.
-	vector(size_type n, const_reference value) :	_size(n), _capacity(n)
+	vector(size_t n, const_reference value) :	_size(n), _capacity(n)
 	{
 		_arr = _alloc.allocate(n);
 		for(size_t i = 0; i < n; i++) {
 			_alloc.construct(_arr + i, value);
-//			std::cout << "test: " << i << " " << _arr[i] << std::endl;
+			std::cout << "test: " << i << " " << _arr[i] << std::endl;
 		}
 	}
 
@@ -158,8 +158,8 @@ public:
 *____________________________________Getters___________________________________*
 *******************************************************************************/
 	allocator_type get_allocator() const { return _alloc; }
-	size_type size() const { return _size; }
-	size_type capacity() const { return _capacity; }
+	size_t size() const { return _size; }
+	size_t capacity() const { return _capacity; }
 
 /*******************************************************************************
 *_______________________________Member_functions_______________________________*
@@ -170,11 +170,11 @@ public:
         return iterator(_arr + _size - 1);
     }
 
-    reference operator[] (size_type n) { //fixme
+    reference operator[] (size_t n) { //fixme
         return _arr[n];
     }
 
-    void reserve (size_type n) {
+    void reserve (size_t n) {
         if (n > _capacity) {
             //clear
             _capacity *= 2;

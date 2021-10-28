@@ -4,7 +4,6 @@
 int main() {
 
     ft::vector<int> a(5, 50);
-//    a[5] = 42;
     ft::vector<int>::iterator z;
 
     a[0] = 10;
@@ -20,5 +19,7 @@ int main() {
     for (int i = 0; i < a.size(); i++) {
         std::cout << a[i] << std::endl;
     }
+    std::cout << "-------" << std::endl;
+
     return 0;
 }
