@@ -35,12 +35,15 @@ int main() {
 //    z = a.end();
 //    std::cout << "last is " << *z << std::endl;
 
-    std::cout << "-------" << std::endl;
+//    std::cout << "-------" << std::endl;
 //
 //    for (int i = 0; i < a.size(); i++) {
 //        std::cout << a[i] << std::endl;
 //    }
     std::cout << "-------" << std::endl;
+    ft::vector<int> y(5, 42);
+
+    std::cout << *y.rend() << std::endl;
 //    ++z;
 //    std::cout << "now iter= " << *z << std::endl;
     for (z = a.begin(); z < a.end(); ++z) {

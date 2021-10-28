@@ -84,29 +84,25 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 //            const_pointer *getPtr() const { return _ptr; };
             reference   operator * () { return *_ptr; }
 
-            reverse_iterator&    operator ++ () { --_ptr; return *this; }
-            reverse_iterator&    operator -- () { ++_ptr; return *this; }
-            reverse_iterator    operator ++ (int) { return reverse_iterator(_ptr--); }
-            reverse_iterator    operator -- (int) { return reverse_iterator(_ptr++); }
-            reverse_iterator&    operator += (difference_type n) { _ptr -= n; return *this; }
-            reverse_iterator&    operator -= (difference_type n) { _ptr += n; return *this; }
-            reverse_iterator    operator + (difference_type n) const { return reverse_iterator(_ptr - n); }
-            reverse_iterator    operator - (difference_type n) const { return reverse_iterator(_ptr + n); }
-            reference            operator * () const { return *_ptr; };
-//            difference_type        operator - (reverse_iterator const &other) const { return other._ptr - _ptr; }
-            reference            operator [] (const_reference n) const { return _ptr[n]; }
-//            pointer                operator -> () { return _ptr; }
-            bool                operator == (reverse_iterator const &other) const { return _ptr == other._ptr; }
-            bool                operator != (reverse_iterator const &other) const { return _ptr != other._ptr; }
-            bool                operator > (reverse_iterator const &other) const{ return _ptr > other._ptr; }
-            bool                operator < (reverse_iterator const &other) const{ return _ptr < other._ptr; }
-            bool                operator >= (reverse_iterator const &other) const { return _ptr >= other._ptr; }
-            bool                operator <= (reverse_iterator const &other) const { return _ptr <= other._ptr; }
+            reverse_iterator&	operator ++ () { --_ptr; return *this; }
+            reverse_iterator&	operator -- () { ++_ptr; return *this; }
+            reverse_iterator 	operator ++ (int) { return reverse_iterator(_ptr--); }
+            reverse_iterator 	operator -- (int) { return reverse_iterator(_ptr++); }
+            reverse_iterator&	operator += (difference_type n) { _ptr -= n; return *this; }
+            reverse_iterator&	operator -= (difference_type n) { _ptr += n; return *this; }
+            reverse_iterator 	operator + (difference_type n) const { return reverse_iterator(_ptr - n); }
+            reverse_iterator 	operator - (difference_type n) const { return reverse_iterator(_ptr + n); }
+            reference        	operator * () const { return *_ptr; };
+//            difference_type	    operator - (reverse_iterator const &other) const { return other._ptr - _ptr; }
+            reference        	operator [] (const_reference n) const { return _ptr[n]; }
+//            pointer        	    operator -> () { return _ptr; }
+            bool             	operator == (reverse_iterator const &other) const { return _ptr == other._ptr; }
+            bool             	operator != (reverse_iterator const &other) const { return _ptr != other._ptr; }
+            bool             	operator > (reverse_iterator const &other) const{ return _ptr > other._ptr; }
+            bool             	operator < (reverse_iterator const &other) const{ return _ptr < other._ptr; }
+            bool             	operator >= (reverse_iterator const &other) const { return _ptr >= other._ptr; }
+            bool             	operator <= (reverse_iterator const &other) const { return _ptr <= other._ptr; }
         };
-//		class						 iterator;
-//		class						 const_iterator;
-//		class						 reverse_iterator;
-//		class						 const_reverse_iterator;
 
 /*******************************************************************************
 *___________________________________Variables__________________________________*
@@ -152,13 +148,12 @@ public:
 //  3)Range constructor.Constructs a container with as many elements as the range
 // (first,last),with each element constructed from its corresponding
 // element in that range, in the same order.
-//	template<class Iter = iterator>
 //	vector(iterator first, iterator last) : _size(0) {
 //		size_t range = last - first;
 //		if (range < 0) { throw std::out_of_range("vector"); }
 //		_arr = _alloc.allocate(range);
 //		_capacity = range;
-//		//insert(begin(), first, last)
+		//insert(begin(), first, last)
 //	}
 
 //  4)Copy constructor.Constructs a container with a copy of each of the
@@ -181,22 +176,25 @@ public:
 
 	//assignation operator overload
 
-/*******************************************************************************
-*____________________________________Getters___________________________________*
-*******************************************************************************/
-	allocator_type get_allocator() const { return _alloc; }
-	size_t size() const { return _size; }
-	size_t capacity() const { return _capacity; }
+
 
 /*******************************************************************************
 *_______________________________MEMBER FUNCTIONS_______________________________*
 *__________________________________Iterators___________________________________*
 *******************************************************************************/
-    iterator    begin()  { return iterator(_arr); }
-    iterator    end() {
-//        std::cout << "end: size=" << _size << " _arr + _size =" << *(_arr + _size - 1 ) << std::endl;
-        return iterator(_arr + _size);
-    }
+    iterator    		begin()  { return iterator(_arr); }
+    iterator    		end() { return iterator(_arr + _size); }
+    reverse_iterator	rbegin() { return reverse_iterator(_arr + _size - 1); }
+    reverse_iterator	rend() { return reverse_iterator(_arr - 1); }
+
+/*******************************************************************************
+*_________________________________Capacity:____________________________________*
+*******************************************************************************/
+	size_t size() const { return _size; }
+
+
+	size_t capacity() const { return _capacity; }
+
 
 /*******************************************************************************
 *______________________________Element acess___________________________________*
@@ -219,6 +217,11 @@ public:
 //        _alloc.construct(_arr + _size, value);
 //        ++_size;
     }
+
+/*******************************************************************************
+*__________________________________Allocator___________________________________*
+*******************************************************************************/
+    allocator_type get_allocator() const { return _alloc; }
 
     //------------end of vector-----------------------------------------------//
 	};
