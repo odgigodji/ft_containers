@@ -32,6 +32,16 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 //		typedef const value_type*	const_pointer;
 
 /*******************************************************************************
+*___________________________________Variables__________________________________*
+*******************************************************************************/
+//	private:
+	public:
+		allocator_type    			_alloc;
+		pointer           			_arr;
+		size_t            			_size;
+		size_t            			_capacity;
+
+/*******************************************************************************
 *_______________________________Iterators_classes______________________________*
 *******************************************************************************/
         class				iterator {
@@ -103,16 +113,6 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
             bool             	operator >= (reverse_iterator const &other) const { return _ptr >= other._ptr; }
             bool             	operator <= (reverse_iterator const &other) const { return _ptr <= other._ptr; }
         };
-
-/*******************************************************************************
-*___________________________________Variables__________________________________*
-*******************************************************************************/
-//	private:
-	public:
-		allocator_type    			_alloc;
-		pointer           			_arr;
-		size_t            			_size;
-		size_t            			_capacity;
 
 
 /*******************************************************************************
@@ -197,8 +197,20 @@ public:
 			reserve(_capacity * 2);
 		_size = n;
 	}
-	size_t capacity() const { return _capacity; }
+	size_t	capacity() const { return _capacity; }
 
+	/*Requests that the vector capacity be at least enough to contain n elements.
+	//If n is greater than the current vector capacity,
+	/the function causes the container to reallocate its storage increasing its
+	 capacity to n (or greater).*/
+	void reserve (size_t n) {
+		if (n > _capacity) {
+//			pointer tmp = _alloc.allocate(_capacity * 2);
+			//clear
+			_capacity *= 2;
+			//            _alloc.allocate(n);
+		}
+	}
 
 /*******************************************************************************
 *______________________________Element_access__________________________________*
@@ -207,13 +219,7 @@ public:
         return _arr[n];
     }
 
-    void reserve (size_t n) {
-        if (n > _capacity) {
-            //clear
-            _capacity *= 2;
-//            _alloc.allocate(n);
-        }
-    }
+
 
     void        push_back(reference value) {
 //        if (_size == _capacity)
