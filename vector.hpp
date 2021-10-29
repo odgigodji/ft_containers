@@ -67,8 +67,9 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
             iterator 	operator - (const difference_type &n) const { return iterator(_ptr - n); }
             reference	operator * () { return *_ptr; };
 			pointer		getPtr() const { return _ptr; };
-//            difference_type operator - (iterator const &other) const { return _ptr - other._ptr; }
-            reference       operator [] (const_reference n) const {
+            difference_type operator - (iterator const &other) const { return _ptr - other._ptr; }
+//			difference_type operator + (iterator const &other) const { return _ptr + other._ptr; }
+			reference       operator [] (const_reference n) const {
             	return _ptr[n];
             }
 //            pointer         operator -> () { return _ptr; }
@@ -79,6 +80,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
             bool		operator >= (iterator const &other) const { return _ptr >= other._ptr; }
             bool		operator <= (iterator const &other) const { return _ptr <= other._ptr; }
         };
+//		friend    iterator  operator + (const difference_type &n, const iterator &it) { return it + n; }
 
         class				 reverse_iterator {
         private:
@@ -205,7 +207,7 @@ public:
 		if (n > _capacity) {
 			pointer tmp = _alloc.allocate(n);
 			for(size_t i = 0; i < _size; ++i) {
-				_alloc.construct(tmp + i, tmp[i]);
+				_alloc.construct(tmp + i, _arr[i]);
 				_alloc.destroy(_arr + i);
 			}
 			if (_arr) { _alloc.deallocate(_arr, _capacity); }
@@ -230,7 +232,6 @@ public:
 /*******************************************************************************
 *__________________________________Modifiers___________________________________*
 *******************************************************************************/
-	//assign
 	void	assign (size_t n, const_reference value) {
 		clear();
 //		_alloc.deallocate(_arr, )
@@ -241,16 +242,31 @@ public:
 		_size = n;
 	}
 
-	void	push_back(reference value) {
-		//        if (_size == _capacity)
-		//            reserve(_size ? _size * 2 : 1);
-		//        _alloc.construct(_arr + _size, value);
-		//        ++_size;
+	void assign (iterator first, iterator last) {
+		clear();
+		size_t n = last - first;
+//		std::cout << "first is " << first << std::endl;
+//		std::cout << "last is " << last << std::endl;
+
+		std::cout << "N is " << n << std::endl;
+		std::cout << "distance is " << first - begin() << std::endl;
+		if ( n > _capacity) { reserve(n); }
+//		for(first; first < last; ++first) {
+			//push_back(*first)
+//			_alloc.construct(_arr + _arr., *first);
+//		}
+	}
+	void	push_back(const_reference value) {
+		if (_size == _capacity)
+			reserve(_size ? _size * 2 : 1);
+//		std::cout << "value from push back " << value << std::endl;
+//		std::cout << "_arr + _size " << *(_arr + _size) << std::endl;
+		_alloc.construct(_arr + _size, value);
+		++_size;
 	}
 	//pop_back
 	//insert
-	iterator	erase(iterator pos)
-	{
+	iterator	erase(iterator pos) {
 		_alloc.destroy(pos.getPtr());
 		size_t len = sizeof(value_type) * (end().getPtr() - pos.getPtr());
 		std::memmove(pos.getPtr(), pos.getPtr() + 1, len);
