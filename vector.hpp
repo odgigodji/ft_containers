@@ -170,10 +170,10 @@ public:
 	}
 
 //  1)Destructor.
-//    ~vector() {
-////	    _clear
-//	    _arr = nullptr;
-//	}
+    ~vector() {
+		clear();
+		_alloc.deallocate(_arr, _capacity);
+	}
 
 	//assignation operator overload
 
@@ -231,14 +231,16 @@ public:
 *__________________________________Modifiers___________________________________*
 *******************************************************************************/
 	//assign
-	void	assign (size_t n, const_reference val) {
+	void	assign (size_t n, const_reference value) {
 		clear();
+//		_alloc.deallocate(_arr, )
 		if (n > _capacity) { reserve(n); }
 		for(int i = 0; i < n; ++i) {
-			_alloc.construct(_arr + i, val);
+			_alloc.construct(_arr + i, value);
 		}
 		_size = n;
 	}
+
 	void	push_back(reference value) {
 		//        if (_size == _capacity)
 		//            reserve(_size ? _size * 2 : 1);

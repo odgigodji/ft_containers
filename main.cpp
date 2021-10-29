@@ -1,5 +1,6 @@
 #include <vector>
 #include "vector.hpp"
+//leaks --atExit -- ./a.out
 
 //int main() {
 ////	std::allocator<int> alloc;
@@ -136,34 +137,51 @@ int main ()
 {
 	std::vector<int> first;
 	std::vector<int> second;
-	std::vector<int> third;
-	ft::vector<int> fifth(5, 51);
+//	std::vector<int> third(5, 51);
+	ft::vector<int> fifth;
+//	first.assign (5,100); // 7 ints with a value of 100
 
-	first.push_back(51);
-	first.push_back(51);
-	first.push_back(51);
-	first.push_back(51);
-	first.push_back(51);
 
-	first.assign (3,100); // 7 ints with a value of 100
-	std::cout << "capacity: " << first.capacity() << std::endl;
-	std::cout << "size: " << first.size() << std::endl;
-	for(int i = 0; i < first.size(); i++) {
-		std::cout << first[i] << std::endl;
-	}
+//	first.push_back(51);
+//	first.push_back(51);
+//	first.push_back(51);
+//	first.push_back(51);
+//	first.push_back(51);
+//	std::cout << "capacity: " << first.capacity() << std::endl;
+//	std::cout << "size: " << first.size() << std::endl;
+//		std::cout << "----------------" << std::endl;
+//	first.assign(2,100);
+//	std::cout << "capacity: " << first.capacity() << std::endl;
+//	std::cout << "size: " << first.size() << std::endl;
+//	for(int i = 0; i < first.size(); i++) {
+//		std::cout << first[i] << std::endl;
+//	}
+
+//my----------------------------------------------------------------------
+	std::cout << "capacity: " << fifth.capacity() << std::endl;
+	std::cout << "size: " << fifth.size() << std::endl;
 	std::cout << "----------------" << std::endl;
-	fifth.assign(2, 100);
+
+	fifth.assign(10, 100);
 	std::cout << "capacity: " << fifth.capacity() << std::endl;
 	std::cout << "size: " << fifth.size() << std::endl;
 	for(int i = 0; i < fifth.size(); i++) {
 		std::cout << fifth[i] << std::endl;
 	}
+	std::cout << "----------------" << std::endl;
+//----------------------------------------------------------------------
+
+
 
 //	std::vector<int>::iterator it;
 //	it = first.begin() + 1;
 //
 //	second.assign (it,first.end() - 1);// the 5 central values of first
-//
+//	std::cout << "capacity: " << second.capacity() << std::endl;
+//	std::cout << "size: " << second.size() << std::endl;
+//	for(int i = 0; i < second.size(); i++) {
+//		std::cout << second[i] << std::endl;
+//	}
 //	int myints[] = { 1776 ,7 ,4 };
 //	third.assign (myints,myints + 3);  // assigning from array.
 //
