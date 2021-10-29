@@ -3,24 +3,24 @@
 
 
 int main() {
-	std::allocator<int> alloc;
-
-	std::vector<int> t1;
-	std::vector<int> t2(5, 51);
-	t1 < t2;
-	int *p = alloc.allocate(3); //space for one int
-	*p = 1;
-	*(p + 1) = 2;
-	*(p + 2) = 3;
-//	alloc.destroy(p); //--
-//	alloc.destroy(p + 1);
-	alloc.deallocate(p, 3); // -- free the memory
-	std::cout << p << " " << *p << std::endl;
-	std::cout << p + 1 << " " << *(p + 1) << std::endl;
-	std::cout << p + 2 << " " << *(p + 2) <<  std::endl;
-
-	std::cout << "========" << std::endl;
-	return 0;
+//	std::allocator<int> alloc;
+//
+//	std::vector<int> t1;
+//	std::vector<int> t2(5, 51);
+//	t1 < t2;
+//	int *p = alloc.allocate(3); //space for one int
+//	*p = 1;
+//	*(p + 1) = 2;
+//	*(p + 2) = 3;
+////	alloc.destroy(p); //--
+////	alloc.destroy(p + 1);
+//	alloc.deallocate(p, 3); // -- free the memory
+//	std::cout << p << " " << *p << std::endl;
+//	std::cout << p + 1 << " " << *(p + 1) << std::endl;
+//	std::cout << p + 2 << " " << *(p + 2) <<  std::endl;
+//
+//	std::cout << "========" << std::endl;
+//	return 0;
 	//	int *z = nullptr;
 //	for(int i = 0; i < 5; i++) {
 //		alloc.construct(p + i, i);
@@ -40,6 +40,8 @@ int main() {
 //	std::cout << goo << std::endl;
 //	return 0;
 
+/*
+
     std::vector<int>::iterator hh;
     std::vector<int>::iterator hh2;
 
@@ -47,7 +49,7 @@ int main() {
     h1.clear();
 //    h1.erase(h1.begin(), h1.end());
     std::cout << h1[2] << " " << h1.size() << " " << h1.capacity() << std::endl;
-    return 0;
+//    return 0;
     std::cout << h1.size() << " " << h1.capacity() << std::endl;
 //    h1.resize(150);
 	h1.reserve(100);
@@ -63,32 +65,59 @@ int main() {
 //	hh2 = 5 + hh;
 	std::cout << hh[0] << std::endl;
     std::cout << "HH " << *hh << std::endl;
-    ft::vector<int> a(5, 50);
-    ft::vector<int>::iterator z;
+
+*/
+    std::vector<int> a(5, 50);
+	ft::vector<int> b(5, 50);
+
+	ft::vector<int>::iterator z;
 	z++;
 	ft::vector<int>::iterator z1 = z + 5;
 	std::ptrdiff_t r ;
 //	hh + r;
+
     a[0] = 10;
     a[1] = 20;
     a[2] = 30;
     a[3] = 40;
 
-    z = a.begin();
-    std::cout << "first is " << *z << std::endl;
-    std::cout << z[3] << std::endl;
+	b[0] = 10;
+	b[1] = 20;
+	b[2] = 30;
+	b[3] = 40;
+//    z = a.begin();
+//    std::cout << "first is " << *z << std::endl;
+//    std::cout << z[3] << std::endl;
 //    z = a.end();
 //    z += 3;
-    std::cout << *z << std::endl;
+//    std::cout << *z << std::endl;
 //    z = a.end();
 //    std::cout << "last is " << *z << std::endl;
 
 //    std::cout << "-------" << std::endl;
-//
 //    for (int i = 0; i < a.size(); i++) {
 //        std::cout << a[i] << std::endl;
 //    }
-    std::cout << "-------" << std::endl;
+//    std::cout << "-------" << std::endl;
+//	a.erase(a.begin() + 3);
+//	for (int i = 0; i < a.size(); i++) {
+//		std::cout << a[i] << std::endl;
+//	}
+//	std::cout << "-------" << std::endl;
+
+	std::cout << "-------" << std::endl;
+	for (int i = 0; i < b.size(); i++) {
+		std::cout << b[i] << std::endl;
+	}
+	std::cout << "-------" << std::endl;
+//	b.erase(b.begin() + 3);
+	b.erase(b.begin() + 1, b.begin() + 3);
+	for (int i = 0; i < b.size(); i++) {
+		std::cout << b[i] << std::endl;
+	}
+	std::cout << "-------" << std::endl;
+
+/*
     ft::vector<int> y(5, 42);
 
     std::cout << *y.rend() << std::endl;
@@ -98,7 +127,7 @@ int main() {
 //        std::cout << *z << std::endl;
     }
     std::vector<int> g(5,41);
-
+*/
     return 0;
 }
 

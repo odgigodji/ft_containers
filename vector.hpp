@@ -66,6 +66,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
             iterator 	operator + (const difference_type &n) const { return iterator(_ptr + n); }
             iterator 	operator - (const difference_type &n) const { return iterator(_ptr - n); }
             reference	operator * () { return *_ptr; };
+			pointer		getPtr() const { return _ptr; };
 //            difference_type operator - (iterator const &other) const { return _ptr - other._ptr; }
             reference       operator [] (const_reference n) const {
             	return _ptr[n];
@@ -199,9 +200,9 @@ public:
 	//-empty
 
 	/*Requests that the vector capacity be at least enough to contain n elements.
-	//If n is greater than the current vector capacity,
-	/the function causes the container to reallocate its storage increasing its
-	 capacity to n (or greater).*/
+	If n is greater than the current vector capacity,
+	the function causes the container to reallocate its storage increasing its
+	capacity to n (or greater).*/
 	void reserve (size_t n) {
 		if (n > _capacity) {
 //			pointer tmp = _alloc.allocate(_capacity * 2);
@@ -233,7 +234,24 @@ public:
 	}
 	//pop_back
 	//insert
-	//erase
+	iterator	erase(iterator pos)
+	{
+		_alloc.destroy(pos.getPtr());
+		size_t len = sizeof(value_type) * (end().getPtr() - pos.getPtr());
+		std::memmove(pos.getPtr(), pos.getPtr() + 1, len);
+		--_size;
+		return pos;
+	}
+
+	iterator	erase(iterator first, iterator last)
+	{
+		for (iterator it = first; it != last; ++it)
+			_alloc.destroy(it.getPtr());
+		size_t len = sizeof(value_type) * (end().getPtr() - last.getPtr());
+		std::memmove(first.getPtr(), last.getPtr(), len);
+		_size -= last.getPtr() - first.getPtr();
+		return last;
+	}
 	//swap
 //Removes all elements from the vector, leaving the container with a size of 0.
 	void clear() {
