@@ -203,16 +203,14 @@ public:
 	capacity to n (or greater).*/
 	void	reserve (const size_t n) {
 		if (n > _capacity) {
-			if (n > _capacity) {
-				pointer tmp = _alloc.allocate(n);
-				for(size_t i = 0; i < _size; ++i) {
-					_alloc.construct(tmp + i, tmp[i]);
-					_alloc.destroy(_arr + i);
-				}
-				if (_arr) { _alloc.deallocate(_arr, _capacity); }
-				_arr = tmp;
-				_capacity = n;
+			pointer tmp = _alloc.allocate(n);
+			for(size_t i = 0; i < _size; ++i) {
+				_alloc.construct(tmp + i, tmp[i]);
+				_alloc.destroy(_arr + i);
 			}
+			if (_arr) { _alloc.deallocate(_arr, _capacity); }
+			_arr = tmp;
+			_capacity = n;
 		}
 	}
 
@@ -233,7 +231,15 @@ public:
 *__________________________________Modifiers___________________________________*
 *******************************************************************************/
 	//assign
-	void        push_back(reference value) {
+	void	assign (size_t n, const_reference val) {
+		clear();
+		if (n > _capacity) { reserve(n); }
+		for(int i = 0; i < n; ++i) {
+			_alloc.construct(_arr + i, val);
+		}
+		_size = n;
+	}
+	void	push_back(reference value) {
 		//        if (_size == _capacity)
 		//            reserve(_size ? _size * 2 : 1);
 		//        _alloc.construct(_arr + _size, value);
