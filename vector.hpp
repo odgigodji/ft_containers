@@ -245,16 +245,8 @@ public:
 	void assign (iterator first, iterator last) {
 		clear();
 		size_t n = last - first;
-//		std::cout << "first is " << first << std::endl;
-//		std::cout << "last is " << last << std::endl;
-
-		std::cout << "N is " << n << std::endl;
-		std::cout << "distance is " << first - begin() << std::endl;
 		if ( n > _capacity) { reserve(n); }
-//		for(first; first < last; ++first) {
-			//push_back(*first)
-//			_alloc.construct(_arr + _arr., *first);
-//		}
+		for(; first < last; ++first) { push_back(*first); }
 	}
 	void	push_back(const_reference value) {
 		if (_size == _capacity)
@@ -283,7 +275,7 @@ public:
 		return last;
 	}
 	//swap
-//Removes all elements from the vector, leaving the container with a size of 0.
+// Removes all elements from the vector, leaving the container with a size of 0.
 	void clear() {
 		for(int i = 0; i < _size; ++i)
 			_alloc.destroy(_arr + i);

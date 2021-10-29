@@ -174,50 +174,50 @@ int main ()
 //----------------------------------------------------------------------
 
 //MYASSIGN------------------------------------------------------------
-//	std::vector<int>::iterator it;
-//	ft::vector<int>::iterator itt;
-//	it = first.begin() + 1;
-//
-//	second.assign (it,first.end() - 1);// the 5 central values of first
-//	std::cout << "capacity: " << second.capacity() << std::endl;
-//	std::cout << "size: " << second.size() << std::endl;
-//	for(int i = 0; i < second.size(); i++) {
-//		std::cout << second[i] << std::endl;
-//	}
-//	std::cout << "----------------" << std::endl;
-//	itt = test.begin() + 1;
-//
-//	second0.assign(itt, test.end() - 1);// the 5 central values of first
-//	std::cout << "capacity: " << second0.capacity() << std::endl;
-//	std::cout << "size: " << second0.size() << std::endl;
-//	for(int i = 0; i < second0.size(); i++) {
-//		std::cout << second0[i] << std::endl;
-//	}
+	std::vector<int>::iterator it;
+	ft::vector<int>::iterator itt;
+	it = first.begin() + 1;
+
+	second.assign (it,first.end() - 1);// the 5 central values of first
+	std::cout << "capacity: " << second.capacity() << std::endl;
+	std::cout << "size: " << second.size() << std::endl;
+	for(int i = 0; i < second.size(); i++) {
+		std::cout << second[i] << std::endl;
+	}
+	std::cout << "----------------" << std::endl;
+	itt = test.begin() + 1;
+
+	second0.assign(itt, test.end() - 1);// the 5 central values of first
+	std::cout << "capacity: " << second0.capacity() << std::endl;
+	std::cout << "size: " << second0.size() << std::endl;
+	for(int i = 0; i < second0.size(); i++) {
+		std::cout << second0[i] << std::endl;
+	}
 //----------------------------------------------------------------------
 
 //MYpsuhback------------------------------------------------------------
-std::vector<int> a(2,33);
-	a.push_back(34);
+//	std::vector<int> a(2,33);
+//	a.push_back(34);
 //	std::cout << "capacity: " << a.capacity() << std::endl;
 //	std::cout << "size: " << a.size() << std::endl;
 //	for(int i = 0; i < a.size(); i++)
 //	{
 //		std::cout << a[i] << std::endl;
 //	}
-	ft::vector<int> b(2,13);
-	std::cout << "capacity: " << b.capacity() << std::endl;
-	std::cout << "size: " << b.size() << std::endl;
-	for(int i = 0; i < b.size(); i++) {
-		std::cout << b[i] << std::endl;
-	}
-	std::cout << "------------------------" << std::endl;
-	b.push_back(14);
-	std::cout << "capacity: " << b.capacity() << std::endl;
-	std::cout << "size: " << b.size() << std::endl;
-	for(int i = 0; i < b.size(); i++) {
-		std::cout << b[i] << std::endl;
-	}
-	std::cout << "------------------------" << std::endl;
+//	ft::vector<int> b(2,13);
+//	std::cout << "capacity: " << b.capacity() << std::endl;
+//	std::cout << "size: " << b.size() << std::endl;
+//	for(int i = 0; i < b.size(); i++) {
+//		std::cout << b[i] << std::endl;
+//	}
+//	std::cout << "------------------------" << std::endl;
+//	b.push_back(14);
+//	std::cout << "capacity: " << b.capacity() << std::endl;
+//	std::cout << "size: " << b.size() << std::endl;
+//	for(int i = 0; i < b.size(); i++) {
+//		std::cout << b[i] << std::endl;
+//	}
+//	std::cout << "------------------------" << std::endl;
 
 //----------------------------------------------------------------------
 
