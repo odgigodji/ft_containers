@@ -176,8 +176,6 @@ public:
 
 	//assignation operator overload
 
-
-
 /*******************************************************************************
 *_______________________________MEMBER_FUNCTIONS_______________________________*
 *__________________________________Iterators___________________________________*
@@ -198,6 +196,7 @@ public:
 		_size = n;
 	}
 	size_t	capacity() const { return _capacity; }
+	//-empty
 
 	/*Requests that the vector capacity be at least enough to contain n elements.
 	//If n is greater than the current vector capacity,
@@ -218,19 +217,24 @@ public:
     reference operator[] (size_t n) { //fixme
         return _arr[n];
     }
-
-
-
-    void        push_back(reference value) {
-//        if (_size == _capacity)
-//            reserve(_size ? _size * 2 : 1);
-//        _alloc.construct(_arr + _size, value);
-//        ++_size;
-    }
+    //at
+    //front
+    //back
 
 /*******************************************************************************
 *__________________________________Modifiers___________________________________*
 *******************************************************************************/
+	//assign
+	void        push_back(reference value) {
+		//        if (_size == _capacity)
+		//            reserve(_size ? _size * 2 : 1);
+		//        _alloc.construct(_arr + _size, value);
+		//        ++_size;
+	}
+	//pop_back
+	//insert
+	//erase
+	//swap
 //Removes all elements from the vector, leaving the container with a size of 0.
 	void clear() {
 		for(int i = 0; i < _size; ++i)
@@ -243,7 +247,11 @@ public:
 *******************************************************************************/
     allocator_type get_allocator() const { return _alloc; }
 
-    //------------end of vector-----------------------------------------------//
+/*******************************************************************************
+*_________________________Non-member function overloads________________________*
+*******************************************************************************/
+    //relational operators
+    //swap
 	};
 //-----------------------------------ft---------------------------------------//
 }

@@ -4,7 +4,10 @@
 
 int main() {
 	std::allocator<int> alloc;
-//
+
+	std::vector<int> t1;
+	std::vector<int> t2(5, 51);
+	t1 < t2;
 	int *p = alloc.allocate(3); //space for one int
 	*p = 1;
 	*(p + 1) = 2;
