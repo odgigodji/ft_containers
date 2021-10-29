@@ -192,35 +192,42 @@ public:
 	size_t 	size() const { return _size; }
 	size_t 	max_size() const { return _alloc.max_size(); }
 	void	resize(size_t n) {
-		if (n > _capacity)
-			reserve(_capacity * 2);
+		if (n > _capacity) { reserve(_capacity * 2); }
 		_size = n;
 	}
 	size_t	capacity() const { return _capacity; }
-	//-empty
-
+	bool	empty() const { return !_size; }
 	/*Requests that the vector capacity be at least enough to contain n elements.
 	If n is greater than the current vector capacity,
 	the function causes the container to reallocate its storage increasing its
 	capacity to n (or greater).*/
-	void reserve (size_t n) {
+	void	reserve (const size_t n) {
 		if (n > _capacity) {
-//			pointer tmp = _alloc.allocate(_capacity * 2);
-			//clear
-			_capacity *= 2;
-			//            _alloc.allocate(n);
+			if (n > _capacity) {
+				pointer tmp = _alloc.allocate(n);
+				for(size_t i = 0; i < _size; ++i) {
+					_alloc.construct(tmp + i, tmp[i]);
+					_alloc.destroy(_arr + i);
+				}
+				if (_arr) { _alloc.deallocate(_arr, _capacity); }
+				_arr = tmp;
+				_capacity = n;
+			}
 		}
 	}
 
 /*******************************************************************************
 *______________________________Element_access__________________________________*
 *******************************************************************************/
-    reference operator[] (size_t n) { //fixme
-        return _arr[n];
-    }
-    //at
-    //front
-    //back
+		reference	operator[] (size_t n) { //fixme
+			return _arr[n];
+		}
+		reference	at(const size_t &n) {
+			if (n < _size) { return _arr[n]; }
+			throw std::out_of_range("vector");
+		}
+		reference	front() { return _arr[0]; }
+		reference 	back() { return _arr[_size - 1]; }
 
 /*******************************************************************************
 *__________________________________Modifiers___________________________________*
@@ -242,7 +249,6 @@ public:
 		--_size;
 		return pos;
 	}
-
 	iterator	erase(iterator first, iterator last)
 	{
 		for (iterator it = first; it != last; ++it)

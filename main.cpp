@@ -111,11 +111,13 @@ int main() {
 	}
 	std::cout << "-------" << std::endl;
 //	b.erase(b.begin() + 3);
-	b.erase(b.begin() + 1, b.begin() + 3);
+//	b.erase(b.begin() + 1, b.begin() + 3);
 	for (int i = 0; i < b.size(); i++) {
 		std::cout << b[i] << std::endl;
 	}
+//	b.erase(b.begin(), b.end());
 	std::cout << "-------" << std::endl;
+//	std::cout << b.empty() << std::endl;
 
 /*
     ft::vector<int> y(5, 42);
