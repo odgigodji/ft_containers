@@ -9,6 +9,7 @@
 #define FT_VECTOR_HPP
 #include <iostream>
 //#include "iterators.hpp"
+#include "ft.hpp"
 
 namespace ft
 {
@@ -183,10 +184,10 @@ public:
 *_______________________________MEMBER_FUNCTIONS_______________________________*
 *__________________________________Iterators___________________________________*
 *******************************************************************************/
-    iterator    		begin()  { return iterator(_arr); }
-    iterator    		end() { return iterator(_arr + _size); }
-    reverse_iterator	rbegin() { return reverse_iterator(_arr + _size - 1); }
-    reverse_iterator	rend() { return reverse_iterator(_arr - 1); }
+    iterator    		begin() const { return iterator(_arr); }
+    iterator    		end() const { return iterator(_arr + _size); }
+    reverse_iterator	rbegin() const { return reverse_iterator(_arr + _size - 1); }
+    reverse_iterator	rend() const { return reverse_iterator(_arr - 1); }
 
 /*******************************************************************************
 *_________________________________Capacity:____________________________________*
@@ -309,13 +310,52 @@ public:
 *__________________________________Allocator___________________________________*
 *******************************************************************************/
     allocator_type get_allocator() const { return _alloc; }
+};
 
 /*******************************************************************************
 *_________________________Non-member function overloads________________________*
 *******************************************************************************/
     //relational operators
+template<class Tp, class Alloc = std::allocator<Tp> >
+bool    operator == (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
+	if (lhs.size() == rhs.size())
+		return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+	return false;
+}
+
+template<class Tp, class Alloc>
+bool    operator != (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
+	return !(lhs == rhs);
+}
+
+template<class Tp, class Alloc>
+bool    operator < (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
+//	return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+}
+
+template<class Tp, class Alloc>
+bool    operator > (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs)
+{
+//	return ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
+}
+
+template<class Tp, class Alloc>
+bool    operator <= (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs)
+{
+	if (lhs == rhs)
+	return true;
+	return (lhs < rhs);
+}
+
+template<class Tp, class Alloc>
+bool    operator >= (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs)
+{
+	if (lhs == rhs)
+	return true;
+	return (lhs > rhs);
+}
     //swap
-	};
+//	};
 //-----------------------------------ft---------------------------------------//
 }
 

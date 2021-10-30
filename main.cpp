@@ -221,6 +221,10 @@ int main ()
 
 //----------------------------------------------------------------------
 
+	ft::vector<int> a(5, 51);
+	ft::vector<int> b(5, 42);
+
+	if(a == b) { std::cout << "equal" << std::endl;}
 //	int myints[] = { 1776 ,7 ,4 };
 //	third.assign (myints,myints + 3);  // assigning from array.
 //
