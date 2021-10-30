@@ -35,8 +35,8 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 /*******************************************************************************
 *___________________________________Variables__________________________________*
 *******************************************************************************/
-//	private:
-	public:
+	private:
+//	public:
 		allocator_type    			_alloc;
 		pointer           			_arr;
 		size_t            			_size;
@@ -45,6 +45,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 /*******************************************************************************
 *_______________________________Iterators_classes______________________________*
 *******************************************************************************/
+	public:
         class				iterator {
         private:
             pointer 		        _ptr;
@@ -140,8 +141,7 @@ public:
 	vector() : _arr(nullptr), _size(0), _capacity(0) {}
 
 //	2)Fill constructor.Constructs a container with n elements. Each element is a copy of val.
-	vector(size_t n, const_reference value) :	_size(n), _capacity(n)
-	{
+	vector(size_t n, const_reference value) :	_size(n), _capacity(n) {
 		_arr = _alloc.allocate(n);
 		for(size_t i = 0; i < n; i++) {
 			_alloc.construct(_arr + i, value);
@@ -185,20 +185,26 @@ public:
 *__________________________________Iterators___________________________________*
 *******************************************************************************/
     iterator    		begin() const { return iterator(_arr); }
+
     iterator    		end() const { return iterator(_arr + _size); }
+
     reverse_iterator	rbegin() const { return reverse_iterator(_arr + _size - 1); }
+
     reverse_iterator	rend() const { return reverse_iterator(_arr - 1); }
 
 /*******************************************************************************
 *_________________________________Capacity:____________________________________*
 *******************************************************************************/
 	size_t 	size() const { return _size; }
+
 	size_t 	max_size() const { return _alloc.max_size(); }
+
 	void	resize(size_t n) {
 		if (n > _capacity) { reserve(_capacity * 2); }
 		_size = n;
 	}
 	size_t	capacity() const { return _capacity; }
+
 	bool	empty() const { return !_size; }
 	/*Requests that the vector capacity be at least enough to contain n elements.
 	If n is greater than the current vector capacity,
@@ -223,17 +229,20 @@ public:
 		reference	operator[] (size_t n) { //fixme
 			return _arr[n];
 		}
+
 		reference	at(const size_t &n) {
 			if (n < _size) { return _arr[n]; }
 			throw std::out_of_range("vector");
 		}
+
 		reference	front() { return _arr[0]; }
+
 		reference 	back() { return _arr[_size - 1]; }
 
 /*******************************************************************************
 *__________________________________Modifiers___________________________________*
 *******************************************************************************/
-	void	assign (size_t n, const_reference value) {
+	void		assign (size_t n, const_reference value) {
 		clear();
 //		_alloc.deallocate(_arr, )
 		if (n > _capacity) { reserve(n); }
@@ -243,27 +252,75 @@ public:
 		_size = n;
 	}
 
-	void assign (iterator first, iterator last) { //fixme
+	void		assign (iterator first, iterator last) { //fixme
 		clear();
 		size_t n = last - first;
 		if ( n > _capacity) { reserve(n); }
 		for(; first < last; ++first) { push_back(*first); }
 	}
 
-	void	push_back(const_reference value) {
+	void		push_back(const_reference value) {
 		if (_size == _capacity)
 			reserve(_size ? _size * 2 : 1);
 		_alloc.construct(_arr + _size, value);
 		++_size;
 	}
 
-	void	pop_back() {
+	void		pop_back() {
 		if (_arr) {
 			--_size;
 			_alloc.destroy(_arr + _size);
 		}
 	}
-	//insert
+
+	iterator	insert(iterator position, const_reference val) {
+		if (_size == _capacity) {
+			size_t    i = (position.getPtr() - begin().getPtr());
+			position = begin() + i;
+			reserve(_size * 2);
+		}
+		size_t len = sizeof(val) * (end().getPtr() - position.getPtr());
+		std::memmove(position.getPtr() + 1, position.getPtr(), len);
+		_alloc.construct(position.getPtr(), val);
+		++_size;
+		return position;
+	}
+
+	void		insert(iterator position, const size_t &count, const_reference val) {
+		if (_size + count > _capacity) {
+			size_t    id = (position.getPtr() - begin().getPtr());
+			if (_size + count > _capacity * 2) { reserve(_arr + count); }
+			else { reserve(_capacity * 2); }
+			position = begin() + id;
+		}
+		size_t len = sizeof(val) * (end().getPtr() - position.getPtr());
+		std::memmove(position.getPtr() + count, position.getPtr(), len);
+		for (size_t i = 0; i != count; ++i)
+			_alloc.construct((position + i).getPtr(), val);
+		_size += count;
+	}
+//
+//	template<class _InputIt>
+//			void    insert( iterator pos, _InputIt first, _InputIt last,
+//							typename ft::enable_if<std::__is_input_iterator<_InputIt>::value>::type * = nullptr )
+//							{
+//		size_t    range = last - first;
+//		if (_arrSize + range > _arrCap)
+//		{
+//			size_t    id = (pos.getPtr() - begin().getPtr());
+//			if (_arrSize + range > _arrCap * 2)
+//				reserve(_arrSize + range);
+//			else
+//				reserve(_arrCap * 2);
+//			pos = begin() + id;
+//		}
+//		std::memmove(pos.getPtr() + range, pos.getPtr(), sizeof(value_type) * (end().getPtr() - pos.getPtr()));
+//		for (size_t i = 0; i != range; ++i)
+//			_alloc.construct((pos + i).getPtr(), *(first + i));
+//		_arrSize += range;
+//							}
+
+
 	iterator	erase(iterator pos) {
 		_alloc.destroy(pos.getPtr());
 		size_t len = sizeof(value_type) * (end().getPtr() - pos.getPtr());
@@ -271,6 +328,7 @@ public:
 		--_size;
 		return pos;
 	}
+
 	iterator	erase(iterator first, iterator last)
 	{
 		for (iterator it = first; it != last; ++it)
@@ -300,7 +358,7 @@ public:
 		}
 	}
 // Removes all elements from the vector, leaving the container with a size of 0.
-	void clear() {
+	void		clear() {
 		for(int i = 0; i < _size; ++i)
 			_alloc.destroy(_arr + i);
 		_size = 0;
@@ -314,7 +372,6 @@ public:
 
 /*******************************************************************************
 *_________________________Non-member function overloads________________________*
-*_____________________________Relational operators_____________________________*
 *******************************************************************************/
 
 template<class Tp, class Alloc = std::allocator<Tp> >
@@ -324,7 +381,7 @@ bool    operator == (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Allo
 	return false;
 }
 
-template<class Tp, class Alloc> //= std::allocator<Tp>
+template<class Tp, class Alloc > //= std::allocator<Tp>
 bool    operator != (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
 	return !(lhs == rhs);
 }
@@ -351,9 +408,8 @@ bool    operator >= (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Allo
 	return (lhs > rhs);
 }
 
-							    /* SWAP */
 template <class T, class Alloc>
-void swap (vector<T,Alloc>& x, vector<T,Alloc>& y) {
+void swap (vector<T, Alloc>& x, vector<T, Alloc>& y) {
 	swap(x);
 }
 //	};

@@ -38,7 +38,9 @@ namespace ft
 //				typedef typename iterator_type::iterator_category    iterator_category;
 //					};
 
-	/*    EQUAL COMPARE    */
+/*******************************************************************************
+*______________________________Equal_compare___________________________________*
+*******************************************************************************/
 template<class InputIt1, class InputIt2>
 bool    equal(InputIt1 first1, InputIt1 last1, InputIt2 first2) {
 	for ( ; first1 != last1; ++first1, ++first2) {
@@ -48,7 +50,9 @@ bool    equal(InputIt1 first1, InputIt1 last1, InputIt2 first2) {
 	return true;
 }
 
-		/*    LEXICOGRAPHICAL COMPARE    */
+/*******************************************************************************
+*__________________________Lexicographical_compare_____________________________*
+*******************************************************************************/
 template<class InputIt1, class InputIt2>
 bool	lexicographical_compare (InputIt1 first1, InputIt1 last1, InputIt2 first2,
 								 InputIt2 last2) {
