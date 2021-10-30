@@ -314,8 +314,9 @@ public:
 
 /*******************************************************************************
 *_________________________Non-member function overloads________________________*
+*_____________________________Relational operators_____________________________*
 *******************************************************************************/
-    //relational operators
+
 template<class Tp, class Alloc = std::allocator<Tp> >
 bool    operator == (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
 	if (lhs.size() == rhs.size())
@@ -323,7 +324,7 @@ bool    operator == (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Allo
 	return false;
 }
 
-template<class Tp, class Alloc>
+template<class Tp, class Alloc> //= std::allocator<Tp>
 bool    operator != (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
 	return !(lhs == rhs);
 }
@@ -334,25 +335,27 @@ bool    operator < (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc
 }
 
 template<class Tp, class Alloc>
-bool    operator > (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs)
-{
+bool    operator > (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
 	return ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
 }
 
 template<class Tp, class Alloc>
-bool    operator <= (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs)
-{
+bool    operator <= (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
 	if (lhs == rhs) { return true; }
 	return (lhs < rhs);
 }
 
 template<class Tp, class Alloc>
-bool    operator >= (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs)
-{
+bool    operator >= (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
 	if (lhs == rhs) { return true; }
 	return (lhs > rhs);
 }
-    //swap
+
+							    /* SWAP */
+template <class T, class Alloc>
+void swap (vector<T,Alloc>& x, vector<T,Alloc>& y) {
+	swap(x);
+}
 //	};
 //-----------------------------------ft---------------------------------------//
 }

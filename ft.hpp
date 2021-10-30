@@ -50,7 +50,8 @@ bool    equal(InputIt1 first1, InputIt1 last1, InputIt2 first2) {
 
 		/*    LEXICOGRAPHICAL COMPARE    */
 template<class InputIt1, class InputIt2>
-bool	lexicographical_compare (InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2) {
+bool	lexicographical_compare (InputIt1 first1, InputIt1 last1, InputIt2 first2,
+								 InputIt2 last2) {
 	while (first1 != last1)
 	{
 		if (first2 == last2 || *first2 < *first1) { return false; }
@@ -62,7 +63,8 @@ bool	lexicographical_compare (InputIt1 first1, InputIt1 last1, InputIt2 first2, 
 }
 
 template<class InputIt1, class InputIt2, class Compare>
-bool	lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2, Compare comp)
+bool	lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2,
+								InputIt2 last2, Compare comp)
 {
 	for ( ; (first1 != last1) && (first2 != last2); ++first1, (void)++first2 )
 	{
