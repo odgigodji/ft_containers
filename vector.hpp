@@ -245,18 +245,16 @@ vector(InputIterator first, InputIterator last,
 /*******************************************************************************
 *______________________________Element_access__________________________________*
 *******************************************************************************/
-		reference	operator[] (size_t n) { //fixme
-			return _arr[n];
-		}
+	reference	operator[] (const size_t n) { return _arr[n]; }
 
-		reference	at(const size_t &n) {
-			if (n < _size) { return _arr[n]; }
-			throw std::out_of_range("vector");
-		}
+	reference	at(const size_t &n) {
+		if (n < _size) { return _arr[n]; }
+		throw std::out_of_range("vector");
+	}
 
-		reference	front() { return _arr[0]; }
+	reference	front() { return _arr[0]; }
 
-		reference 	back() { return _arr[_size - 1]; }
+	reference 	back() { return _arr[_size - 1]; }
 
 /*******************************************************************************
 *__________________________________Modifiers___________________________________*
