@@ -242,21 +242,26 @@ public:
 		_size = n;
 	}
 
-	void assign (iterator first, iterator last) {
+	void assign (iterator first, iterator last) { //fixme
 		clear();
 		size_t n = last - first;
 		if ( n > _capacity) { reserve(n); }
 		for(; first < last; ++first) { push_back(*first); }
 	}
+
 	void	push_back(const_reference value) {
 		if (_size == _capacity)
 			reserve(_size ? _size * 2 : 1);
-//		std::cout << "value from push back " << value << std::endl;
-//		std::cout << "_arr + _size " << *(_arr + _size) << std::endl;
 		_alloc.construct(_arr + _size, value);
 		++_size;
 	}
-	//pop_back
+
+	void	pop_back() {
+		if (_arr) {
+			--_size;
+			_alloc.destroy(_arr + _size);
+		}
+	}
 	//insert
 	iterator	erase(iterator pos) {
 		_alloc.destroy(pos.getPtr());
@@ -274,7 +279,25 @@ public:
 		_size -= last.getPtr() - first.getPtr();
 		return last;
 	}
-	//swap
+
+	void		swap(vector &other) {
+		if (this != &other) {
+			allocator_type    tmpAlloc = _alloc;
+			pointer           tmpArr = _arr;
+			size_t            tmpSize = _size;
+			size_t            tmpCapacity = _capacity;
+
+			_alloc = other._alloc;
+			_arr = other._arr;
+			_size  = other._size;
+			_capacity  = other._capacity;
+
+			other._alloc = tmpAlloc;
+			other._arr = tmpArr;
+			other._size = tmpSize;
+			other._capacity = tmpCapacity;
+		}
+	}
 // Removes all elements from the vector, leaving the container with a size of 0.
 	void clear() {
 		for(int i = 0; i < _size; ++i)
