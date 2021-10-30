@@ -178,7 +178,7 @@ vector(InputIterator first, InputIterator last,
 	}
 
 //  1)Destructor.
-    ~vector() {
+	~vector() {
 		clear();
 		_alloc.deallocate(_arr, _capacity);
 	}
