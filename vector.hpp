@@ -203,9 +203,9 @@ vector(InputIterator first, InputIterator last,
 *_______________________________MEMBER_FUNCTIONS_______________________________*
 *__________________________________Iterators___________________________________*
 *******************************************************************************/
-    iterator			begin() const { return iterator(_arr); }
+	iterator			begin() const { return iterator(_arr); }
 
-    iterator			end() const { return iterator(_arr + _size); }
+	iterator			end() const { return iterator(_arr + _size); }
 
     reverse_iterator	rbegin() const { return reverse_iterator(_arr + _size - 1); }
 
