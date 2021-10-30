@@ -336,22 +336,20 @@ bool    operator < (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc
 template<class Tp, class Alloc>
 bool    operator > (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs)
 {
-//	return ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
+	return ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
 }
 
 template<class Tp, class Alloc>
 bool    operator <= (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs)
 {
-	if (lhs == rhs)
-	return true;
+	if (lhs == rhs) { return true; }
 	return (lhs < rhs);
 }
 
 template<class Tp, class Alloc>
 bool    operator >= (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs)
 {
-	if (lhs == rhs)
-	return true;
+	if (lhs == rhs) { return true; }
 	return (lhs > rhs);
 }
     //swap

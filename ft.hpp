@@ -50,26 +50,26 @@ bool    equal(InputIt1 first1, InputIt1 last1, InputIt2 first2) {
 
 		/*    LEXICOGRAPHICAL COMPARE    */
 template<class InputIt1, class InputIt2>
-bool    lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2)
-{
-	for ( ; (first1 != last1) && (first2 != last2); ++first1, (void) ++first2 )
+bool	lexicographical_compare (InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2) {
+	while (first1 != last1)
 	{
-		if (*first1 < *first2) return true;
-		if (*first2 < *first1) return false;
+		if (first2 == last2 || *first2 < *first1) return false;
+		else if (*first1 < *first2) return true;
+		++first1; ++first2;
 	}
-	return (first1 == last1) && (first2 != last2);
+	return (first2!=last2);
 }
 
-template<class _InputIt1, class _InputIt2, class _Compare>
-bool    lexicographical_compare(_InputIt1 first1, _InputIt1 last1, _InputIt2 first2, _InputIt2 last2, _Compare comp)
-{
-	for ( ; (first1 != last1) && (first2 != last2); ++first1, (void) ++first2 )
-	{
-		if (comp(*first1, *first2)) return true;
-		if (comp(*first2, *first1)) return false;
-	}
-	return (first1 == last1) && (first2 != last2);
-}
+//template<class _InputIt1, class _InputIt2, class _Compare>
+//bool	lexicographical_compare(_InputIt1 first1, _InputIt1 last1, _InputIt2 first2, _InputIt2 last2, _Compare comp)
+//{
+//	for ( ; (first1 != last1) && (first2 != last2); ++first1, (void) ++first2 )
+//	{
+//		if (comp(*first1, *first2)) return true;
+//		if (comp(*first2, *first1)) return false;
+//	}
+//	return (first1 == last1) && (first2 != last2);
+//}
 
 //							/*    PAIR    */
 //							template<class _T1, class _T2>
