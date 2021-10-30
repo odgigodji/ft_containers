@@ -153,17 +153,17 @@ public:
 // (first,last),with each element constructed from its corresponding
 // element in that range, in the same order.
 
-//template <class InputIterator>
+template <class InputIterator>
 //	vector (InputIterator first, InputIterator last,
 //			const allocator_type& alloc = allocator_type());
-
-//	vector(iterator first, iterator last) : _size(0) {
-//		size_t range = last - first;
-//		if (range < 0) { throw std::out_of_range("vector"); }
-//		_arr = _alloc.allocate(range);
-//		_capacity = range;
-//		insert(begin(), first, last)
-//	}
+vector(InputIterator first, InputIterator last,
+	   typename ft::enable_if<std::__is_input_iterator<InputIterator>::value>::type * = nullptr) : _size(0) {
+		size_t range = last - first;
+		if (range < 0) { throw std::out_of_range("vector"); }
+		_arr = _alloc.allocate(range);
+		_capacity = range;
+		insert(begin(), first, last);
+	}
 
 //  4)Copy constructor.Constructs a container with a copy of each of the
 // elements in x, in the same order.
@@ -203,9 +203,9 @@ public:
 *_______________________________MEMBER_FUNCTIONS_______________________________*
 *__________________________________Iterators___________________________________*
 *******************************************************************************/
-    iterator    		begin() const { return iterator(_arr); }
+    iterator			begin() const { return iterator(_arr); }
 
-    iterator    		end() const { return iterator(_arr + _size); }
+    iterator			end() const { return iterator(_arr + _size); }
 
     reverse_iterator	rbegin() const { return reverse_iterator(_arr + _size - 1); }
 
