@@ -15,16 +15,16 @@ namespace ft
 //template<class Tp>
 //			struct    enable_if<true, _T> { typedef _T type; };
 //
-//	/*    ITERATOR TRAITS    */
-//template<class _Category, class Tp>
-//	struct    iterator_traits
-//	{
-//	typedef Tp               value_type;
-//	typedef value_type*      pointer;
-//	typedef value_type&      reference;
-//	typedef ptrdiff_t        difference_type;
-////	typedef _Category        iterator_category;
-//	};
+	/*    ITERATOR TRAITS    */
+template<class _Category, class Tp>
+	struct    iterator_traits
+	{
+	typedef Tp               value_type;
+	typedef value_type*      pointer;
+	typedef value_type&      reference;
+	typedef ptrdiff_t        difference_type;
+//	typedef _Category        iterator_category;
+	};
 //
 //	/*    REVERSE ITERATOR */
 //	template<class _Iter>
