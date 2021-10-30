@@ -330,7 +330,7 @@ bool    operator != (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Allo
 
 template<class Tp, class Alloc>
 bool    operator < (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
-//	return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+	return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
 
 template<class Tp, class Alloc>

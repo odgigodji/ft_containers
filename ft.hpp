@@ -12,19 +12,19 @@ namespace ft
 //	template<bool _B, class _T = void>
 //			struct    enable_if {};
 //
-template<class Tp>
+//template<class Tp>
 //			struct    enable_if<true, _T> { typedef _T type; };
 //
 //	/*    ITERATOR TRAITS    */
 //template<class _Category, class Tp>
-	struct    iterator_traits
-	{
-	typedef Tp               value_type;
-	typedef value_type*      pointer;
-	typedef value_type&      reference;
-	typedef ptrdiff_t        difference_type;
-//	typedef _Category        iterator_category;
-	};
+//	struct    iterator_traits
+//	{
+//	typedef Tp               value_type;
+//	typedef value_type*      pointer;
+//	typedef value_type&      reference;
+//	typedef ptrdiff_t        difference_type;
+////	typedef _Category        iterator_category;
+//	};
 //
 //	/*    REVERSE ITERATOR */
 //	template<class _Iter>
@@ -49,8 +49,8 @@ bool    equal(InputIt1 first1, InputIt1 last1, InputIt2 first2) {
 }
 
 		/*    LEXICOGRAPHICAL COMPARE    */
-template<class _InputIt1, class _InputIt2>
-bool    lexicographical_compare(_InputIt1 first1, _InputIt1 last1, _InputIt2 first2, _InputIt2 last2)
+template<class InputIt1, class InputIt2>
+bool    lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2)
 {
 	for ( ; (first1 != last1) && (first2 != last2); ++first1, (void) ++first2 )
 	{
