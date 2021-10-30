@@ -152,18 +152,20 @@ public:
 //  3)Range constructor.Constructs a container with as many elements as the range
 // (first,last),with each element constructed from its corresponding
 // element in that range, in the same order.
+//fixme
+//template <class InputIterator>
 
-template <class InputIterator>
 //	vector (InputIterator first, InputIterator last,
 //			const allocator_type& alloc = allocator_type());
-vector(InputIterator first, InputIterator last,
-	   typename ft::enable_if<std::__is_input_iterator<InputIterator>::value>::type * = nullptr) : _size(0) {
-		size_t range = last - first;
-		if (range < 0) { throw std::out_of_range("vector"); }
-		_arr = _alloc.allocate(range);
-		_capacity = range;
-		insert(begin(), first, last);
-	}
+
+//vector(InputIterator first, InputIterator last,
+//	   typename ft::enable_if<std::__is_input_iterator<InputIterator>::value>::type * = nullptr) : _size(0) {
+//		size_t range = last - first;
+//		if (range < 0) { throw std::out_of_range("vector"); }
+//		_arr = _alloc.allocate(range);
+//		_capacity = range;
+//		insert(begin(), first, last);
+//	}
 
 //  4)Copy constructor.Constructs a container with a copy of each of the
 // elements in x, in the same order.
@@ -178,18 +180,12 @@ vector(InputIterator first, InputIterator last,
 	}
 
 //  1)Destructor.
-	~vector() {
-		clear();
-		_alloc.deallocate(_arr, _capacity);
-	}
+	~vector() { clear(); _alloc.deallocate(_arr, _capacity); }
 
 //	Assignation operator overload.
 	vector& operator= (const vector& x) {
 		if (this != &x) {
-			if (_arr) {
-				clear();
-				_alloc.deallocate(_arr, _capacity);
-			}
+			if (_arr) { clear(); _alloc.deallocate(_arr, _capacity); }
 			_alloc = x.get_allocator();
 			_capacity = x.capacity();
 			_size = x.size();
@@ -256,22 +252,21 @@ vector(InputIterator first, InputIterator last,
 /*******************************************************************************
 *__________________________________Modifiers___________________________________*
 *******************************************************************************/
-	void		assign (size_t n, const_reference value) {
-		clear();
-//		_alloc.deallocate(_arr, )
-		if (n > _capacity) { reserve(n); }
-		for(int i = 0; i < n; ++i) {
-			_alloc.construct(_arr + i, value);
-		}
-		_size = n;
-	}
-
-	void		assign (iterator first, iterator last) { //fixme
+template <class InputIterator>
+		void		assign (InputIterator first, InputIterator last) { //fixme
 		clear();
 		size_t n = last - first;
 		if ( n > _capacity) { reserve(n); }
 		for(; first < last; ++first) { push_back(*first); }
 	}
+
+	void		assign (size_t n, const_reference value) {
+		clear();
+		if (n > _capacity) { reserve(n); }
+		for(int i = 0; i < n; ++i) { _alloc.construct(_arr + i, value); }
+		_size = n;
+	}
+
 
 	void		push_back(const_reference value) {
 		if (_size == _capacity)

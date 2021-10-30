@@ -26,12 +26,13 @@ template<class T>
 #ifndef ITERATOR_TRAITS_HPP
 # define ITERATOR_TRAITS_HPP
 template<class Category, class Tp>
-	struct    iterator_traits {
-	typedef Tp               value_type;
-	typedef value_type*      pointer;
-	typedef value_type&      reference;
-	typedef ptrdiff_t        difference_type;
-	typedef Category		 iterator_category;
+	struct   	iterator_traits
+	{
+	typedef 	Tp               value_type;
+	typedef 	value_type*      pointer;
+	typedef 	value_type&      reference;
+	typedef 	ptrdiff_t        difference_type;
+	typedef 	Category		 iterator_category;
 	};
 #endif
 //
