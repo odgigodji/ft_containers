@@ -204,12 +204,9 @@ vector(InputIterator first, InputIterator last,
 *__________________________________Iterators___________________________________*
 *******************************************************************************/
 	iterator			begin() const { return iterator(_arr); }
-
 	iterator			end() const { return iterator(_arr + _size); }
-
-    reverse_iterator	rbegin() const { return reverse_iterator(_arr + _size - 1); }
-
-    reverse_iterator	rend() const { return reverse_iterator(_arr - 1); }
+	reverse_iterator	rbegin() const { return reverse_iterator(_arr + _size - 1); }
+	reverse_iterator	rend() const { return reverse_iterator(_arr - 1); }
 
 /*******************************************************************************
 *_________________________________Capacity:____________________________________*
