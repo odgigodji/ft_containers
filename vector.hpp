@@ -46,7 +46,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 *_______________________________Iterators_classes______________________________*
 *******************************************************************************/
 	public:
-        class				iterator {
+	class	iterator : public ft::iterator_traits<std::random_access_iterator_tag, value_type> {
         private:
             pointer 		        _ptr;
 
@@ -84,7 +84,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
         };
 //		friend    iterator  operator + (const difference_type &n, const iterator &it) { return it + n; }
 
-        class				 reverse_iterator {
+        class	 reverse_iterator {
         private:
             pointer 		        _ptr;
 

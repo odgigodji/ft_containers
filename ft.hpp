@@ -14,10 +14,10 @@ namespace ft
 #ifndef ENABLE_IF_HPP
 # define ENABLE_IF_HPP
 template<bool B, class T = void>
-		struct    enable_if {};
+	struct    enable_if {};
 
 template<class T>
-			struct    enable_if<true, T> { typedef T type; };
+	struct    enable_if<true, T> { typedef T type; };
 #endif
 
 /*******************************************************************************
@@ -25,28 +25,31 @@ template<class T>
 *******************************************************************************/
 #ifndef ITERATOR_TRAITS_HPP
 # define ITERATOR_TRAITS_HPP
-template<class T>
-	struct   	iterator_traits
-	{
-	typedef 	T               value_type;
-	typedef 	value_type*      pointer;
-	typedef 	value_type&      reference;
-	typedef 	ptrdiff_t        difference_type;
-//	typedef 	Category		 iterator_category;
+template<class Category, class T>
+	struct   	iterator_traits {
+		typedef 	T				 value_type;
+		typedef 	value_type*      pointer;
+		typedef 	value_type&      reference;
+		typedef 	ptrdiff_t        difference_type;
+		typedef 	Category		 iterator_category;
 	};
 #endif
-//
-//	/*    REVERSE ITERATOR */
-//	template<class _Iter>
-//			struct    reverse_iterator
-//					{
-//				typedef _Iter                                        iterator_type;
-//				typedef typename iterator_type::value_type            value_type;
-//				typedef typename iterator_type::pointer                pointer;
-//				typedef typename iterator_type::reference            reference;
-//				typedef typename iterator_type::difference_type        difference_type;
-//				typedef typename iterator_type::iterator_category    iterator_category;
-//					};
+
+/*******************************************************************************
+*____________________________Reverse_iterator__________________________________*
+*******************************************************************************/
+#ifndef REVERSE_ITERATOR_HPP
+# define REVERSE_ITERATOR_HPP
+template<class Iter>
+	struct    reverse_iterator {
+		typedef Iter										iterator_type;
+		typedef typename iterator_type::value_type			value_type;
+		typedef typename iterator_type::pointer				pointer;
+		typedef typename iterator_type::reference			reference;
+		typedef typename iterator_type::difference_type		difference_type;
+		typedef typename iterator_type::iterator_category	iterator_category;
+	};
+#endif
 
 /*******************************************************************************
 *______________________________Equal_compare___________________________________*
