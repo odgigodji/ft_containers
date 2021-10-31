@@ -38,7 +38,59 @@ namespace ft
 
 			stack&	operator=(const stack &other) { vec = other.vec; return *this; }
 
+			/*******************************************************************************
+			*______________________________Element_access__________________________________*
+			*******************************************************************************/
+			reference		top() { return vec.back(); }
+
+			const_reference	top() const { return vec.back(); }
+
+			/*******************************************************************************
+			*_________________________________Capacity:____________________________________*
+			*******************************************************************************/
+			bool			empty() const { return vec.empty(); }
+
+			size_t			size() const { return vec.size(); }
+
+			/*******************************************************************************
+			*__________________________________Modifiers___________________________________*
+			*******************************************************************************/
+			void			pop() { vec.pop_back(); }
+
+			void			push(const_reference value) { vec.push_back(value); }
 		};
+	/*******************************************************************************
+	*_________________________Non-member function overloads________________________*
+	*******************************************************************************/
+	template<class T, class Container>
+	bool    operator == (const ft::stack<T, Container> &lhs, const ft::stack<T, Container> &rhs) {
+		return lhs.c == rhs.c;
+	}
+
+	template<class T, class Container>
+	bool    operator != (const ft::stack<T, Container> &lhs, const ft::stack<T, Container> &rhs) {
+		return lhs.c != rhs.c;
+	}
+
+	template<class T, class Container>
+	bool    operator < (const ft::stack<T, Container> &lhs, const ft::stack<T, Container> &rhs) {
+		return lhs.c < rhs.c;
+	}
+
+	template<class T, class Container>
+	bool    operator > (const ft::stack<T, Container> &lhs, const ft::stack<T, Container> &rhs) {
+		return lhs.c > rhs.c;
+	}
+
+	template<class T, class Container>
+	bool    operator <= (const ft::stack<T, Container> &lhs, const ft::stack<T, Container> &rhs) {
+		return lhs.c <= rhs.c;
+	}
+
+	template<class T, class Container>
+	bool    operator >= (const ft::stack<T, Container> &lhs, const ft::stack<T, Container> &rhs) {
+		return lhs.c >= rhs.c;
+	}
 }
 
 #endif //FT_CONTAINERS_STACK_HPP
