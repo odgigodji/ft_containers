@@ -11,7 +11,7 @@
 
 namespace ft
 {
-template<class Tp,  class Alloc = std::allocator<Tp> > //fixme 98 std
+template<class Tp,  class Alloc = std::allocator<Tp> >
 	class vector
 	{
 		/*******************************************************************************
@@ -42,7 +42,8 @@ template<class Tp,  class Alloc = std::allocator<Tp> > //fixme 98 std
 		*_______________________________Iterators_classes______________________________*
 		*******************************************************************************/
 	public:
-		class	iterator : public ft::iterator_traits<std::random_access_iterator_tag, value_type> {
+		class	iterator : public ft::iterator_traits<std::random_access_iterator_tag,
+				value_type> {
 		private:
 			pointer 		        _ptr;
 
@@ -128,11 +129,11 @@ template<class Tp,  class Alloc = std::allocator<Tp> > //fixme 98 std
 			the elements of the container with.
 		 */
 
-		//	1)Default constructor. Constructs an empty container, with no elements.
+		//1)Default constructor. Constructs an empty container, with no elements.
 	public:
 		vector() : _arr(nullptr), _size(0), _capacity(0) {}
 
-		//	2)Fill constructor.Constructs a container with n elements. Each element is a copy of val.
+		//2)Fill constructor.Constructs a container with n elements. Each element is a copy of val.
 		vector(size_t n, const_reference value) :	_size(n), _capacity(n) {
 			_arr = _alloc.allocate(n);
 			for(size_t i = 0; i < n; i++) {
@@ -141,7 +142,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> > //fixme 98 std
 			}
 		}
 
-		//  3)Range constructor.Constructs a container with as many elements as the range
+		//3)Range constructor.Constructs a container with as many elements as the range
 		// (first,last),with each element constructed from its corresponding
 		// element in that range, in the same order.
 		//fixme
@@ -156,7 +157,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> > //fixme 98 std
 					insert(begin(), first, last);
 			}
 
-		//  4)Copy constructor.Constructs a container with a copy of each of the
+		//4)Copy constructor.Constructs a container with a copy of each of the
 		// elements in x, in the same order.
 		vector(const vector& other) {
 			_size = other.size();
@@ -168,10 +169,10 @@ template<class Tp,  class Alloc = std::allocator<Tp> > //fixme 98 std
 			}
 		}
 
-		//  1)Destructor.
+		//1)Destructor.
 		~vector() { clear(); _alloc.deallocate(_arr, _capacity); }
 
-		//	Assignation operator overload.
+		//Assignation operator overload.
 		vector& operator=(const vector& x) {
 			if (this != &x) {
 				if (_arr) { clear(); _alloc.deallocate(_arr, _capacity); }
@@ -201,9 +202,22 @@ template<class Tp,  class Alloc = std::allocator<Tp> > //fixme 98 std
 		size_t 	max_size() const { return _alloc.max_size(); }
 
 		void	resize(size_t n) {
-			if (n > _capacity) { reserve(_capacity * 2); }
+			if (n > _capacity) {
+				_alloc.allocate(n);
+				_capacity = n;
+			}
 			_size = n;
 		}
+
+		void     resize(const size_t &n, const_reference value)
+		{
+			if (n > _capacity)
+				reserve(_capacity * 2);
+			for (size_t i = _size; i < n; ++i)
+				_alloc.construct(_arr + i, value);
+			_size = n;
+		}
+
 		size_t	capacity() const { return _capacity; }
 
 		bool	empty() const { return !_size; }
@@ -369,7 +383,7 @@ template<class Tp, class Alloc>
 		return false;
 	}
 
-template<class Tp, class Alloc > //= std::allocator<Tp>
+template<class Tp, class Alloc >
 	bool    operator!=(const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
 		return !(lhs == rhs);
 	}
