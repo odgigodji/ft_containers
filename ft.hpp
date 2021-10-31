@@ -2,8 +2,9 @@
 // Created by Nelson Amerei on 10/30/21.
 //
 
+#ifndef FT_HPP
+#define FT_HPP
 #pragma once
-
 #include <iostream>
 
 namespace ft
@@ -167,3 +168,4 @@ template <class T>
 //								class _Allocator = std::allocator<pair<const _Key, _T> > >
 //										class map;
 };
+#endif

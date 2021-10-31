@@ -7,13 +7,10 @@
 
 #ifndef FT_VECTOR_HPP
 #define FT_VECTOR_HPP
-#include <iostream>
-//#include "iterators.hpp"
 #include "ft.hpp"
 
 namespace ft
 {
-//---------------------------------ft-----------------------------------------//
 template<class Tp,  class Alloc = std::allocator<Tp> >
 	class vector
 	{
@@ -36,7 +33,6 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 *___________________________________Variables__________________________________*
 *******************************************************************************/
 	private:
-//	public:
 		allocator_type    			_alloc;
 		pointer           			_arr;
 		size_t            			_size;
@@ -133,32 +129,32 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
  */
 
 //	1)Default constructor. Constructs an empty container, with no elements.
-public:
-	vector() : _arr(nullptr), _size(0), _capacity(0) {}
+	public:
+		vector() : _arr(nullptr), _size(0), _capacity(0) {}
 
-//	2)Fill constructor.Constructs a container with n elements. Each element is a copy of val.
-	vector(size_t n, const_reference value) :	_size(n), _capacity(n) {
-		_arr = _alloc.allocate(n);
-		for(size_t i = 0; i < n; i++) {
-			_alloc.construct(_arr + i, value);
-//			std::cout << "test: " << i << " " << _arr[i] << std::endl;
+	//	2)Fill constructor.Constructs a container with n elements. Each element is a copy of val.
+		vector(size_t n, const_reference value) :	_size(n), _capacity(n) {
+			_arr = _alloc.allocate(n);
+			for(size_t i = 0; i < n; i++) {
+				_alloc.construct(_arr + i, value);
+	//			std::cout << "test: " << i << " " << _arr[i] << std::endl;
+			}
 		}
-	}
 
 //  3)Range constructor.Constructs a container with as many elements as the range
 // (first,last),with each element constructed from its corresponding
 // element in that range, in the same order.
 //fixme
-template <class InputIterator>
-	vector(InputIterator first, InputIterator last,
-	   typename ft::enable_if<std::__is_input_iterator<InputIterator>::value>
-	   ::type * = nullptr) : _size(0) {
-			size_t range = last - first;
-			if (range < 0) { throw std::out_of_range("vector"); }
-			_arr = _alloc.allocate(range);
-			_capacity = range;
-			insert(begin(), first, last);
-	}
+	template <class InputIterator>
+		vector(InputIterator first, InputIterator last,
+		   typename ft::enable_if<std::__is_input_iterator<InputIterator>::value>
+		   ::type * = nullptr) : _size(0) {
+				size_t range = last - first;
+				if (range < 0) { throw std::out_of_range("vector"); }
+				_arr = _alloc.allocate(range);
+				_capacity = range;
+				insert(begin(), first, last);
+		}
 
 //  4)Copy constructor.Constructs a container with a copy of each of the
 // elements in x, in the same order.
@@ -242,12 +238,12 @@ template <class InputIterator>
 /*******************************************************************************
 *__________________________________Modifiers___________________________________*
 *******************************************************************************/
-template <class InputIterator> //fixme
-	typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
-	assign (InputIterator first, InputIterator last) {
-		clear();
-		for(; first != last; ++first) { push_back(*first); }
-	}
+	template <class InputIterator> //fixme
+		typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
+		assign (InputIterator first, InputIterator last) {
+			clear();
+			for(; first != last; ++first) { push_back(*first); }
+		}
 
 	void		assign (size_t n, const_reference value) {
 		clear();
@@ -297,22 +293,22 @@ template <class InputIterator> //fixme
 		_size += count;
 	}
 
-template <class InputIterator> //fixme
+	template <class InputIterator> //fixme
 	typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
-	insert(iterator pos, InputIterator first, InputIterator last) {
-		size_t    range = last - first;
-		if (_size + range > _capacity) {
-			size_t    i = (pos.getPtr() - begin().getPtr());
-			if (_size + range > _capacity * 2) { reserve(_size + range); }
-			else { reserve(_capacity * 2); }
-			pos = begin() + i;
+		insert(iterator pos, InputIterator first, InputIterator last) {
+			size_t    range = last - first;
+			if (_size + range > _capacity) {
+				size_t    i = (pos.getPtr() - begin().getPtr());
+				if (_size + range > _capacity * 2) { reserve(_size + range); }
+				else { reserve(_capacity * 2); }
+				pos = begin() + i;
+			}
+			size_t len = sizeof(value_type) * (end().getPtr() - pos.getPtr());
+			std::memmove(pos.getPtr() + range, pos.getPtr(), len);
+			for (size_t i = 0; i != range; ++i)
+				_alloc.construct((pos + i).getPtr(), *(first + i));
+			_size += range;
 		}
-		size_t len = sizeof(value_type) * (end().getPtr() - pos.getPtr());
-		std::memmove(pos.getPtr() + range, pos.getPtr(), len);
-		for (size_t i = 0; i != range; ++i)
-			_alloc.construct((pos + i).getPtr(), *(first + i));
-		_size += range;
-	}
 
 	iterator	erase(iterator pos) {
 		_alloc.destroy(pos.getPtr());
@@ -402,8 +398,6 @@ template<class Tp, class Alloc>
 
 template <class T, class Alloc>
 	void swap (vector<T, Alloc>& x, vector<T, Alloc>& y) { swap(x); }
-//	};
-//-----------------------------------ft---------------------------------------//
 }
 
 #endif //FT_VECTOR_HPP

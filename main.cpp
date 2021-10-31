@@ -26,6 +26,7 @@ int main() {
 #include <vector>
 #include <list>
 #include <map>
+#include "stack.hpp"
 
 template<class T>
 	void my_reverse(T first, T last)
