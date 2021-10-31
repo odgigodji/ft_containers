@@ -25,14 +25,14 @@ template<class T>
 *******************************************************************************/
 #ifndef ITERATOR_TRAITS_HPP
 # define ITERATOR_TRAITS_HPP
-template<class Category, class Tp>
+template<class T>
 	struct   	iterator_traits
 	{
-	typedef 	Tp               value_type;
+	typedef 	T               value_type;
 	typedef 	value_type*      pointer;
 	typedef 	value_type&      reference;
 	typedef 	ptrdiff_t        difference_type;
-	typedef 	Category		 iterator_category;
+//	typedef 	Category		 iterator_category;
 	};
 #endif
 //
@@ -90,8 +90,17 @@ bool	lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2,
 	}
 	return (first1 == last1) && (first2 != last2);
 }
-#endif
 
+/*******************************************************************************
+*_________________________________Is_integral__________________________________*
+*******************************************************************************/
+
+#endif
+#ifndef IS_INTEGRAL_HPP
+# define IS_INTEGRAL_HPP
+template <class T>
+		struct is_integral : public std::integral_constant<bool, __is_integral(T)>
+#endif
 /*******************************************************************************
 *__________________________Other _____________________________*
 *******************************************************************************/
@@ -136,9 +145,7 @@ bool	lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2,
 //template<class _T1, class _T2>
 //		pair<_T1, _T2>    make_pair(_T1 t, _T2 u) { return pair<_T1, _T2>(t, u); }
 //
-//		/*    IS INTEGRAL    */
-//		template <class T>
-//				struct is_integral : public std::integral_constant<bool, __is_integral(T)> {};
+{};
 //
 //		/*    CONTAINER PROTOTYPES    */
 //		template <    class _T,

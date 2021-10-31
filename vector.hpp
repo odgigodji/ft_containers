@@ -252,12 +252,15 @@ public:
 /*******************************************************************************
 *__________________________________Modifiers___________________________________*
 *******************************************************************************/
-template <class InputIterator>
-		void		assign (InputIterator first, InputIterator last) { //fixme
+template <class InputIterator> //fixme
+		typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
+		assign (InputIterator first, InputIterator last) {
 		clear();
-		size_t n = last - first;
+//		size_t n = last - first;
+		size_t n = 15;
 		if ( n > _capacity) { reserve(n); }
-		for(; first < last; ++first) { push_back(*first); }
+		std::cout << "all is good\n";
+		for(; first != last; ++first) { push_back(*first); }
 	}
 
 	void		assign (size_t n, const_reference value) {
@@ -266,7 +269,6 @@ template <class InputIterator>
 		for(int i = 0; i < n; ++i) { _alloc.construct(_arr + i, value); }
 		_size = n;
 	}
-
 
 	void		push_back(const_reference value) {
 		if (_size == _capacity)
