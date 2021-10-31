@@ -47,78 +47,76 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 *******************************************************************************/
 	public:
 	class	iterator : public ft::iterator_traits<std::random_access_iterator_tag, value_type> {
-        private:
-            pointer 		        _ptr;
+	private:
+		pointer 		        _ptr;
 
-        public:
-            iterator() : _ptr(nullptr) {}
-            explicit iterator(pointer ptr) : _ptr(ptr) {}
-            iterator(const iterator &orig) { _ptr = orig._ptr; }
-            iterator& operator = (const iterator &rhs) {
-                if (_ptr != rhs._ptr) { _ptr = rhs._ptr; }
-                return *this;
-            }
+	public:
+		iterator() : _ptr(nullptr) {}
+		explicit iterator(pointer ptr) : _ptr(ptr) {}
+		iterator(const iterator &orig) { _ptr = orig._ptr; }
+		iterator& operator = (const iterator &rhs) {
+			if (_ptr != rhs._ptr) { _ptr = rhs._ptr; }
+			return *this;
+		}
 
-            iterator&	operator++() { ++_ptr; return *this; }
-            iterator&	operator--() { --_ptr; return *this; }
-            iterator 	operator ++ (int) { return iterator(_ptr++); }
-            iterator 	operator -- (int) { return iterator(_ptr--); }
-            iterator&	operator += (const difference_type &n) { _ptr += n; return *this; }
-            iterator&	operator -= (const difference_type &n) { _ptr -= n; return *this; }
-            iterator 	operator + (const difference_type &n) const { return iterator(_ptr + n); }
-            iterator 	operator - (const difference_type &n) const { return iterator(_ptr - n); }
-            reference	operator * () { return *_ptr; };
-			pointer		getPtr() const { return _ptr; };
-            difference_type operator - (iterator const &other) const { return _ptr - other._ptr; }
+		pointer		getPtr() const { return _ptr; };
+		iterator&	operator++() { ++_ptr; return *this; }
+		iterator&	operator--() { --_ptr; return *this; }
+		iterator 	operator ++ (int) { return iterator(_ptr++); }
+		iterator 	operator -- (int) { return iterator(_ptr--); }
+		iterator&	operator += (const difference_type &n) { _ptr += n; return *this; }
+		iterator&	operator -= (const difference_type &n) { _ptr -= n; return *this; }
+		iterator 	operator + (const difference_type &n) const { return iterator(_ptr + n); }
+		iterator 	operator - (const difference_type &n) const { return iterator(_ptr - n); }
+		reference	operator * () { return *_ptr; };
+		difference_type operator - (iterator const &other) const { return _ptr - other._ptr; }
 //			difference_type operator + (iterator const &other) const { return _ptr + other._ptr; }
-			reference       operator [] (const_reference n) const {
-            	return _ptr[n];
-            }
+		reference       operator [] (const_reference n) const {
+			return _ptr[n];
+		}
 //            pointer         operator -> () { return _ptr; }
-            bool operator == (iterator const &other) const { return _ptr == other._ptr; }
-            bool operator != (iterator const &other) const { return _ptr != other._ptr; }
-            bool operator > (iterator const &other) const{ return _ptr > other._ptr; }
-            bool operator < (iterator const &other) const{ return _ptr < other._ptr; }
-            bool operator >= (iterator const &other) const { return _ptr >= other._ptr; }
-            bool operator <= (iterator const &other) const { return _ptr <= other._ptr; }
-        };
+		bool operator == (iterator const &other) const { return _ptr == other._ptr; }
+		bool operator != (iterator const &other) const { return _ptr != other._ptr; }
+		bool operator > (iterator const &other) const{ return _ptr > other._ptr; }
+		bool operator < (iterator const &other) const{ return _ptr < other._ptr; }
+		bool operator >= (iterator const &other) const { return _ptr >= other._ptr; }
+		bool operator <= (iterator const &other) const { return _ptr <= other._ptr; }
+	};
 //		friend    iterator  operator + (const difference_type &n, const iterator &it) { return it + n; }
 
-        class	 reverse_iterator {
-        private:
-            pointer 		        _ptr;
+	class	 reverse_iterator : public ft::reverse_iterator<iterator> {
+	private:
+		pointer 		        _ptr;
 
-        public:
-            reverse_iterator() : _ptr(nullptr) {}
-            explicit reverse_iterator(pointer ptr) : _ptr(ptr) {}
-            reverse_iterator(const reverse_iterator &orig) { _ptr = orig._ptr; }
-            reverse_iterator& operator = (const reverse_iterator &rhs) {
-                if (_ptr != rhs._ptr) { _ptr = rhs._ptr; }
-                return *this;
-            }
-//            const_pointer *getPtr() const { return _ptr; };
-            reference   operator * () { return *_ptr; }
+	public:
+		reverse_iterator() : _ptr(nullptr) {}
+		explicit reverse_iterator(pointer ptr) : _ptr(ptr) {}
+		reverse_iterator(const reverse_iterator &orig) { _ptr = orig._ptr; }
+		reverse_iterator& operator = (const reverse_iterator &rhs) {
+			if (_ptr != rhs._ptr) { _ptr = rhs._ptr; }
+			return *this;
+		}
 
-            reverse_iterator&	operator ++ () { --_ptr; return *this; }
-            reverse_iterator&	operator -- () { ++_ptr; return *this; }
-            reverse_iterator 	operator ++ (int) { return reverse_iterator(_ptr--); }
-            reverse_iterator 	operator -- (int) { return reverse_iterator(_ptr++); }
-            reverse_iterator&	operator += (difference_type n) { _ptr -= n; return *this; }
-            reverse_iterator&	operator -= (difference_type n) { _ptr += n; return *this; }
-            reverse_iterator 	operator + (difference_type n) const { return reverse_iterator(_ptr - n); }
-            reverse_iterator 	operator - (difference_type n) const { return reverse_iterator(_ptr + n); }
-            reference        	operator * () const { return *_ptr; };
+		pointer				*getPtr() const { return _ptr; };
+		reverse_iterator&	operator ++ () { --_ptr; return *this; }
+		reverse_iterator&	operator -- () { ++_ptr; return *this; }
+		reverse_iterator 	operator ++ (int) { return reverse_iterator(_ptr--); }
+		reverse_iterator 	operator -- (int) { return reverse_iterator(_ptr++); }
+		reverse_iterator&	operator += (difference_type n) { _ptr -= n; return *this; }
+		reverse_iterator&	operator -= (difference_type n) { _ptr += n; return *this; }
+		reverse_iterator 	operator + (difference_type n) const { return reverse_iterator(_ptr - n); }
+		reverse_iterator 	operator - (difference_type n) const { return reverse_iterator(_ptr + n); }
+		reference        	operator * () const { return *_ptr; };
 //            difference_type	    operator - (reverse_iterator const &other) const { return other._ptr - _ptr; }
-            reference        	operator [] (const_reference n) const { return _ptr[n]; }
+		reference        	operator [] (const_reference n) const { return _ptr[n]; }
 //            pointer        	    operator -> () { return _ptr; }
-            bool	operator == (reverse_iterator const &other) const { return _ptr == other._ptr; }
-            bool	operator != (reverse_iterator const &other) const { return _ptr != other._ptr; }
-            bool	operator > (reverse_iterator const &other) const{ return _ptr > other._ptr; }
-            bool	operator < (reverse_iterator const &other) const{ return _ptr < other._ptr; }
-            bool	operator >= (reverse_iterator const &other) const { return _ptr >= other._ptr; }
-            bool	operator <= (reverse_iterator const &other) const { return _ptr <= other._ptr; }
-        };
-
+		bool	operator == (reverse_iterator const &other) const { return _ptr == other._ptr; }
+		bool	operator != (reverse_iterator const &other) const { return _ptr != other._ptr; }
+		bool	operator > (reverse_iterator const &other) const{ return _ptr > other._ptr; }
+		bool	operator < (reverse_iterator const &other) const{ return _ptr < other._ptr; }
+		bool	operator >= (reverse_iterator const &other) const { return _ptr >= other._ptr; }
+		bool	operator <= (reverse_iterator const &other) const { return _ptr <= other._ptr; }
+	};
 
 /*******************************************************************************
 *===============================MEMBER_FUNCTIONS===============================*
@@ -155,21 +153,22 @@ public:
 //fixme
 template <class InputIterator>
 	vector(InputIterator first, InputIterator last,
-		   typename ft::enable_if<std::__is_input_iterator<InputIterator>::value>::type * = nullptr) : _size(0) {
+	   typename ft::enable_if<std::__is_input_iterator<InputIterator>::value>
+	   ::type * = nullptr) : _size(0) {
 			size_t range = last - first;
 			if (range < 0) { throw std::out_of_range("vector"); }
 			_arr = _alloc.allocate(range);
 			_capacity = range;
 			insert(begin(), first, last);
-		}
+	}
 
 //  4)Copy constructor.Constructs a container with a copy of each of the
 // elements in x, in the same order.
 	vector(const vector& other) {
 		_size = other.size();
         _capacity = other.capacity();
-//        _alloc = other.get_allocator();
-        _arr = _alloc.allocate(_capacity);
+        _alloc = other.get_allocator();
+//        _arr = _alloc.allocate(_capacity);
 		for(size_t i = 0; i < _size; i++) {
 			_alloc.construct(_arr + i, other._arr[i]);
 		}
@@ -214,10 +213,7 @@ template <class InputIterator>
 	size_t	capacity() const { return _capacity; }
 
 	bool	empty() const { return !_size; }
-	/*Requests that the vector capacity be at least enough to contain n elements.
-	If n is greater than the current vector capacity,
-	the function causes the container to reallocate its storage increasing its
-	capacity to n (or greater).*/
+
 	void	reserve (const size_t n) {
 		if (n > _capacity) {
 			pointer tmp = _alloc.allocate(n);
@@ -312,12 +308,10 @@ template <class InputIterator> //fixme
 	insert( iterator pos, InputIterator first, InputIterator last) {
 		size_t    range = last - first;
 		if (_size + range > _capacity) {
-			size_t    id = (pos.getPtr() - begin().getPtr());
-			if (_size + range > _capacity * 2)
-				reserve(_size + range);
-			else
-				reserve(_capacity * 2);
-			pos = begin() + id;
+			size_t    i = (pos.getPtr() - begin().getPtr());
+			if (_size + range > _capacity * 2) { reserve(_size + range); }
+			else { reserve(_capacity * 2); }
+			pos = begin() + i;
 		}
 		size_t len = sizeof(value_type) * (end().getPtr() - pos.getPtr());
 		std::memmove(pos.getPtr() + range, pos.getPtr(), len);
