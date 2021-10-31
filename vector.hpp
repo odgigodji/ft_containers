@@ -153,19 +153,15 @@ public:
 // (first,last),with each element constructed from its corresponding
 // element in that range, in the same order.
 //fixme
-//template <class InputIterator>
-
-//	vector (InputIterator first, InputIterator last,
-//			const allocator_type& alloc = allocator_type());
-
-//vector(InputIterator first, InputIterator last,
-//	   typename ft::enable_if<std::__is_input_iterator<InputIterator>::value>::type * = nullptr) : _size(0) {
-//		size_t range = last - first;
-//		if (range < 0) { throw std::out_of_range("vector"); }
-//		_arr = _alloc.allocate(range);
-//		_capacity = range;
-//		insert(begin(), first, last);
-//	}
+template <class InputIterator>
+	vector(InputIterator first, InputIterator last,
+		   typename ft::enable_if<std::__is_input_iterator<InputIterator>::value>::type * = nullptr) : _size(0) {
+			size_t range = last - first;
+			if (range < 0) { throw std::out_of_range("vector"); }
+			_arr = _alloc.allocate(range);
+			_capacity = range;
+			insert(begin(), first, last);
+		}
 
 //  4)Copy constructor.Constructs a container with a copy of each of the
 // elements in x, in the same order.
@@ -253,8 +249,8 @@ public:
 *__________________________________Modifiers___________________________________*
 *******************************************************************************/
 template <class InputIterator> //fixme
-		typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
-		assign (InputIterator first, InputIterator last) {
+	typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
+	assign (InputIterator first, InputIterator last) {
 		clear();
 //		size_t n = last - first;
 		size_t n = 15;
@@ -310,27 +306,25 @@ template <class InputIterator> //fixme
 			_alloc.construct((position + i).getPtr(), val);
 		_size += count;
 	}
-//
-//	template<class _InputIt>
-//			void    insert( iterator pos, _InputIt first, _InputIt last,
-//							typename ft::enable_if<std::__is_input_iterator<_InputIt>::value>::type * = nullptr )
-//							{
-//		size_t    range = last - first;
-//		if (_arrSize + range > _arrCap)
-//		{
-//			size_t    id = (pos.getPtr() - begin().getPtr());
-//			if (_arrSize + range > _arrCap * 2)
-//				reserve(_arrSize + range);
-//			else
-//				reserve(_arrCap * 2);
-//			pos = begin() + id;
-//		}
-//		std::memmove(pos.getPtr() + range, pos.getPtr(), sizeof(value_type) * (end().getPtr() - pos.getPtr()));
-//		for (size_t i = 0; i != range; ++i)
-//			_alloc.construct((pos + i).getPtr(), *(first + i));
-//		_arrSize += range;
-//							}
 
+template <class InputIterator> //fixme
+	typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
+	insert( iterator pos, InputIterator first, InputIterator last) {
+		size_t    range = last - first;
+		if (_size + range > _capacity) {
+			size_t    id = (pos.getPtr() - begin().getPtr());
+			if (_size + range > _capacity * 2)
+				reserve(_size + range);
+			else
+				reserve(_capacity * 2);
+			pos = begin() + id;
+		}
+		size_t len = sizeof(value_type) * (end().getPtr() - pos.getPtr());
+		std::memmove(pos.getPtr() + range, pos.getPtr(), len);
+		for (size_t i = 0; i != range; ++i)
+			_alloc.construct((pos + i).getPtr(), *(first + i));
+		_size += range;
+	}
 
 	iterator	erase(iterator pos) {
 		_alloc.destroy(pos.getPtr());
