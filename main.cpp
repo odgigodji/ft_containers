@@ -40,19 +40,30 @@ template<class T>
 
 int main()
 {
-//	std::vector<int> v{1, 2, 3, 4, 5};
-//	std::map<int, std::string> b;
-//	std::list<int> x;
-//	ft::vector<int> m;
-//	x.push_back(15);
-//	x.push_back(51);
-//	x.begin(); //__list_iterator<value_type, std::__list_imp<_Tp, _Alloc>::__void_pointer>
-//	b.begin(); //__map_iterator<std::__tree<std::__value_type, std::map::__vc, __allocator_type>::iterator>
-//	v.begin(); //__wrap_iter<std::vector::pointer>
-//	my_reverse(v.begin(), v.end());
-//	m.begin();
+	std::list<int> x;
+	std::vector<int> b;
+	ft::vector<int> m;
+	x.push_back(15);
+	x.push_back(51);
+	x.push_back(42);
+	m.begin();
 ////	m.assign(v.begin(), v.end());
-//	m.assign(x.begin(), x.end());
+std::cout << "cap = " <<  m.capacity() << " size = " << m.size() << std::endl;
+	m.assign(x.begin(), x.end());
+	std::cout << "cap = " <<  m.capacity() << " size = " << m.size() << std::endl;
+	std::cout << m[0] << std::endl;
+	std::cout << m[1] << std::endl;
+	std::cout << m[2] << std::endl;
+
+	m.erase(m.begin(), m.end());
+	m.clear();
+	std::cout << "cap = " <<  m.capacity() << " size = " << m.size() << std::endl;
+	std::cout << m[0] << std::endl;
+	std::cout << m[1] << std::endl;
+	std::cout << m[2] << std::endl;
+
+
+//	m.insert(x.begin(), )
 //	m.assign(b.begin(), b.end());
 
 //	v.assign(x.begin(), x.end());

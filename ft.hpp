@@ -103,7 +103,7 @@ bool	lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2,
 #ifndef IS_INTEGRAL_HPP
 # define IS_INTEGRAL_HPP
 template <class T>
-		struct is_integral : public std::integral_constant<bool, __is_integral(T)>
+	struct is_integral : public std::integral_constant<bool, __is_integral(T)>
 #endif
 
 /*******************************************************************************

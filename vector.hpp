@@ -248,10 +248,6 @@ template <class InputIterator> //fixme
 	typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
 	assign (InputIterator first, InputIterator last) {
 		clear();
-//		size_t n = last - first;
-		size_t n = 15;
-		if ( n > _capacity) { reserve(n); }
-		std::cout << "all is good\n";
 		for(; first != last; ++first) { push_back(*first); }
 	}
 
@@ -305,7 +301,7 @@ template <class InputIterator> //fixme
 
 template <class InputIterator> //fixme
 	typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
-	insert( iterator pos, InputIterator first, InputIterator last) {
+	insert(iterator pos, InputIterator first, InputIterator last) {
 		size_t    range = last - first;
 		if (_size + range > _capacity) {
 			size_t    i = (pos.getPtr() - begin().getPtr());
