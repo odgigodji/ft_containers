@@ -11,7 +11,7 @@
 
 namespace ft
 {
-template<class Tp,  class Alloc = std::allocator<Tp> >
+template<class Tp,  class Alloc = std::allocator<Tp> > //fixme 98 std
 	class vector
 	{
 		/*******************************************************************************
@@ -362,7 +362,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 *_________________________Non-member function overloads________________________*
 *******************************************************************************/
 
-template<class Tp, class Alloc = std::allocator<Tp> >
+template<class Tp, class Alloc>
 	bool    operator==(const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
 		if (lhs.size() == rhs.size())
 			return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
