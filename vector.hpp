@@ -54,7 +54,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		iterator() : _ptr(nullptr) {}
 		explicit iterator(pointer ptr) : _ptr(ptr) {}
 		iterator(const iterator &orig) { _ptr = orig._ptr; }
-		iterator& operator = (const iterator &rhs) {
+		iterator& operator=(const iterator &rhs) {
 			if (_ptr != rhs._ptr) { _ptr = rhs._ptr; }
 			return *this;
 		}
@@ -62,27 +62,26 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		pointer		getPtr() const { return _ptr; };
 		iterator&	operator++() { ++_ptr; return *this; }
 		iterator&	operator--() { --_ptr; return *this; }
-		iterator 	operator ++ (int) { return iterator(_ptr++); }
-		iterator 	operator -- (int) { return iterator(_ptr--); }
-		iterator&	operator += (const difference_type &n) { _ptr += n; return *this; }
-		iterator&	operator -= (const difference_type &n) { _ptr -= n; return *this; }
-		iterator 	operator + (const difference_type &n) const { return iterator(_ptr + n); }
-		iterator 	operator - (const difference_type &n) const { return iterator(_ptr - n); }
-		reference	operator * () { return *_ptr; };
-		difference_type operator - (iterator const &other) const { return _ptr - other._ptr; }
-//			difference_type operator + (iterator const &other) const { return _ptr + other._ptr; }
-		reference       operator [] (const_reference n) const {
+		iterator 	operator++(int) { return iterator(_ptr++); }
+		iterator 	operator--(int) { return iterator(_ptr--); }
+		iterator&	operator+=(const difference_type &n) { _ptr += n; return *this; }
+		iterator&	operator-=(const difference_type &n) { _ptr -= n; return *this; }
+		iterator 	operator+(const difference_type &n) const { return iterator(_ptr + n); }
+		iterator 	operator-(const difference_type &n) const { return iterator(_ptr - n); }
+		reference	operator*() { return *_ptr; };
+		pointer		operator->() { return _ptr; }
+		difference_type operator-(iterator const &other) const { return _ptr - other._ptr; }
+		difference_type operator+(iterator const &other) const { return _ptr + other._ptr; }
+		reference       operator[](const_reference n) const {
 			return _ptr[n];
 		}
-//            pointer         operator -> () { return _ptr; }
-		bool operator == (iterator const &other) const { return _ptr == other._ptr; }
-		bool operator != (iterator const &other) const { return _ptr != other._ptr; }
-		bool operator > (iterator const &other) const{ return _ptr > other._ptr; }
-		bool operator < (iterator const &other) const{ return _ptr < other._ptr; }
-		bool operator >= (iterator const &other) const { return _ptr >= other._ptr; }
-		bool operator <= (iterator const &other) const { return _ptr <= other._ptr; }
+		bool operator==(iterator const &other) const { return _ptr == other._ptr; }
+		bool operator!=(iterator const &other) const { return _ptr != other._ptr; }
+		bool operator>(iterator const &other) const{ return _ptr > other._ptr; }
+		bool operator<(iterator const &other) const{ return _ptr < other._ptr; }
+		bool operator>=(iterator const &other) const { return _ptr >= other._ptr; }
+		bool operator<=(iterator const &other) const { return _ptr <= other._ptr; }
 	};
-//		friend    iterator  operator + (const difference_type &n, const iterator &it) { return it + n; }
 
 	class	 reverse_iterator : public ft::reverse_iterator<iterator> {
 	private:
@@ -98,24 +97,24 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		}
 
 		pointer				*getPtr() const { return _ptr; };
-		reverse_iterator&	operator ++ () { --_ptr; return *this; }
-		reverse_iterator&	operator -- () { ++_ptr; return *this; }
-		reverse_iterator 	operator ++ (int) { return reverse_iterator(_ptr--); }
-		reverse_iterator 	operator -- (int) { return reverse_iterator(_ptr++); }
-		reverse_iterator&	operator += (difference_type n) { _ptr -= n; return *this; }
-		reverse_iterator&	operator -= (difference_type n) { _ptr += n; return *this; }
-		reverse_iterator 	operator + (difference_type n) const { return reverse_iterator(_ptr - n); }
-		reverse_iterator 	operator - (difference_type n) const { return reverse_iterator(_ptr + n); }
-		reference        	operator * () const { return *_ptr; };
-//            difference_type	    operator - (reverse_iterator const &other) const { return other._ptr - _ptr; }
-		reference        	operator [] (const_reference n) const { return _ptr[n]; }
-//            pointer        	    operator -> () { return _ptr; }
-		bool	operator == (reverse_iterator const &other) const { return _ptr == other._ptr; }
-		bool	operator != (reverse_iterator const &other) const { return _ptr != other._ptr; }
-		bool	operator > (reverse_iterator const &other) const{ return _ptr > other._ptr; }
-		bool	operator < (reverse_iterator const &other) const{ return _ptr < other._ptr; }
-		bool	operator >= (reverse_iterator const &other) const { return _ptr >= other._ptr; }
-		bool	operator <= (reverse_iterator const &other) const { return _ptr <= other._ptr; }
+		reverse_iterator&	operator++() { --_ptr; return *this; }
+		reverse_iterator&	operator--() { ++_ptr; return *this; }
+		reverse_iterator 	operator++(int) { return reverse_iterator(_ptr--); }
+		reverse_iterator 	operator--(int) { return reverse_iterator(_ptr++); }
+		reverse_iterator&	operator+=(difference_type n) { _ptr -= n; return *this; }
+		reverse_iterator&	operator-=(difference_type n) { _ptr += n; return *this; }
+		reverse_iterator 	operator+(difference_type n) const { return reverse_iterator(_ptr - n); }
+		reverse_iterator 	operator-(difference_type n) const { return reverse_iterator(_ptr + n); }
+		reference        	operator*() const { return *_ptr; };
+		difference_type	    operator-(reverse_iterator const &other) const { return other._ptr - _ptr; }
+		reference        	operator[](const_reference n) const { return _ptr[n]; }
+		pointer        	    operator->() { return _ptr; }
+		bool	operator==(reverse_iterator const &other) const { return _ptr == other._ptr; }
+		bool	operator!=(reverse_iterator const &other) const { return _ptr != other._ptr; }
+		bool	operator>(reverse_iterator const &other) const{ return _ptr > other._ptr; }
+		bool	operator<(reverse_iterator const &other) const{ return _ptr < other._ptr; }
+		bool	operator>=(reverse_iterator const &other) const { return _ptr >= other._ptr; }
+		bool	operator<=(reverse_iterator const &other) const { return _ptr <= other._ptr; }
 	};
 
 /*******************************************************************************
@@ -131,7 +130,6 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 	first, last	-	the range to copy the elements from
 	other	-	another container to be used as source to initialize
  	the elements of the container with.
-	init	-	initializer list to initialize the elements of the container with
  */
 
 //	1)Default constructor. Constructs an empty container, with no elements.
@@ -178,7 +176,7 @@ template <class InputIterator>
 	~vector() { clear(); _alloc.deallocate(_arr, _capacity); }
 
 //	Assignation operator overload.
-	vector& operator= (const vector& x) {
+	vector& operator=(const vector& x) {
 		if (this != &x) {
 			if (_arr) { clear(); _alloc.deallocate(_arr, _capacity); }
 			_alloc = x.get_allocator();
@@ -369,35 +367,35 @@ template <class InputIterator> //fixme
 *******************************************************************************/
 
 template<class Tp, class Alloc = std::allocator<Tp> >
-	bool    operator == (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
+	bool    operator==(const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
 		if (lhs.size() == rhs.size())
 			return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 		return false;
 	}
 
 template<class Tp, class Alloc > //= std::allocator<Tp>
-	bool    operator != (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
+	bool    operator!=(const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
 		return !(lhs == rhs);
 	}
 
 template<class Tp, class Alloc>
-	bool    operator < (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
+	bool    operator<(const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
 		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 	}
 
 template<class Tp, class Alloc>
-	bool    operator > (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
+	bool    operator>(const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
 		return ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
 	}
 
 template<class Tp, class Alloc>
-	bool    operator <= (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
+	bool    operator<=(const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
 		if (lhs == rhs) { return true; }
 		return (lhs < rhs);
 	}
 
 template<class Tp, class Alloc>
-	bool    operator >= (const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
+	bool    operator>=(const ft::vector<Tp, Alloc> &lhs, const ft::vector<Tp, Alloc> &rhs) {
 		if (lhs == rhs) { return true; }
 		return (lhs > rhs);
 	}

@@ -63,6 +63,7 @@ std::cout << "cap = " <<  m.capacity() << " size = " << m.size() << std::endl;
 	std::cout << m[2] << std::endl;
 
 
+	std::cout << b.begin().operator*() << std::endl;
 //	m.insert(x.begin(), )
 //	m.assign(b.begin(), b.end());
 
