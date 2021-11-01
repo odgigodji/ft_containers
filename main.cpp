@@ -42,17 +42,19 @@ int main() {
 
 	//ASSIGN
 	std::vector<int> sys(4, 51);
-	sys.assign(5, 23);
-	for(int i = 0; i < sys.size(); ++i) {
-		std::cout << sys[i] << " ";
-	}
-	std::cout << "\n----------------------\n";
+	std::cout << *sys.crbegin() << std::endl;
+//	sys.assign(5, 23);
+//	for(int i = 0; i < sys.size(); ++i) {
+//		std::cout << sys[i] << " ";
+//	}
+//	std::cout << "\n----------------------\n";
+//
+//	ft::vector<int> ass(4, 51);
+//	ass.assign(5, 23);
+//	for(int i = 0; i < ass.size(); ++i) {
+//		std::cout << ass[i] << " ";
+//	}
 
-	ft::vector<int> ass(4, 51);
-	ass.assign(5, 23);
-	for(int i = 0; i < ass.size(); ++i) {
-		std::cout << ass[i] << " ";
-	}
 //	std::cout << swap2[0] << " " <<
 //	swap2[1] << " " << swap2[2]<< " " << std::endl;
 }
