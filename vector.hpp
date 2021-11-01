@@ -343,7 +343,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		}
 
 		void		swap(vector &other) {
-			if (this != &other) {
+			if (other.size() && size() && this != &other ) {
 				allocator_type    tmpAlloc = _alloc;
 				pointer           tmpArr = _arr;
 				size_t            tmpSize = _size;
@@ -411,7 +411,9 @@ template<class Tp, class Alloc>
 	}
 
 template <class T, class Alloc>
-	void swap (vector<T, Alloc>& x, vector<T, Alloc>& y) { swap(x); }
+	void swap (vector<T, Alloc>& x, vector<T, Alloc>& y) {
+		x.swap(y);
+	}
 }
 
 #endif //FT_VECTOR_HPP

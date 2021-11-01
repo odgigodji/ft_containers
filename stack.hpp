@@ -8,7 +8,7 @@
 #include "vector.hpp"
 namespace ft
 {
-	template<class T, class Container>
+	template<class T, class Container = ft::vector<T> >
 		class stack {
 			/*******************************************************************************
 			*=================================MEMBER_TYPES=================================*
@@ -32,6 +32,7 @@ namespace ft
 			********************************************************************************
 			*_________________Constructors,destructor,assignation operator_________________*
 			*******************************************************************************/
+		public:
 			explicit stack(const Container &cont = Container()) : vec(cont) {}
 
 			stack(const stack &other) : vec(other.vec) {}
