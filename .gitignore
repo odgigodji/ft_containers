@@ -1,6 +1,6 @@
 cmake-build-debug/
 /.idea
-/CMakeLists.txt
+#/CMakeLists.txt
 /a.out
 /*.gch
-/ft_containers-unit-test/
+#/ft_containers-unit-test/
