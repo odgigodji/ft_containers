@@ -135,10 +135,12 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 
 		//2)Fill constructor.Constructs a container with n elements. Each element is a copy of val.
 		vector(size_t n, const_reference value) :	_size(n), _capacity(n) {
-			_arr = _alloc.allocate(n);
-			for(size_t i = 0; i < n; i++) {
-				_alloc.construct(_arr + i, value);
-	//			std::cout << "test: " << i << " " << _arr[i] << std::endl;
+			if (n > 0) {
+				_arr = _alloc.allocate(_capacity);
+				for(size_t i = 0; i < _capacity; i++) {
+					_alloc.construct(_arr + i, value);
+					//			std::cout << "test: " << i << " " << _arr[i] << std::endl;
+				}
 			}
 		}
 
@@ -170,7 +172,12 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		}
 
 		//1)Destructor.
-		~vector() { clear(); _alloc.deallocate(_arr, _capacity); }
+		~vector() {
+			if(_arr) {
+				clear();
+				_alloc.deallocate(_arr, _capacity);
+			}
+		}
 
 		//Assignation operator overload.
 		vector& operator=(const vector& x) {
@@ -258,7 +265,10 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		template <class InputIterator> //fixme
 			typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
 			assign (InputIterator first, InputIterator last) {
+//				std::cout << "ASS: " << _capacity << std::endl;
 				clear();
+				std::cout << "ASS: " << _capacity << std::endl;
+
 				for(; first != last; ++first) { push_back(*first); }
 				
 			}
@@ -366,9 +376,14 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		}
 		// Removes all elements from the vector, leaving the container with a size of 0.
 		void		clear() {
-			for(size_t i = 0; i < _size; ++i)
-				_alloc.destroy(_arr + i);
-			_size = 0;
+			std::cout << "CL: " << _capacity << std::endl;
+
+			if(_capacity > 0) {
+				for(size_t i = 0; i < _size; ++i)
+					_alloc.destroy(_arr + i);
+				_size = 0;
+//				_capacity = 0;
+			}
 		}
 
 		/*******************************************************************************

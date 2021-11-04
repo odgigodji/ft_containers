@@ -5,6 +5,17 @@
 #include <stack>
 #include "stack.hpp"
 
+void test(ft::vector<int> vector) {
+	std::vector<int> v;
+	vector.assign(3, 3);
+	std::vector<int> tmp(10000000, 4);
+	ft::vector<int> tmp2(tmp.begin(), tmp.end());
+	v.push_back(tmp2.size());
+	v.push_back(tmp2.capacity());
+	for (size_t i = 0; i < tmp.size(); ++i)
+		v.push_back(tmp2[i]);
+}
+
 int main() {
 
 	//STACK----------------------------
@@ -42,10 +53,15 @@ int main() {
 	*/
 
 	//ASSIGN
+	ft::vector<int> he;
+	he.assign(3,3);
+	std::cout << he[0] << " " << he[1] << " " << he[2] << std::endl;
 //	std::vector<int> sys(4, 51);
-
+	ft::vector<int> tmp, tmp2;
+	tmp.assign(40000000, 1);
+	tmp2.assign(4000, 1);
+	he.assign(tmp.begin(), tmp.end());
 //	std::cout << *sys.crbegin() << std::endl;
-
 
 //	sys.assign(5, 23);
 //	for(int i = 0; i < sys.size(); ++i) {
@@ -61,34 +77,11 @@ int main() {
 
 //	std::cout << swap2[0] << " " <<
 //	swap2[1] << " " << swap2[2]<< " " << std::endl;
+{
+//	ft::vector<int> v;
+//	test(v);
+//	ft::vector<int> tmp(10000000, 4), tmp1(10000000, 5);
 
+}
 
-
-
-
-
-	//	insert example:
-//	std::vector<int> myvector (3,100);
-//	std::vector<int>::iterator it;
-//
-//	it = myvector.begin();
-//	it = myvector.insert ( it , 200 );
-//
-//	myvector.insert (it,2,300);
-//
-//	// "it" no longer valid, get a new one:
-//	it = myvector.begin();
-//
-//	std::vector<int> anothervector (2,400);
-//	myvector.insert (it+2,anothervector.begin(),anothervector.end());
-//
-//	int myarray [] = { 501,502,503 };
-//	myvector.insert (myvector.begin(), myarray, myarray+3);
-//
-//	std::cout << "myvector contains:";
-//	for (it=myvector.begin(); it<myvector.end(); it++)
-//		std::cout << ' ' << *it;
-//	std::cout << '\n';
-//
-//	return 0;
 }

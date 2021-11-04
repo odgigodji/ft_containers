@@ -3,8 +3,8 @@ project(ft_containers)
 
 set(CMAKE_CXX_STANDARD 14)
 
-SET(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -Werror")
-SET(GCC_COVERAGE_LINK_FLAGS    "-Wall -Wextra -Werror")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=")
+
 include_directories(.)
 
 add_executable(ft_containers
