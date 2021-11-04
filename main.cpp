@@ -29,6 +29,7 @@ int main() {
 	//swap - segfault
 	//data() - not compile
 
+
 	//SWAP
 	/*
 	std::vector<int> test(4,41);
@@ -41,8 +42,11 @@ int main() {
 	*/
 
 	//ASSIGN
-	std::vector<int> sys(4, 51);
-	std::cout << *sys.crbegin() << std::endl;
+//	std::vector<int> sys(4, 51);
+
+//	std::cout << *sys.crbegin() << std::endl;
+
+
 //	sys.assign(5, 23);
 //	for(int i = 0; i < sys.size(); ++i) {
 //		std::cout << sys[i] << " ";
@@ -57,4 +61,34 @@ int main() {
 
 //	std::cout << swap2[0] << " " <<
 //	swap2[1] << " " << swap2[2]<< " " << std::endl;
+
+
+
+
+
+
+	//	insert example:
+//	std::vector<int> myvector (3,100);
+//	std::vector<int>::iterator it;
+//
+//	it = myvector.begin();
+//	it = myvector.insert ( it , 200 );
+//
+//	myvector.insert (it,2,300);
+//
+//	// "it" no longer valid, get a new one:
+//	it = myvector.begin();
+//
+//	std::vector<int> anothervector (2,400);
+//	myvector.insert (it+2,anothervector.begin(),anothervector.end());
+//
+//	int myarray [] = { 501,502,503 };
+//	myvector.insert (myvector.begin(), myarray, myarray+3);
+//
+//	std::cout << "myvector contains:";
+//	for (it=myvector.begin(); it<myvector.end(); it++)
+//		std::cout << ' ' << *it;
+//	std::cout << '\n';
+//
+//	return 0;
 }

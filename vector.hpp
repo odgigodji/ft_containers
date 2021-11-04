@@ -184,6 +184,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 					_alloc.construct(_arr + i, x._arr[i]);
 				}
 			}
+			return *this;
 		}
 		/*******************************************************************************
 		*_______________________________MEMBER_FUNCTIONS_______________________________*
@@ -209,7 +210,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 			_size = n;
 		}
 
-		void     resize(const size_t &n, const_reference value)
+		void	resize(const size_t &n, const_reference value)
 		{
 			if (n > _capacity)
 				reserve(_capacity * 2);
@@ -259,12 +260,13 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 			assign (InputIterator first, InputIterator last) {
 				clear();
 				for(; first != last; ++first) { push_back(*first); }
+				
 			}
 
 		void		assign (size_t n, const_reference value) {
 			clear();
 			if (n > _capacity) { reserve(n); }
-			for(int i = 0; i < n; ++i) { _alloc.construct(_arr + i, value); }
+			for(size_t i = 0; i < n; ++i) { _alloc.construct(_arr + i, value); }
 			_size = n;
 		}
 
@@ -364,7 +366,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		}
 		// Removes all elements from the vector, leaving the container with a size of 0.
 		void		clear() {
-			for(int i = 0; i < _size; ++i)
+			for(size_t i = 0; i < _size; ++i)
 				_alloc.destroy(_arr + i);
 			_size = 0;
 		}
@@ -415,6 +417,9 @@ template<class Tp, class Alloc>
 template <class T, class Alloc>
 	void swap (vector<T, Alloc>& x, vector<T, Alloc>& y) {
 		x.swap(y);
+//		vector<T, Alloc> &tmp(x);
+//		x = y;
+//		y = tmp;
 	}
 }
 
