@@ -13,7 +13,7 @@ std::vector<int> assign_std_test(std::vector<T> vector) {
 	for (size_t i = 0; i < tmp.size(); ++i)
 		v.push_back(vector[i]);
 	v.push_back(vector.size());
-	v.push_back(vector.capacity());
+//	v.push_back(vector.capacity());
 	return v;
 }
 
@@ -29,7 +29,7 @@ std::vector<int> assign_std_test(_vector<T> vector) {
 	for (size_t i = 0; i < tmp.size(); ++i)
 		v.push_back(vector[i]);
 	v.push_back(vector.size());
-	v.push_back(vector.capacity());
+//	v.push_back(vector.capacity());
 	return v;
 }
 

@@ -173,10 +173,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 
 		//1)Destructor.
 		~vector() {
-			if(_arr) {
-				clear();
-				_alloc.deallocate(_arr, _capacity);
-			}
+			if(_arr) { clear(); _alloc.deallocate(_arr, _capacity); }
 		}
 
 		//Assignation operator overload.
@@ -265,12 +262,8 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		template <class InputIterator> //fixme
 			typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
 			assign (InputIterator first, InputIterator last) {
-//				std::cout << "ASS: " << _capacity << std::endl;
 				clear();
-				std::cout << "ASS: " << _capacity << std::endl;
-
 				for(; first != last; ++first) { push_back(*first); }
-				
 			}
 
 		void		assign (size_t n, const_reference value) {
@@ -281,6 +274,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		}
 
 		void		push_back(const_reference value) {
+//			std::cout << "CAP " << _capacity << std::endl;
 			if (_size == _capacity)
 				reserve(_size ? _size * 2 : 1);
 			_alloc.construct(_arr + _size, value);
@@ -376,8 +370,6 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		}
 		// Removes all elements from the vector, leaving the container with a size of 0.
 		void		clear() {
-			std::cout << "CL: " << _capacity << std::endl;
-
 			if(_capacity > 0) {
 				for(size_t i = 0; i < _size; ++i)
 					_alloc.destroy(_arr + i);
