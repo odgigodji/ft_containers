@@ -1,17 +1,1 @@
-In file included from ../stack_tests/operator >=.cpp:2:
-In file included from ../stack_tests/__service.ipp:3:
-../stack_tests/../../../stack.hpp:93:14: error: no member named 'c' in 'ft::stack<int, ft::vector<int, std::__1::allocator<int> > >'
-                return lhs.c >= rhs.c;
-                       ~~~ ^
-../stack_tests/operator >=.cpp:19:27: note: in instantiation of function template specialization 'ft::operator>=<int, ft::vector<int, std::__1::allocator<int> > >' requested here
-        result2.push_back(st.st1 >= st.st1); result2.push_back(st.st3 >= st.st3); result2.push_back(st.st5 >= st.st9);
-                                 ^
-In file included from ../stack_tests/operator >=.cpp:2:
-In file included from ../stack_tests/__service.ipp:3:
-../stack_tests/../../../stack.hpp:93:14: error: no member named 'c' in 'ft::stack<std::__1::basic_string<char>, ft::vector<std::__1::basic_string<char>, std::__1::allocator<std::__1::basic_string<char> > > >'
-                return lhs.c >= rhs.c;
-                       ~~~ ^
-../stack_tests/operator >=.cpp:19:101: note: in instantiation of function template specialization 'ft::operator>=<std::__1::basic_string<char>, ft::vector<std::__1::basic_string<char>, std::__1::allocator<std::__1::basic_string<char> > > >' requested here
-        result2.push_back(st.st1 >= st.st1); result2.push_back(st.st3 >= st.st3); result2.push_back(st.st5 >= st.st9);
-                                                                                                           ^
-2 errors generated.
+

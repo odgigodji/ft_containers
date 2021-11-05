@@ -200,6 +200,9 @@ int main() {
 	std::cout << "capacity= " << w.capacity() << std::endl;
 
 
+	ft::stack<int> n;
+	ft::stack<int> m;
+	if (n == m) { std::cout << "her"; }
 //	ft::vector<int> v;
 //	ft::vector<int> vector;
 //	vector.assign(26000000, 1);

@@ -27,11 +27,15 @@ namespace ft
 		private:
 			container_type  					vec;
 
+		public:
+			container_type getVec() const { return vec; }
+
 			/*******************************************************************************
 			*===============================MEMBER_FUNCTIONS===============================*
 			********************************************************************************
 			*_________________Constructors,destructor,assignation operator_________________*
 			*******************************************************************************/
+
 		public:
 			explicit stack(const Container &cont = Container()) : vec(cont) {}
 
@@ -65,32 +69,32 @@ namespace ft
 	*******************************************************************************/
 	template<class T, class Container>
 	bool    operator == (const ft::stack<T, Container> &lhs, const ft::stack<T, Container> &rhs) {
-		return lhs.c == rhs.c;
+		return lhs.getVec() == rhs.getVec();
 	}
 
 	template<class T, class Container>
 	bool    operator != (const ft::stack<T, Container> &lhs, const ft::stack<T, Container> &rhs) {
-		return lhs.c != rhs.c;
+		return lhs.getVec() != rhs.getVec();
 	}
 
 	template<class T, class Container>
 	bool    operator < (const ft::stack<T, Container> &lhs, const ft::stack<T, Container> &rhs) {
-		return lhs.c < rhs.c;
+		return lhs.getVec() < rhs.getVec();
 	}
 
 	template<class T, class Container>
 	bool    operator > (const ft::stack<T, Container> &lhs, const ft::stack<T, Container> &rhs) {
-		return lhs.c > rhs.c;
+		return lhs.getVec() > rhs.getVec();
 	}
 
 	template<class T, class Container>
 	bool    operator <= (const ft::stack<T, Container> &lhs, const ft::stack<T, Container> &rhs) {
-		return lhs.c <= rhs.c;
+		return lhs.getVec() <= rhs.getVec();
 	}
 
 	template<class T, class Container>
 	bool    operator >= (const ft::stack<T, Container> &lhs, const ft::stack<T, Container> &rhs) {
-		return lhs.c >= rhs.c;
+		return lhs.getVec() >= rhs.getVec();
 	}
 }
 
