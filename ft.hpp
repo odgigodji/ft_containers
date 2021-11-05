@@ -106,6 +106,7 @@ bool	lexicographical_compare(InputIt1 first1, InputIt1 last1, InputIt2 first2,
 template <class T>
 	struct is_integral : public std::integral_constant<bool, __is_integral(T)>
 #endif
+{};
 
 /*******************************************************************************
 *__________________________Other _____________________________*
@@ -151,7 +152,6 @@ template <class T>
 //template<class _T1, class _T2>
 //		pair<_T1, _T2>    make_pair(_T1 t, _T2 u) { return pair<_T1, _T2>(t, u); }
 //
-{};
 //
 //		/*    CONTAINER PROTOTYPES    */
 //		template <    class _T,

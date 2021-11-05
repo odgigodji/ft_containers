@@ -53,52 +53,52 @@ int main() {
 	*/
 
 	//ASSIGN
-	ft::vector<int> he;
-	he.assign(3,3);
-	std::cout << he[0] << " " << he[1] << " " << he[2] << std::endl;
-//	std::vector<int> sys(4, 51);
-	ft::vector<int> tmp, tmp2;
-	std::vector<int> h;
-	h.assign(40000000, 1);
-	std::cout << h.capacity() << std::endl;
-	tmp.assign(40000000, 1);
-
-//	for(int i = 0; i < tmp.size(); i++) {
-//		std::cout << tmp[i] << " ";
-//	}
-	tmp2.assign(4000, 1);
-	he.assign(tmp.begin(), tmp.end());
-	std::cout << "CAP " << he.capacity() << std::endl;
+//	ft::vector<int> he;
+//	he.assign(3,3);
+//	std::cout << he[0] << " " << he[1] << " " << he[2] << std::endl;
+////	std::vector<int> sys(4, 51);
+//	ft::vector<int> tmp, tmp2;
+//	std::vector<int> h;
+//	h.assign(40000000, 1);
+//	std::cout << h.capacity() << std::endl;
+//	tmp.assign(40000000, 1);
 //
-//	for(int i = 0; i < 30; i++) {
-//		std::cout << tmp[i] << " ";
+////	for(int i = 0; i < tmp.size(); i++) {
+////		std::cout << tmp[i] << " ";
+////	}
+//	tmp2.assign(4000, 1);
+//	he.assign(tmp.begin(), tmp.end());
+//	std::cout << "CAP " << he.capacity() << std::endl;
+////
+////	for(int i = 0; i < 30; i++) {
+////		std::cout << tmp[i] << " ";
+////	}
+//	std::vector<int> a1;
+//	a1.push_back(13);
+//	std::cout << a1.capacity() << " " << a1.size() << " " << std::endl;
+//
+//	a1.push_back(20);
+//
+//	std::cout << a1.capacity() << " " << a1.size() << " " << std::endl;
+//	a1.push_back(20);
+//	std::cout << a1.capacity() << " " << a1.size() << " " << std::endl;
+//
+//	ft::vector<int> a2;
+//	a2.push_back(13);
+//	std::cout << a2.capacity() << " " << a2.size() << " " << std::endl;
+//
+//	a2.push_back(20);
+//
+//	std::cout << a2.capacity() << " " << a2.size() << " " << std::endl;
+//	a2.push_back(20);
+//	std::cout << a2.capacity() << " " << a2.size() << " " << std::endl;
+//	a2.push_back(20);
+//
+//	for(int i = 0; i < 50; i++) {
+//		a2.push_back(i);
+//		std::cout << a2.capacity() << " " << a2.size() << " " << std::endl;
 //	}
-	std::vector<int> a1;
-	a1.push_back(13);
-	std::cout << a1.capacity() << " " << a1.size() << " " << std::endl;
-
-	a1.push_back(20);
-
-	std::cout << a1.capacity() << " " << a1.size() << " " << std::endl;
-	a1.push_back(20);
-	std::cout << a1.capacity() << " " << a1.size() << " " << std::endl;
-
-	ft::vector<int> a2;
-	a2.push_back(13);
-	std::cout << a2.capacity() << " " << a2.size() << " " << std::endl;
-
-	a2.push_back(20);
-
-	std::cout << a2.capacity() << " " << a2.size() << " " << std::endl;
-	a2.push_back(20);
-	std::cout << a2.capacity() << " " << a2.size() << " " << std::endl;
-	a2.push_back(20);
-
-	for(int i = 0; i < 50; i++) {
-		a2.push_back(i);
-		std::cout << a2.capacity() << " " << a2.size() << " " << std::endl;
-	}
-	std::cout << a2.capacity() << " " << a2.size() << " " << std::endl;
+//	std::cout << a2.capacity() << " " << a2.size() << " " << std::endl;
 
 //	std::cout << *sys.crbegin() << std::endl;
 
@@ -116,11 +116,10 @@ int main() {
 
 //	std::cout << swap2[0] << " " <<
 //	swap2[1] << " " << swap2[2]<< " " << std::endl;
-{
-//	ft::vector<int> v;
-//	test(v);
-//	ft::vector<int> tmp(10000000, 4), tmp1(10000000, 5);
 
-}
+ft::vector<int> g(5, 51);
+ft::vector<int> f(g);
+std::cout << f[0] << std::endl;
+
 
 }

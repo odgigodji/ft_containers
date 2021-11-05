@@ -137,10 +137,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		vector(size_t n, const_reference value) :	_size(n), _capacity(n) {
 			if (n > 0) {
 				_arr = _alloc.allocate(_capacity);
-				for(size_t i = 0; i < _capacity; i++) {
-					_alloc.construct(_arr + i, value);
-					//			std::cout << "test: " << i << " " << _arr[i] << std::endl;
-				}
+				for(size_t i = 0; i < _capacity; i++) { _alloc.construct(_arr + i, value); }
 			}
 		}
 
@@ -165,10 +162,8 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 			_size = other.size();
 			_capacity = other.capacity();
 			_alloc = other.get_allocator();
-	//        _arr = _alloc.allocate(_capacity);
-			for(size_t i = 0; i < _size; i++) {
-				_alloc.construct(_arr + i, other._arr[i]);
-			}
+	        _arr = _alloc.allocate(_capacity);
+			for(size_t i = 0; i < _size; i++) { _alloc.construct(_arr + i, other._arr[i]); }
 		}
 
 		//1)Destructor.
@@ -184,9 +179,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 				_capacity = x.capacity();
 				_size = x.size();
 				_arr = _alloc.allocate(_capacity);
-				for (size_t i = 0; i < _size; ++i) {
-					_alloc.construct(_arr + i, x._arr[i]);
-				}
+				for (size_t i = 0; i < _size; ++i) { _alloc.construct(_arr + i, x._arr[i]); }
 			}
 			return *this;
 		}

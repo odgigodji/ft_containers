@@ -9,11 +9,11 @@ std::vector<int> assign_test(std::vector<T> vector) {
     tmp.assign(40000000, 1);
     tmp2.assign(4000, 1);
     g_start1 = timer();
-//    vector.assign(tmp.begin(), tmp.end());
+    vector.assign(tmp.begin(), tmp.end());
     v.push_back(vector[1]);
     v.push_back(vector.size());
     v.push_back(vector.capacity());
-//    vector.assign(tmp2.begin(), tmp2.end());
+    vector.assign(tmp2.begin(), tmp2.end());
     g_end1 = timer();
     v.push_back(vector[444]);
     v.push_back(vector.size());
@@ -29,11 +29,11 @@ std::vector<int> assign_test(_vector<T> vector) {
     tmp.assign(40000000, 1);
     tmp2.assign(4000, 1);
     g_start2 = timer();
-//    vector.assign(tmp.begin(), tmp.end());
+    vector.assign(tmp.begin(), tmp.end());
     v.push_back(vector[1]);
     v.push_back(vector.size());
     v.push_back(vector.capacity());
-//    vector.assign(tmp2.begin(), tmp2.end());
+    vector.assign(tmp2.begin(), tmp2.end());
     g_end2 = timer();
     v.push_back(vector[444]);
     v.push_back(vector.size());
