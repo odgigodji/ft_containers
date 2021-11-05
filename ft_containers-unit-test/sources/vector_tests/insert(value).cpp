@@ -47,7 +47,6 @@ std::vector<int> insert_test_1(std::vector<T> vector) {
 
     v1.push_back(&(*k2));
     v1.push_back(&(*k3));
-//    v1.push_back(&(*k4));
     try { vv.insert(vv.begin(), v1.begin(), v1.end()); }
     catch (...) {
     	v.push_back(vv.size());
@@ -73,7 +72,6 @@ std::vector<int> insert_test_1(_vector<T> vector) {
 
     v1.push_back(&(*k2));
     v1.push_back(&(*k3));
-//    v1.push_back(&(*k4));
     try { vv.insert(vv.begin(), v1.begin(), v1.end()); }
     catch (...) {
     	v.push_back(vv.size());
