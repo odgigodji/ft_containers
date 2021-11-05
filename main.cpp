@@ -113,32 +113,46 @@ int main() {
 //std::cout << "cap= " << a.capacity() << std::endl;
 
 
-	std::vector<int> v1;
-	std::vector<int> tmp1;
-	std::vector<int> vector1;
-	vector1.assign(3, 3);
-	tmp1.assign(40000000, 1);
-	vector1.assign(tmp1.begin(), tmp1.end());
-	for (size_t i = 0; i < tmp1.size(); ++i)
-		v1.push_back(vector1[i]);
-	v1.push_back(vector1.size());
-	std::cout << vector1.capacity() << std::endl;
-
-	std::cout << "---------------------------" << std::endl;
-
-	std::vector<int> v;
-	std::vector<int> tmp;
-	ft::vector<int> vector;
-	vector.assign(3, 3);
-	tmp.assign(40000000, 1);
-	std::cout << vector.capacity() << std::endl;
-
-	vector.assign(tmp.begin(), tmp.end());
-	std::cout << vector.capacity() << std::endl;
-	for (size_t i = 0; i < tmp.size(); ++i)
-		v.push_back(vector[i]);
-	v.push_back(vector.size());
-	std::cout << vector.capacity() << std::endl;
+//	std::vector<int> v1;
+//	std::vector<int> tmp1;
+//	std::vector<int> vector1;
+//	vector1.assign(3, 3);
+//	tmp1.assign(40000000, 1);
+//	vector1.assign(tmp1.begin(), tmp1.end());
+//	for (size_t i = 0; i < tmp1.size(); ++i)
+//		v1.push_back(vector1[i]);
+//	v1.push_back(vector1.size());
+//	std::cout << vector1.capacity() << std::endl;
+//
+//	std::cout << "---------------------------" << std::endl;
+//
+//	std::vector<int> v;
+//	std::vector<int> tmp;
+//	ft::vector<int> vector;
+//	vector.assign(3, 3);
+//	tmp.assign(40000000, 1);
+//	std::cout << vector.capacity() << std::endl;
+//
+//	vector.assign(tmp.begin(), tmp.end());
+//	std::cout << vector.capacity() << std::endl;
+//	for (size_t i = 0; i < tmp.size(); ++i)
+//		v.push_back(vector[i]);
+//	v.push_back(vector.size());
+//	std::cout << vector.capacity() << std::endl;
 //	v.push_back(vector.capacity());
+
+//	std::vector<int> q(5, 51);
+	std::vector<int> w;
+	w.push_back(42);
+	w.push_back(43);
+	w.push_back(44);
+	std::cout << w.capacity() << std::endl;
+
+	std::cout << "insert return= " << *(w.insert(w.begin() + 1, 51)) << std::endl;
+	for(int i = 0; i < w.size(); i++) {
+		std::cout << w[i] << std::endl;
+	}
+	std::cout << "capacity= " << w.capacity() << std::endl;
+
 
 }
