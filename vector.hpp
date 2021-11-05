@@ -318,18 +318,18 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		template <class InputIterator> //fixme
 		typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
 			insert(iterator pos, InputIterator first, InputIterator last) {
-				size_t    range = last - first;
-				if (_size + range > _capacity) {
+				size_t    id = last - first;
+				if (_size + id > _capacity) {
 					size_t    i = (pos.getPtr() - begin().getPtr());
-					if (_size + range > _capacity * 2) { reserve(_size + range); }
+					if (_size + id > _capacity * 2) { reserve(_size + id); }
 					else { reserve(_capacity * 2); }
 					pos = begin() + i;
 				}
 				size_t len = sizeof(value_type) * (end().getPtr() - pos.getPtr());
-				std::memmove(pos.getPtr() + range, pos.getPtr(), len);
-				for (size_t i = 0; i != range; ++i)
+				std::memmove(pos.getPtr() + id, pos.getPtr(), len);
+				for (size_t i = 0; i != id; ++i)
 					_alloc.construct((pos + i).getPtr(), *(first + i));
-				_size += range;
+				_size += id;
 			}
 
 		iterator	erase(iterator pos) {
