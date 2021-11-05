@@ -344,21 +344,21 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		}
 
 		void		swap(vector &other) {
-			if (other.size() && size() && this != &other ) {
-				allocator_type    tmpAlloc = _alloc;
-				pointer           tmpArr = _arr;
-				size_t            tmpSize = _size;
-				size_t            tmpCapacity = _capacity;
+			if (this != &other ) {
+				allocator_type    tmp_alloc = _alloc;
+				pointer           tmp_arr = _arr;
+				size_t            tmp_size = _size;
+				size_t            tmp_capacity = _capacity;
 
-				_alloc = other._alloc;
+				_alloc = other.get_allocator();
 				_arr = other._arr;
 				_size  = other._size;
 				_capacity  = other._capacity;
 
-				other._alloc = tmpAlloc;
-				other._arr = tmpArr;
-				other._size = tmpSize;
-				other._capacity = tmpCapacity;
+				other._alloc = tmp_alloc;
+				other._arr = tmp_arr;
+				other._size = tmp_size;
+				other._capacity = tmp_capacity;
 			}
 		}
 		// Removes all elements from the vector, leaving the container with a size of 0.

@@ -5,17 +5,6 @@
 #include <stack>
 #include "stack.hpp"
 
-void test(ft::vector<int> vector) {
-	std::vector<int> v;
-	vector.assign(3, 3);
-	std::vector<int> tmp(10000000, 4);
-	ft::vector<int> tmp2(tmp.begin(), tmp.end());
-	v.push_back(tmp2.size());
-	v.push_back(tmp2.capacity());
-	for (size_t i = 0; i < tmp.size(); ++i)
-		v.push_back(tmp2[i]);
-}
-
 int main() {
 
 	//STACK----------------------------
@@ -38,8 +27,6 @@ int main() {
 	//insert(fill) - slow
 	//insert(range) - slow
 	//swap - segfault
-	//data() - not compile
-
 
 	//SWAP
 	/*
@@ -120,6 +107,7 @@ int main() {
 ft::vector<int> g(5, 51);
 ft::vector<int> f(g);
 std::cout << f[0] << std::endl;
-
+f.swap(g);
+g = f;
 
 }
