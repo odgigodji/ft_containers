@@ -423,9 +423,6 @@ template<class Tp, class Alloc>
 template <class T, class Alloc>
 	void swap (vector<T, Alloc>& x, vector<T, Alloc>& y) {
 		x.swap(y);
-//		vector<T, Alloc> &tmp(x);
-//		x = y;
-//		y = tmp;
 	}
 }
 
