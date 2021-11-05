@@ -5,6 +5,36 @@
 #include <stack>
 #include "stack.hpp"
 
+class B {
+public:
+	char *l;
+	int i;
+	B():l(nullptr), i(1) {};
+	B(const int &ex) {
+		this->i = ex;
+		this->l = new char('a');
+	};
+	virtual ~B() {
+		delete this->l;
+		this->l = nullptr;
+	};
+};
+
+class A : public B {
+public:
+	A():B(){};
+	A(const B* ex){
+		this->l = new char(*(ex->l));
+		this->i = ex->i;
+		if (ex->i == -1) throw "n";
+	}
+	~A() {
+		delete this->l;
+		this->l = nullptr;
+	};
+};
+
+
 int main() {
 
 	//STACK----------------------------
@@ -155,14 +185,41 @@ int main() {
 	ft::vector<int> w;
 	w.push_back(42);
 	w.push_back(43);
+	w.push_back(44);
+	w.push_back(45);
+	w.push_back(46);
+	w.push_back(47);
+	w.push_back(48);
 //	w.push_back(44);
 	std::cout << w.capacity() << std::endl;
 
-	std::cout << "insert return= " << *(w.insert(w.begin() + 1, 51)) << std::endl;
+	std::cout << "insert return= " << *(w.insert(w.begin() + 7, 221)) << std::endl;
 	for(int i = 0; i < w.size(); i++) {
 		std::cout << w[i] << std::endl;
 	}
 	std::cout << "capacity= " << w.capacity() << std::endl;
 
+
+//	ft::vector<int> v;
+//	ft::vector<int> vector;
+//	vector.assign(26000000, 1);
+//	v.push_back(*(vector.insert(vector.end() - 8000000, 44)));
+//	v.push_back(vector.size());
+//	v.push_back(vector.capacity());
+//	std::unique_ptr<B> k2(new B(3));
+//	std::unique_ptr<B> k3(new B(-4));
+//	std::unique_ptr<B> k4(new B(-1));
+//	ft::vector<A> vv;
+//	ft::vector<B*> v1;
+//	//
+//	v1.push_back(&(*k2));
+//	v1.push_back(&(*k3));
+//	v1.push_back(&(*k4));
+//
+//	try { vv.insert(vv.begin(), v1.begin(), v1.end()); }
+//	catch (...) {
+//		v.push_back(vv.size());
+//		v.push_back(vv.capacity());
+//	}
 
 }

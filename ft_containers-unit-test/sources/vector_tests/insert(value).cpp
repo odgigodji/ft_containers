@@ -34,17 +34,17 @@ template <typename T>
 std::vector<int> insert_test_1(std::vector<T> vector) {
     std::vector<int> v;
     vector.assign(26000000, 1);
-//    g_start1 = timer();
+    g_start1 = timer();
     v.push_back(*(vector.insert(vector.end() - 8000000, 44)));
-//    g_end1 = timer();
+    g_end1 = timer();
     v.push_back(vector.size());
     v.push_back(vector.capacity());
     std::unique_ptr<B> k2(new B(3));
-    std::unique_ptr<B> k3(new B(4));
+    std::unique_ptr<B> k3(new B(-4));
     std::unique_ptr<B> k4(new B(-1));
     std::vector<A> vv;
     std::vector<B*> v1;
-//
+
     v1.push_back(&(*k2));
     v1.push_back(&(*k3));
 //    v1.push_back(&(*k4));
@@ -60,17 +60,17 @@ template <typename T>
 std::vector<int> insert_test_1(_vector<T> vector) {
     std::vector<int> v;
     vector.assign(26000000, 1);
-//    g_start2 = timer();
+    g_start2 = timer();
     v.push_back(*(vector.insert(vector.end() - 8000000, 44)));
-//    g_end2 = timer();
+    g_end2 = timer();
     v.push_back(vector.size());
     v.push_back(vector.capacity());
     std::unique_ptr<B> k2(new B(3));
-    std::unique_ptr<B> k3(new B(4));
+    std::unique_ptr<B> k3(new B(-4));
     std::unique_ptr<B> k4(new B(-1));
     _vector<A> vv;
     _vector<B*> v1;
-//
+
     v1.push_back(&(*k2));
     v1.push_back(&(*k3));
 //    v1.push_back(&(*k4));
