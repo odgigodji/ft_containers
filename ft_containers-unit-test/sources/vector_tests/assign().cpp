@@ -12,12 +12,12 @@ std::vector<int> assign_test(std::vector<T> vector) {
     vector.assign(tmp.begin(), tmp.end());
     v.push_back(vector[1]);
     v.push_back(vector.size());
-//    v.push_back(vector.capacity());
+    v.push_back(vector.capacity());
     vector.assign(tmp2.begin(), tmp2.end());
     g_end1 = timer();
     v.push_back(vector[444]);
     v.push_back(vector.size());
-//    v.push_back(vector.capacity());
+    v.push_back(vector.capacity());
     return v;
 }
 
@@ -32,12 +32,12 @@ std::vector<int> assign_test(_vector<T> vector) {
     vector.assign(tmp.begin(), tmp.end());
     v.push_back(vector[1]);
     v.push_back(vector.size());
-//    v.push_back(vector.capacity());
+    v.push_back(vector.capacity());
     vector.assign(tmp2.begin(), tmp2.end());
     g_end2 = timer();
     v.push_back(vector[444]);
     v.push_back(vector.size());
-//    v.push_back(vector.capacity());
+    v.push_back(vector.capacity());
     return v;
 }
 

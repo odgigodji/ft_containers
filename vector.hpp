@@ -256,7 +256,11 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 			typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
 			assign (InputIterator first, InputIterator last) {
 				clear();
-				for(; first != last; ++first) { push_back(*first); }
+				size_t len = last - first;
+				if (len > _capacity) { reserve(len); }
+				for(; first != last; ++first) {
+					push_back(*first);
+				}
 			}
 
 		void		assign (size_t n, const_reference value) {
@@ -268,8 +272,10 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 
 		void		push_back(const_reference value) {
 //			std::cout << "CAP " << _capacity << std::endl;
-			if (_size == _capacity)
-				reserve(_size ? _size * 2 : 1);
+			if (_size == _capacity) {
+				if (!_size) { reserve(1); }
+				else { reserve(_size * 2); }
+			}
 			_alloc.construct(_arr + _size, value);
 			++_size;
 		}
@@ -281,7 +287,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 			}
 		}
 
-		iterator	insert(iterator position, const_reference val) {
+		iterator	insert(iterator position, const_reference val) { //fixme
 			if (_size == _capacity) {
 				size_t    i = (position.getPtr() - begin().getPtr());
 				position = begin() + i;
@@ -367,7 +373,6 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 				for(size_t i = 0; i < _size; ++i)
 					_alloc.destroy(_arr + i);
 				_size = 0;
-//				_capacity = 0;
 			}
 		}
 

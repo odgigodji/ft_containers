@@ -103,11 +103,42 @@ int main() {
 
 //	std::cout << swap2[0] << " " <<
 //	swap2[1] << " " << swap2[2]<< " " << std::endl;
+//
+//std::vector<int> t;
+//t.assign(5,51);
+//std::cout << "cap= " << t.capacity() << std::endl;
+//
+//ft::vector<int> a;
+//a.assign(5, 51);
+//std::cout << "cap= " << a.capacity() << std::endl;
 
-ft::vector<int> g(5, 51);
-ft::vector<int> f(g);
-std::cout << f[0] << std::endl;
-f.swap(g);
-g = f;
+
+	std::vector<int> v1;
+	std::vector<int> tmp1;
+	std::vector<int> vector1;
+	vector1.assign(3, 3);
+	tmp1.assign(40000000, 1);
+	vector1.assign(tmp1.begin(), tmp1.end());
+	for (size_t i = 0; i < tmp1.size(); ++i)
+		v1.push_back(vector1[i]);
+	v1.push_back(vector1.size());
+	std::cout << vector1.capacity() << std::endl;
+
+	std::cout << "---------------------------" << std::endl;
+
+	std::vector<int> v;
+	std::vector<int> tmp;
+	ft::vector<int> vector;
+	vector.assign(3, 3);
+	tmp.assign(40000000, 1);
+	std::cout << vector.capacity() << std::endl;
+
+	vector.assign(tmp.begin(), tmp.end());
+	std::cout << vector.capacity() << std::endl;
+	for (size_t i = 0; i < tmp.size(); ++i)
+		v.push_back(vector[i]);
+	v.push_back(vector.size());
+	std::cout << vector.capacity() << std::endl;
+//	v.push_back(vector.capacity());
 
 }
