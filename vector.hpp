@@ -22,12 +22,10 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 	public:
 		typedef Tp					value_type;
 		typedef Alloc				allocator_type;
-//		typedef std::size_t			size_type;
 		typedef std::ptrdiff_t		difference_type;
 		typedef value_type&			reference;
 		typedef const value_type&	const_reference;
 		typedef value_type*			pointer;
-//		typedef const value_type*	const_pointer;
 
 		/*******************************************************************************
 		*___________________________________Variables__________________________________*
@@ -144,7 +142,6 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		//3)Range constructor.Constructs a container with as many elements as the range
 		// (first,last),with each element constructed from its corresponding
 		// element in that range, in the same order.
-		//fixme
 		template <class InputIterator>
 			vector(InputIterator first, InputIterator last,
 			   typename ft::enable_if<std::__is_input_iterator<InputIterator>::value>
@@ -252,7 +249,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		/*******************************************************************************
 		*__________________________________Modifiers___________________________________*
 		*******************************************************************************/
-		template <class InputIterator> //fixme
+		template <class InputIterator>
 			typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
 			assign (InputIterator first, InputIterator last) {
 				clear();
@@ -271,7 +268,6 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		}
 
 		void		push_back(const_reference value) {
-//			std::cout << "CAP " << _capacity << std::endl;
 			if (_size == _capacity) {
 				if (!_size) { reserve(1); }
 				else { reserve(_size * 2); }
@@ -287,7 +283,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 			}
 		}
 
-		iterator	insert(iterator position, const_reference val) { //fixme
+		iterator	insert(iterator position, const_reference val) {
 			if (_size == _capacity) {
 				size_t    i = (position.getPtr() - begin().getPtr());
 				reserve(_size * 2);
@@ -315,7 +311,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 			_size += count;
 		}
 
-		template <class InputIterator> //fixme
+		template <class InputIterator>
 		typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
 			insert(iterator pos, InputIterator first, InputIterator last) {
 				size_t    id = last - first;
