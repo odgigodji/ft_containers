@@ -142,10 +142,20 @@ int main() {
 //	v.push_back(vector.capacity());
 
 //	std::vector<int> q(5, 51);
-	std::vector<int> w;
+
+/*
+									capacity = 4
+									insert return= 51
+									42
+									51
+									43
+									44
+									capacity= 4
+ */
+	ft::vector<int> w;
 	w.push_back(42);
 	w.push_back(43);
-	w.push_back(44);
+//	w.push_back(44);
 	std::cout << w.capacity() << std::endl;
 
 	std::cout << "insert return= " << *(w.insert(w.begin() + 1, 51)) << std::endl;

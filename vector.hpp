@@ -290,15 +290,16 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 		iterator	insert(iterator position, const_reference val) { //fixme
 			if (_size == _capacity) {
 				size_t    i = (position.getPtr() - begin().getPtr());
-				position = begin() + i;
 				reserve(_size * 2);
+				position = begin() + i;
 			}
-			size_t len = sizeof(val) * (end().getPtr() - position.getPtr());
+			size_t len = sizeof(value_type) * (end().getPtr() - position.getPtr());
 			std::memmove(position.getPtr() + 1, position.getPtr(), len);
 			_alloc.construct(position.getPtr(), val);
 			++_size;
 			return position;
 		}
+
 
 		void		insert(iterator position, const size_t &count, const_reference val) {
 			if (_size + count > _capacity) {

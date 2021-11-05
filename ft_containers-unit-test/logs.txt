@@ -1,6 +1,6 @@
 In file included from ../vector_tests/insert(value).cpp:2:
 In file included from ../vector_tests/__service.ipp:3:
-../vector_tests/../../../vector.hpp:328:31: warning: destination for this 'memmove' call is a pointer to dynamic class 'A'; vtable pointer will be overwritten [-Wdynamic-class-memaccess]
+../vector_tests/../../../vector.hpp:331:31: warning: destination for this 'memmove' call is a pointer to dynamic class 'A'; vtable pointer will be overwritten [-Wdynamic-class-memaccess]
                                 std::memmove(pos.getPtr() + range, pos.getPtr(), len);
                                 ~~~~~~~~~~~~              ^
 ../vector_tests/insert(value).cpp:77:14: note: in instantiation of function template specialization 'ft::vector<A, std::__1::allocator<A> >::insert<ft::vector<B *, std::__1::allocator<B *> >::iterator>' requested here
@@ -9,7 +9,7 @@ In file included from ../vector_tests/__service.ipp:3:
 ../vector_tests/insert(value).cpp:87:68: note: in instantiation of function template specialization 'insert_test_1<int>' requested here
     exit(run_vector_unit_test<int>("insert(value)", insert_test_1, insert_test_1));
                                                                    ^
-../vector_tests/../../../vector.hpp:328:31: note: explicitly cast the pointer to silence this warning
+../vector_tests/../../../vector.hpp:331:31: note: explicitly cast the pointer to silence this warning
                                 std::memmove(pos.getPtr() + range, pos.getPtr(), len);
                                                           ^
                                              (void*)
