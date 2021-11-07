@@ -113,9 +113,12 @@ namespace ft
 	#ifndef PAIR_HPP
 	# define PAIR_HPP
 	template<class T1, class T2> struct pair {
+		/*    						MEMBER TYPES							*/
 
 		typedef T1		first_type;
 		typedef T2		second_type;
+
+		/*    						VARIABLES							*/
 
 		first_type		first;
 		second_type		second;
