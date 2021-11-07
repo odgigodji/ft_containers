@@ -20,7 +20,7 @@ template < class Key, class T, class Compare, class Allocator >
 		typedef T							mapped_type;
 		typedef Compare					key_compare;
 		typedef Allocator					allocator_type;
-//		typedef ft::pair<const Key, T>	value_type;
+		typedef ft::pair<const Key, T>	value_type;
 //		typedef value_type* 				pointer;
 //		typedef value_type&					reference;
 //		typedef const value_type*			const_pointer;

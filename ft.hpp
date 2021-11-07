@@ -108,18 +108,33 @@ template <class T>
 #endif
 {};
 
-
 /*******************************************************************************
 *__________________________________Pair________________________________________*
 *******************************************************************************/
 #ifndef PAIR_HPP
 # define PAIR_HPP
 template<class T1, class T2> struct pair {
+
 	typedef T1		first_type;
 	typedef T2		second_type;
 
 	first_type		first;
 	second_type		second;
+
+	/*
+	 * Parameters:
+	 *
+	 * pr - Another pair object. This may be an object of the same type as the
+	 * object being constructed or of a pair type whose elements' types are
+	 * implicitly convertible to those in the pair being constructed.
+	 *
+	 * a - An object of the type of first, or some other type implicitly convertible to it.
+	 *
+	 * b - An object of the type of second, or some other type implicitly convertible to it.
+	 *
+	 * first_args, second_args - tuple objects with the arguments to be
+	 * passed to the constructors of members first and second.
+	 */
 
 	/*    						CONSTRUCTORS								*/
 
@@ -127,14 +142,11 @@ template<class T1, class T2> struct pair {
 	pair() : first(first_type()), second(second_type()) {}
 
 	/*						initialization constructor 						*/
-	pair(const first_type &x, const second_type &y) : first(x), second(y) {}
+	pair(const first_type &a, const second_type &b) : first(a), second(b) {}
 
-	/*						converting constructor							*/
-	template<class U1, class U2>
-		explicit pair(const pair<U1, U2> &p) : first(p.first), second(p.second) {}
-
-		/*						copy constructor							*/
-		pair(const pair &orig) { *this = orig; }
+	/*							move/copy constructor						*/
+	template<class U, class V>
+		explicit pair(const pair<U, V> &pr) : first(pr.first), second(pr.second) {}
 
 		/*						ASSIGNMENT OPERATOR							*/
 		pair&    operator = (const pair &orig) {
@@ -148,27 +160,30 @@ template<class T1, class T2> struct pair {
 #endif
 
 /*******************************************************************************
-*_________________________________Other________________________________________*
+*_____________________________Make_pair________________________________________*
 *******************************************************************************/
+#ifndef MAKE_PAIR_HPP
+# define MAKE_PAIR_HPP
+//Constructs a pair object with its first element set to x and its second element set to y.
+template<class T1, class T2> pair<T1, T2> make_pair(T1 x, T2 y) {
+	return pair<T1, T2>(x, y);
+}
 
-///*    MAKE PAIR    */
-//template<class _T1, class _T2>
-//		pair<_T1, _T2>    make_pair(_T1 t, _T2 u) { return pair<_T1, _T2>(t, u); }
-//
-//
+
 //		/*    CONTAINER PROTOTYPES    */
-//		template <    class _T,
-//				class _Allocator = std::allocator<_T> >
+//		template <    class T,
+//				class Allocator = std::allocator<T> >
 //						class vector;
 //
-//		template <    class _T,
-//				class _Container = vector<_T> >
+//		template <    class T,
+//				class Container = vector<T> >
 //						class stack;
 //
-//		template <    class _Key,
-//				class _T,
-//						class _Compare = std::less<_Key>,
-//								class _Allocator = std::allocator<pair<const _Key, _T> > >
+//		template <    class Key,
+//				class T,
+//						class Compare = std::less<Key>,
+//								class Allocator = std::allocator<pair<const Key, T> > >
 //										class map;
 };
+#endif
 #endif
