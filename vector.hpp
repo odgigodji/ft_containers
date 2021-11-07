@@ -65,17 +65,17 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 			iterator 	operator-(const difference_type &n) const { return iterator(_ptr - n); }
 			reference	operator*() { return *_ptr; };
 			pointer		operator->() { return _ptr; }
-			difference_type operator-(iterator const &other) const { return _ptr - other._ptr; }
-			difference_type operator+(iterator const &other) const { return _ptr + other._ptr; }
+			difference_type operator-(iterator const &orig) const { return _ptr - orig._ptr; }
+			difference_type operator+(iterator const &orig) const { return _ptr + orig._ptr; }
 			reference       operator[](const_reference n) const {
 				return _ptr[n];
 			}
-			bool operator==(iterator const &other) const { return _ptr == other._ptr; }
-			bool operator!=(iterator const &other) const { return _ptr != other._ptr; }
-			bool operator>(iterator const &other) const{ return _ptr > other._ptr; }
-			bool operator<(iterator const &other) const{ return _ptr < other._ptr; }
-			bool operator>=(iterator const &other) const { return _ptr >= other._ptr; }
-			bool operator<=(iterator const &other) const { return _ptr <= other._ptr; }
+			bool operator==(iterator const &orig) const { return _ptr == orig._ptr; }
+			bool operator!=(iterator const &orig) const { return _ptr != orig._ptr; }
+			bool operator>(iterator const &orig) const{ return _ptr > orig._ptr; }
+			bool operator<(iterator const &orig) const{ return _ptr < orig._ptr; }
+			bool operator>=(iterator const &orig) const { return _ptr >= orig._ptr; }
+			bool operator<=(iterator const &orig) const { return _ptr <= orig._ptr; }
 		};
 
 	class	 reverse_iterator : public ft::reverse_iterator<iterator> {
@@ -101,15 +101,15 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 			reverse_iterator 	operator+(difference_type n) const { return reverse_iterator(_ptr - n); }
 			reverse_iterator 	operator-(difference_type n) const { return reverse_iterator(_ptr + n); }
 			reference        	operator*() const { return *_ptr; };
-			difference_type	    operator-(reverse_iterator const &other) const { return other._ptr - _ptr; }
+			difference_type	    operator-(reverse_iterator const &orig) const { return orig._ptr - _ptr; }
 			reference        	operator[](const_reference n) const { return _ptr[n]; }
 			pointer        	    operator->() { return _ptr; }
-			bool	operator==(reverse_iterator const &other) const { return _ptr == other._ptr; }
-			bool	operator!=(reverse_iterator const &other) const { return _ptr != other._ptr; }
-			bool	operator>(reverse_iterator const &other) const{ return _ptr > other._ptr; }
-			bool	operator<(reverse_iterator const &other) const{ return _ptr < other._ptr; }
-			bool	operator>=(reverse_iterator const &other) const { return _ptr >= other._ptr; }
-			bool	operator<=(reverse_iterator const &other) const { return _ptr <= other._ptr; }
+			bool	operator==(reverse_iterator const &orig) const { return _ptr == orig._ptr; }
+			bool	operator!=(reverse_iterator const &orig) const { return _ptr != orig._ptr; }
+			bool	operator>(reverse_iterator const &orig) const{ return _ptr > orig._ptr; }
+			bool	operator<(reverse_iterator const &orig) const{ return _ptr < orig._ptr; }
+			bool	operator>=(reverse_iterator const &orig) const { return _ptr >= orig._ptr; }
+			bool	operator<=(reverse_iterator const &orig) const { return _ptr <= orig._ptr; }
 		};
 
 		/*******************************************************************************
@@ -123,7 +123,7 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 			alloc	-	allocator to use for all memory allocations of this container
 			value	-	the value to initialize elements of the container with
 			first, last	-	the range to copy the elements from
-			other	-	another container to be used as source to initialize
+			orig	-	anorig container to be used as source to initialize
 			the elements of the container with.
 		 */
 
@@ -155,12 +155,12 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 
 		//4)Copy constructor.Constructs a container with a copy of each of the
 		// elements in x, in the same order.
-		vector(const vector& other) {
-			_size = other.size();
-			_capacity = other.capacity();
-			_alloc = other.get_allocator();
+		vector(const vector& orig) {
+			_size = orig.size();
+			_capacity = orig.capacity();
+			_alloc = orig.get_allocator();
 	        _arr = _alloc.allocate(_capacity);
-			for(size_t i = 0; i < _size; i++) { _alloc.construct(_arr + i, other._arr[i]); }
+			for(size_t i = 0; i < _size; i++) { _alloc.construct(_arr + i, orig._arr[i]); }
 		}
 
 		//1)Destructor.
@@ -346,22 +346,22 @@ template<class Tp,  class Alloc = std::allocator<Tp> >
 			return last;
 		}
 
-		void		swap(vector &other) {
-			if (this != &other ) {
+		void		swap(vector &orig) {
+			if (this != &orig ) {
 				allocator_type    tmp_alloc = _alloc;
 				pointer           tmp_arr = _arr;
 				size_t            tmp_size = _size;
 				size_t            tmp_capacity = _capacity;
 
-				_alloc = other.get_allocator();
-				_arr = other._arr;
-				_size  = other._size;
-				_capacity  = other._capacity;
+				_alloc = orig.get_allocator();
+				_arr = orig._arr;
+				_size  = orig._size;
+				_capacity  = orig._capacity;
 
-				other._alloc = tmp_alloc;
-				other._arr = tmp_arr;
-				other._size = tmp_size;
-				other._capacity = tmp_capacity;
+				orig._alloc = tmp_alloc;
+				orig._arr = tmp_arr;
+				orig._size = tmp_size;
+				orig._capacity = tmp_capacity;
 			}
 		}
 		// Removes all elements from the vector, leaving the container with a size of 0.

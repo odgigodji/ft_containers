@@ -108,45 +108,48 @@ template <class T>
 #endif
 {};
 
+
 /*******************************************************************************
-*__________________________Other _____________________________*
+*__________________________________Pair________________________________________*
 *******************************************************************************/
-//							/*    PAIR    */
-//							template<class _T1, class _T2>
-//									struct pair
-//											{
-//										typedef _T1    first_type;
-//										typedef _T2    second_type;
-//
-//										first_type    first;
-//										second_type    second;
-//
-//										/*    CONSTRUCTORS    */
-//
-//										/*    default constructor    */
-//										pair() : first(first_type()), second(second_type()) {}
-//
-//										/*    filling    constructor    */
-//										pair(const first_type &x, const second_type &y) : first(x), second(y) {}
-//
-//										/*    converting constructor    */
-//										template<class _U1, class _U2>
-//												pair(const pair<_U1, _U2> &p) : first(p.first), second(p.second) {}
-//
-//												/*    copy constructor    */
-//												pair(const pair &other) { *this = other; }
-//
-//												/*    ASSIGNMENT OPERATOR    */
-//												pair&    operator = (const pair &other)
-//														{
-//													if (this != &other)
-//													{
-//														first = other.first;
-//														second = other.second;
-//													}
-//													return *this;
-//														}
-//											};
+#ifndef PAIR_HPP
+# define PAIR_HPP
+template<class T1, class T2> struct pair {
+	typedef T1		first_type;
+	typedef T2		second_type;
+
+	first_type		first;
+	second_type		second;
+
+	/*    						CONSTRUCTORS								*/
+
+	/*						default constructor								*/
+	pair() : first(first_type()), second(second_type()) {}
+
+	/*						initialization constructor 						*/
+	pair(const first_type &x, const second_type &y) : first(x), second(y) {}
+
+	/*						converting constructor							*/
+	template<class U1, class U2>
+		explicit pair(const pair<U1, U2> &p) : first(p.first), second(p.second) {}
+
+		/*						copy constructor							*/
+		pair(const pair &orig) { *this = orig; }
+
+		/*						ASSIGNMENT OPERATOR							*/
+		pair&    operator = (const pair &orig) {
+			if (this != &orig) {
+				first = orig.first;
+				second = orig.second;
+			}
+			return *this;
+		}
+	};
+#endif
+
+/*******************************************************************************
+*_________________________________Other________________________________________*
+*******************************************************************************/
 
 ///*    MAKE PAIR    */
 //template<class _T1, class _T2>
