@@ -27,9 +27,18 @@ int main () {
 	*________________________________ft::make_pair_________________________________*
 	*******************************************************************************/
 
-	product_my1 = ft::make_pair(std::string("lightbulbs"),1);   // using make_pair (move)
+	ft::pair<int, std::string> mp1;
+	mp1 = ft::make_pair(1, std::string("one"));   // using make_pair (move)
 
-	std::cout << "The price of " << product1.first << " is $" << product1.second << '\n';
+	std::cout << mp1.first << " " << mp1.second << '\n';
 
+	ft::pair <int,int> foo;
+	std::pair <int,int> bar;
+
+	foo = ft::make_pair (10,20);
+	bar = std::make_pair (10.5,'A'); // ok: implicit conversion from pair<double,char>
+
+	std::cout << "foo: " << foo.first << ", " << foo.second << '\n';
+	std::cout << "bar: " << bar.first << ", " << bar.second << '\n';
 	return 0;
 }
