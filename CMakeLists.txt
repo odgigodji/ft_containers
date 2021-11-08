@@ -16,5 +16,6 @@ add_executable(ft_containers
         ft_containers-unit-test/config.hpp
         map.hpp
 #        mains/ft_pair.cpp
-        mains/map_insert.cpp
+#        mains/map_insert.cpp
+        mains/AVL.cpp
         )

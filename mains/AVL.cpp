@@ -1,16 +1,10 @@
 #include <vector>
-#include "vector.hpp"
-#include "ft.hpp"
 //leaks --atExit -- ./a.out
 #include <list>
 #include <stack>
-#include "stack.hpp"
-#include "map.hpp"
 
 #include <iostream>
-#include<cctype>
 #include <stdlib.h>
-//#include <conio.h>
 
 
 //REALIZATION AVL TREE FROM CPLUSPLUS.COM

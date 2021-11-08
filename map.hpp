@@ -58,15 +58,16 @@ namespace ft
 												isEnd(false) {}
 		};
 
-		class compare_value {
-				public:
-					key_compare    _cmp;
+		class value_compare {
+		protected:
+			key_compare    _cmp;
 
-					explicit	compare_value(const key_compare &c) : _cmp(c) {}
-
-					bool	operator ()(const_reference val1,
-							const_reference val2) const { return _cmp(val1.first, val2.first); }
+		public:
+			explicit	value_compare(const key_compare &c) : _cmp(c) {}
+			bool		operator ()(const_reference val1,
+					const_reference val2) const { return _cmp(val1.first, val2.first); }
 		};
+
 		/*******************************************************************************
 		*____________________________________Variables_________________________________*
 		*******************************************************************************/
@@ -76,6 +77,83 @@ namespace ft
 		node*									_beginNode;
 		node*									_endNode;
 		key_compare								_cmp;
+
+		/*******************************************************************************
+		*_______________________________Iterators_classes______________________________*
+		*******************************************************************************/
+		class    iterator : public ft::iterator_traits<std::bidirectional_iterator_tag, value_type> {
+				private:
+					node*	_node;
+
+					node*	find_min(node *p) {
+						if (p == NULL) { std::cout << "The tree is empty" << std::endl; }
+						else { while(p->left !=NULL) { p = p->left; } }
+						return p;
+					}
+					node*	find_max(node *p) {
+						if (p == NULL) { std::cout << "The tree is empty" << std::endl; }
+						else { while(p->right !=NULL) { p = p->right; } }
+						return p;
+//						return p->right ? find_max(p->right) : p;
+					}
+
+				public:
+					iterator() : _node(nullptr) {}
+					iterator(node *ptr) : _node(ptr) {}
+					~iterator() {}
+					iterator(const iterator &other) { *this = other; }
+
+					node*			getNode() const { return _node; }
+
+					iterator&		operator = (const iterator &other) {
+						if(this != other) { _node = other._node; }
+						return *this;
+					}
+					reference	operator * () { return _node->value; }
+					pointer		operator -> () { return &_node->value; }
+					bool    operator == (const iterator &rhs) { return this->_node == rhs._node; }
+					bool    operator != (const iterator &hrs) { return this->_node != hrs._node; }
+
+					iterator&    operator ++ () {
+						if (_node->isBegin)
+							_node = _node->parent;
+						else if (_node->right)
+							_node = find_min(_node->right);
+						else {
+							node    *tmp = _node->parent;
+							while (tmp && tmp->value.first < _node->value.first)
+								tmp = tmp->parent;
+							_node = tmp;
+						}
+						return *this;
+					}
+
+					iterator&        operator -- () {
+						if (_node->isEnd)
+							_node = _node->parent;
+						else if (_node->left)
+							_node = find_max(_node->left);
+						else {
+							node    *tmp = _node->parent;
+							while (tmp && tmp->value.first > _node->value.first)
+								tmp = tmp->parent;
+							_node = tmp;
+						}
+						return *this;
+					}
+
+					iterator        operator ++ (int) {
+						iterator    tmp(_node);
+						operator++();
+						return tmp;
+					}
+
+					iterator        operator -- (int) {
+						iterator    tmp(_node);
+						operator--();
+						return tmp;
+					}
+				};
 
 		/*******************************************************************************
 		*===============================MEMBER_FUNCTIONS===============================*
@@ -131,6 +209,11 @@ namespace ft
 		*__________________________________Modifiers___________________________________*
 		*******************************************************************************/
 		//insert
+		//		ft::pair<iterator,bool> insert (const value_type& val);
+		//		iterator insert (iterator position, const value_type& val);
+		//template <class InputIterator>
+		//		void insert (InputIterator first, InputIterator last);
+
 		//erase
 		//swap
 		//clear
@@ -155,6 +238,7 @@ namespace ft
 		*******************************************************************************/
 		//get_allocator
 	};
+	//==
 }
 
 #endif //FT_CONTAINERS_MAP_HPP
