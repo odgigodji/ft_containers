@@ -311,7 +311,7 @@ int bstree::bsheight(nodeptr p)
 	}
 }
 
-nodeptr bstree:: srl(nodeptr &p1)
+nodeptr bstree:: srl(nodeptr &p1) //s rotate left
 {
 	nodeptr p2;
 	p2 = p1->left;
@@ -321,7 +321,7 @@ nodeptr bstree:: srl(nodeptr &p1)
 	p2->height = max(bsheight(p2->left),p1->height) + 1;
 	return p2;
 }
-nodeptr bstree:: srr(nodeptr &p1)
+nodeptr bstree:: srr(nodeptr &p1) // s rotate right
 {
 	nodeptr p2;
 	p2 = p1->right;
@@ -331,12 +331,12 @@ nodeptr bstree:: srr(nodeptr &p1)
 	p2->height = max(p1->height,bsheight(p2->right)) + 1;
 	return p2;
 }
-nodeptr bstree:: drl(nodeptr &p1)
+nodeptr bstree:: drl(nodeptr &p1) // d rotate left
 {
 	p1->left=srr(p1->left);
 	return srl(p1);
 }
-nodeptr bstree::drr(nodeptr &p1)
+nodeptr bstree::drr(nodeptr &p1) // d rotate right
 {
 	p1->right = srl(p1->right);
 	return srr(p1);
@@ -452,8 +452,8 @@ int main()
 														cout<<"Sorry! wrong input\n"<<endl;
 														break;
 		}
-		system("pause");
-		system("cls");
+//		system("pause");
+//		system("cls");
 	}while(choice != 0);
 	return 0;
 }
