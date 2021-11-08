@@ -10,12 +10,13 @@
 
 #include <iostream>
 #include<cctype>
-#include <stdlib.h>
 //#include <conio.h>
 
 int main() {
 	std::map<int, std::string> a;
 	a.insert(a.begin(), std::make_pair(51," hello "));
+
+	ft::map<int, std::string> b;
 
 	return 0;
 }
