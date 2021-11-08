@@ -48,6 +48,8 @@ public:
 // Inserting a node
 void bstree::insert(int x,nodeptr &p)
 {
+
+
 	if (p == NULL)
 	{
 		p = new node;
@@ -311,7 +313,7 @@ int bstree::bsheight(nodeptr p)
 	}
 }
 
-nodeptr bstree:: srl(nodeptr &p1) //s rotate left
+nodeptr bstree:: srl(nodeptr &p1) //single rotate left
 {
 	nodeptr p2;
 	p2 = p1->left;
@@ -321,7 +323,7 @@ nodeptr bstree:: srl(nodeptr &p1) //s rotate left
 	p2->height = max(bsheight(p2->left),p1->height) + 1;
 	return p2;
 }
-nodeptr bstree:: srr(nodeptr &p1) // s rotate right
+nodeptr bstree:: srr(nodeptr &p1) // single rotate right
 {
 	nodeptr p2;
 	p2 = p1->right;
@@ -331,12 +333,12 @@ nodeptr bstree:: srr(nodeptr &p1) // s rotate right
 	p2->height = max(p1->height,bsheight(p2->right)) + 1;
 	return p2;
 }
-nodeptr bstree:: drl(nodeptr &p1) // d rotate left
+nodeptr bstree:: drl(nodeptr &p1) // double rotate left
 {
 	p1->left=srr(p1->left);
 	return srl(p1);
 }
-nodeptr bstree::drr(nodeptr &p1) // d rotate right
+nodeptr bstree::drr(nodeptr &p1) // double rotate right
 {
 	p1->right = srl(p1->right);
 	return srr(p1);

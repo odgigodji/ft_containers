@@ -209,7 +209,67 @@ namespace ft
 		*__________________________________Modifiers___________________________________*
 		*******************************************************************************/
 		//insert
-		//		ft::pair<iterator,bool> insert (const value_type& val);
+//		ft::pair<iterator,bool> insert (const value_type& val) {
+//			_tree->right = val;
+//			return(ft::make_pair(nullptr, true));
+			//if elem == val - false ; return;
+//			return(ft::make_pair(iteratr, ture))
+
+//			if (val == NULL)
+//			{
+////				p = new node;
+//				_alloc.allocate(node);
+//				_tree.construct(_tree, val);
+//
+//				p->element = x;
+//				p->left=NULL;
+//				p->right = NULL;
+//				p->height=0;
+//				if (p==NULL)
+//				{
+//					cout<<"Out of Space\n"<<endl;
+//				}
+//			}
+//			else
+//			{
+//				if (x<p->element)
+//				{
+//					insert(x,p->left);
+//					if ((bsheight(p->left) - bsheight(p->right))==2)
+//					{
+//						if (x < p->left->element)
+//						{
+//							p=srl(p);
+//						}
+//						else
+//						{
+//							p = drl(p);
+//						}
+//					}
+//				}
+//				else if (x>p->element)
+//				{
+//					insert(x,p->right);
+//					if ((bsheight(p->right) - bsheight(p->left))==2)
+//					{
+//						if (x > p->right->element)
+//						{
+//							p=srr(p);
+//						}
+//						else
+//						{
+//							p = drr(p);
+//						}
+//					}
+//				}
+//				else
+//				{
+//					cout<<"Element Exists\n"<<endl;
+//				}
+//			}
+//		}
+
+
 		//		iterator insert (iterator position, const value_type& val);
 		//template <class InputIterator>
 		//		void insert (InputIterator first, InputIterator last);

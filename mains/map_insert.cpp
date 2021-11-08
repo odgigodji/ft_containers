@@ -56,7 +56,7 @@ int main ()
 	a.insert(std::pair<int, std::string>(51, "hello") );
 
 	ft::map<int, std::string> a1;
-	
+
 	return 0;
 }
 
