@@ -71,6 +71,9 @@ namespace ft
 					const_reference val2) const { return _cmp(val1.first, val2.first); }
 		};
 
+		/*								Alloc for node 							*/
+		typedef typename allocator_type::template rebind<node>::other      allocator_rebind_node;
+
 		/*******************************************************************************
 		*____________________________________Variables_________________________________*
 		*******************************************************************************/
@@ -81,6 +84,7 @@ namespace ft
 			node*									_beginNode;
 			node*									_endNode;
 			key_compare								_cmp;
+			allocator_rebind_node					_nodeAlloc;
 
 		/*******************************************************************************
 		*_______________________________Iterators_classes______________________________*
@@ -176,10 +180,10 @@ namespace ft
 		/* 						Constructs an empty container.					  */
 
 		map() : _size(0) {
-			_tree = _alloc.allocate(sizeof(node));
+			_tree = _nodeAlloc.allocate(sizeof(node));
 //			_tree = new(node);
-//			_alloc.construct(_tree);
-//			std::cout << _tree->height << std::endl;
+			_nodeAlloc.construct(_tree);
+			std::cout << _tree->height << std::endl;
 			_beginNode = _endNode = _tree;
 		}
 
