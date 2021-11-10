@@ -9,7 +9,7 @@
 namespace ft
 {
 	template < class Key, class T, class Compare = std::less<Key>,
-	        class Allocator = std::allocator<T> >
+	        class Allocator = std::allocator<ft::pair<Key, T> > >
 	class map {
 		/*******************************************************************************
 		*=================================MEMBER_TYPES=================================*
@@ -35,7 +35,7 @@ namespace ft
 		struct	node {
 			value_type	value; 			/*    пара ключ - значение            */
 			size_t		height;			/*    высота поддерева                */
-			node*		parent;		/*    указатель на родителя           */
+			node*		parent;			/*    указатель на родителя           */
 			node*		right;			/*    указатель на правое поддерево   */
 			node*		left; 			/*    указатель на левое поддерево    */
 			bool		isBegin;		/*    true - узел перед минимальным	  */
@@ -56,6 +56,9 @@ namespace ft
 												left(nullptr),
 												isBegin(false),
 												isEnd(false) {}
+			node(const node &orig) { *this = orig; }
+
+			~node() {};
 		};
 
 		class value_compare {
@@ -71,30 +74,29 @@ namespace ft
 		/*******************************************************************************
 		*____________________________________Variables_________________________________*
 		*******************************************************************************/
-		node*									_tree;
-		size_t          						_size;
-		allocator_type							_alloc;
-		node*									_beginNode;
-		node*									_endNode;
-		key_compare								_cmp;
+		private:
+			node*									_tree;
+			size_t          						_size;
+			allocator_type							_alloc;
+			node*									_beginNode;
+			node*									_endNode;
+			key_compare								_cmp;
 
 		/*******************************************************************************
 		*_______________________________Iterators_classes______________________________*
 		*******************************************************************************/
-		class    iterator : public ft::iterator_traits<std::bidirectional_iterator_tag, value_type> {
+		public:
+			class    iterator : public ft::iterator_traits<std::bidirectional_iterator_tag, value_type> {
 				private:
 					node*	_node;
 
 					node*	find_min(node *p) {
-						if (p == NULL) { std::cout << "The tree is empty" << std::endl; }
-						else { while(p->left !=NULL) { p = p->left; } }
+						while(p->left !=NULL) { p = p->left; }
 						return p;
 					}
 					node*	find_max(node *p) {
-						if (p == NULL) { std::cout << "The tree is empty" << std::endl; }
-						else { while(p->right !=NULL) { p = p->right; } }
+						while(p->right != NULL) { p = p->right; }
 						return p;
-//						return p->right ? find_max(p->right) : p;
 					}
 
 				public:
@@ -153,7 +155,7 @@ namespace ft
 						operator--();
 						return tmp;
 					}
-				};
+			};
 
 		/*******************************************************************************
 		*===============================MEMBER_FUNCTIONS===============================*
@@ -172,16 +174,17 @@ namespace ft
 		 */
 
 		/* 						Constructs an empty container.					  */
+
 		map() : _size(0) {
-			_alloc.allocate(sizeof(node));
-			_alloc.construct(_tree, node());
+			_tree = _alloc.allocate(sizeof(node));
+//			_tree = new(node);
+//			_alloc.construct(_tree);
+//			std::cout << _tree->height << std::endl;
 			_beginNode = _endNode = _tree;
 		}
 
 		/* Constructs the container with the contents of the range [first, last). */
-		template< class InputIt > map( InputIt first, InputIt last, //fixme
-					 const Compare& comp = Compare(),
-					 const Allocator& alloc = Allocator() ) {
+		template< class InputIt > map( InputIt first, InputIt last) { //fixme
 			;
 		}
 
@@ -189,6 +192,9 @@ namespace ft
 		*__________________________________Iterators___________________________________*
 		*******************************************************************************/
 		//	begin
+		iterator	begin() {
+			return _size ? ++iterator(_beginNode) : iterator(_beginNode);
+		}
 		//	end
 		//	rbegin
 		//	rend

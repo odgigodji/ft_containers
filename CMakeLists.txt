@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 
 add_executable(ft_containers
-#        main.cpp
+        main.cpp
 
         vector.hpp
         ft.hpp stack.hpp
@@ -16,6 +16,6 @@ add_executable(ft_containers
         ft_containers-unit-test/config.hpp
         map.hpp
 #        mains/ft_pair.cpp
-        mains/map_insert.cpp
+#        mains/map_insert.cpp
 #        mains/AVL.cpp
         )
