@@ -12,6 +12,7 @@ int main() {
 	a.insert(z);
 	a.insert(x);
 //	 b = a.begin();
+	a.printValues();
 	return 0;
 }
 

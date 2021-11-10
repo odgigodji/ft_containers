@@ -221,25 +221,41 @@ namespace ft
 		*******************************************************************************/
 		//insert  ft::pair<iterator,bool>
 		 void insert (const value_type& val) {
-//			std::cout << val.first << " " << val.second << std::endl;
-			if (_tree->isEnd) {
-				makeAlloc(val);
-				_tree->isEnd = false;
-				std::cout << "first insert\n";
-			}
-			else {
-				if (val.first < _tree->value.first) { //left
-					std::cout << "add to left\n";
-				}
-				else if (val.first > _tree->value.first) {
-
-					std::cout << val.first;
-					std::cout << " add to right\n";
-				}
-			}
-//			std::cout << _tree->value.first << " " << _tree->value.second << std::endl;
-
+			insertX(val, *_tree);
 		}
+
+		void insertX(const value_type &val, const node &currentNode) {
+		 	//			std::cout << val.first << " " << val.second << std::endl;
+		 	if (_tree == _endNode) {
+		 		makeAlloc(val);
+		 		_tree->isEnd = false;
+		 		std::cout << "first insert\n";
+		 	}
+		 	else {
+		 		if (val.first < _tree->value.first) { //left
+		 			//					_tree = _tree->left;
+		 			insert(val);
+		 			if (val.first < _tree->left->value.first)
+		 			{
+		 				//						p=srl(p);
+		 				std::cout << "need srl " << std::endl;
+		 			}
+		 			else
+		 			{
+		 				//						p = drl(p);
+		 				std::cout << "need drl " << std::endl;
+
+		 			}
+		 			std::cout << "add to left\n";
+		 		}
+		 		else if (val.first > _tree->value.first) {
+
+		 			std::cout << val.first;
+		 			std::cout << " add to right\n";
+		 		}
+		 	}
+		 	//			std::cout << _tree->value.first << " " << _tree->value.second << std::endl;
+		 }
 
 
 		//		iterator insert (iterator position, const value_type& val);
@@ -278,6 +294,17 @@ namespace ft
 			_tree = _nodeAlloc.allocate(sizeof(node));
 			_nodeAlloc.construct(_tree, node(val));
 		}
+
+	public:
+		void printValues() {
+			std::cout << "----------printValues--------";
+			while(_tree->left !=NULL) {
+				_tree = _tree->left;
+				std::cout << _tree->value.first << " " << _tree->value.second << std::endl;
+			}
+			std::cout << "---------------------------";
+		}
+
 	};
 	//==
 }
