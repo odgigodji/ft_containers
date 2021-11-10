@@ -222,8 +222,22 @@ namespace ft
 		//insert  ft::pair<iterator,bool>
 		 void insert (const value_type& val) {
 //			std::cout << val.first << " " << val.second << std::endl;
-			makeAlloc(val);
-			std::cout << _tree->value.first << " " << _tree->value.second << std::endl;
+			if (_tree->isEnd) {
+				makeAlloc(val);
+				_tree->isEnd = false;
+				std::cout << "first insert\n";
+			}
+			else {
+				if (val.first < _tree->value.first) { //left
+					std::cout << "add to left\n";
+				}
+				else if (val.first > _tree->value.first) {
+
+					std::cout << val.first;
+					std::cout << " add to right\n";
+				}
+			}
+//			std::cout << _tree->value.first << " " << _tree->value.second << std::endl;
 
 		}
 

@@ -5,11 +5,12 @@
 int main() {
 
 	ft::pair<int, std::string> z(51, "hello");
+	ft::pair<int, std::string> x(63, "vay");
 	ft::map<int, std::string> a;
 
 //	ft::map<int, std::string>::iterator b;
 	a.insert(z);
-
+	a.insert(x);
 //	 b = a.begin();
 	return 0;
 }
