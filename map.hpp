@@ -21,7 +21,7 @@ namespace ft
 		typedef T								mapped_type;
 		typedef Compare							key_compare;
 		typedef Allocator						allocator_type;
-		typedef ft::pair<const Key, T>			value_type;
+		typedef ft::pair<Key, T>			value_type;
 		typedef value_type* 					pointer;
 		typedef value_type&						reference;
 		typedef const value_type*				const_pointer;
@@ -71,8 +71,8 @@ namespace ft
 					const_reference val2) const { return _cmp(val1.first, val2.first); }
 		};
 
-		/*								Alloc for node 							*/
-		typedef typename allocator_type::template rebind<node>::other      allocator_rebind_node;
+		/*							Allocator for node 							*/
+		typedef typename allocator_type::template rebind<node>::other	allocator_rebind_node;
 
 		/*******************************************************************************
 		*____________________________________Variables_________________________________*
@@ -112,7 +112,7 @@ namespace ft
 					node*			getNode() const { return _node; }
 
 					iterator&		operator = (const iterator &other) {
-						if(this != other) { _node = other._node; }
+//						if(this != other) { _node = other._node; }
 						return *this;
 					}
 					reference	operator * () { return _node->value; }
@@ -183,12 +183,13 @@ namespace ft
 			_tree = _nodeAlloc.allocate(sizeof(node));
 //			_tree = new(node);
 			_nodeAlloc.construct(_tree);
-			std::cout << _tree->height << std::endl;
+//			std::cout << _tree->height << std::endl;
 			_beginNode = _endNode = _tree;
 		}
 
 		/* Constructs the container with the contents of the range [first, last). */
 		template< class InputIt > map( InputIt first, InputIt last) { //fixme
+
 			;
 		}
 
@@ -218,66 +219,10 @@ namespace ft
 		/*******************************************************************************
 		*__________________________________Modifiers___________________________________*
 		*******************************************************************************/
-		//insert
-//		ft::pair<iterator,bool> insert (const value_type& val) {
-//			_tree->right = val;
-//			return(ft::make_pair(nullptr, true));
-			//if elem == val - false ; return;
-//			return(ft::make_pair(iteratr, ture))
-
-//			if (val == NULL)
-//			{
-////				p = new node;
-//				_alloc.allocate(node);
-//				_tree.construct(_tree, val);
-//
-//				p->element = x;
-//				p->left=NULL;
-//				p->right = NULL;
-//				p->height=0;
-//				if (p==NULL)
-//				{
-//					cout<<"Out of Space\n"<<endl;
-//				}
-//			}
-//			else
-//			{
-//				if (x<p->element)
-//				{
-//					insert(x,p->left);
-//					if ((bsheight(p->left) - bsheight(p->right))==2)
-//					{
-//						if (x < p->left->element)
-//						{
-//							p=srl(p);
-//						}
-//						else
-//						{
-//							p = drl(p);
-//						}
-//					}
-//				}
-//				else if (x>p->element)
-//				{
-//					insert(x,p->right);
-//					if ((bsheight(p->right) - bsheight(p->left))==2)
-//					{
-//						if (x > p->right->element)
-//						{
-//							p=srr(p);
-//						}
-//						else
-//						{
-//							p = drr(p);
-//						}
-//					}
-//				}
-//				else
-//				{
-//					cout<<"Element Exists\n"<<endl;
-//				}
-//			}
-//		}
+		//insert ft::pair<iterator,bool>
+		void insert (const value_type& val) {
+			std::cout << val.first << " " << val.second << std::endl;
+		}
 
 
 		//		iterator insert (iterator position, const value_type& val);

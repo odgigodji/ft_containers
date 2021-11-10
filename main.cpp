@@ -4,10 +4,13 @@
 
 int main() {
 
-//	ft::pair<int, std::string> z(51, "hello");
+	ft::pair<int, std::string> z(51, "hello");
 	ft::map<int, std::string> a;
 
-	ft::map<int, std::string>::iterator b;
+//	ft::map<int, std::string>::iterator b;
+	a.insert(z);
+
+//	 b = a.begin();
 	return 0;
 }
 
@@ -22,7 +25,6 @@ int main() {
 //		std::allocator<int> alloc;
 //
 //		// demonstrating the few directly usable members
-////		static_assert(std::is_same_v<int, decltype(alloc)::value_type>);
 //		int* p = alloc.allocate(1);  // space for one int
 //		alloc.deallocate(p, 1);      // and it is gone
 //
