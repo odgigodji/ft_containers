@@ -219,9 +219,12 @@ namespace ft
 		/*******************************************************************************
 		*__________________________________Modifiers___________________________________*
 		*******************************************************************************/
-		//insert ft::pair<iterator,bool>
-		void insert (const value_type& val) {
-			std::cout << val.first << " " << val.second << std::endl;
+		//insert  ft::pair<iterator,bool>
+		 void insert (const value_type& val) {
+//			std::cout << val.first << " " << val.second << std::endl;
+			makeAlloc(val);
+			std::cout << _tree->value.first << " " << _tree->value.second << std::endl;
+
 		}
 
 
@@ -252,6 +255,15 @@ namespace ft
 		*__________________________________Allocator___________________________________*
 		*******************************************************************************/
 		//get_allocator
+
+		/*******************************************************************************
+		*__________________________________Utilities___________________________________*
+		*******************************************************************************/
+	private:
+		void makeAlloc(const value_type& val) {
+			_tree = _nodeAlloc.allocate(sizeof(node));
+			_nodeAlloc.construct(_tree, node(val));
+		}
 	};
 	//==
 }
