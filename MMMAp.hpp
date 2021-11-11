@@ -164,127 +164,6 @@ namespace ft
 			}
 		};
 
-	public:
-/*    ITERATORS    */
-//		class iterator;
-
-		class const_iterator;
-
-		class reverse_iterator;
-
-		class const_reverse_iterator;
-
-
-		/*    Const Iterator    */
-		class const_iterator
-				: public ft::iterator_traits<std::bidirectional_iterator_tag, value_type>
-		{
-		private:
-			node *_node;
-
-			node *find_min(node *p)
-			{ return p->left ? find_min(p->left) : p; }
-
-			node *find_max(node *p)
-			{ return p->right ? find_max(p->right) : p; }
-
-		public:
-			const_iterator() : _node(nullptr)
-			{}
-
-			const_iterator(node *ptr) : _node(ptr)
-			{}
-
-			~const_iterator()
-			{}
-
-			const_iterator(const const_iterator &other)
-			{ *this = other; }
-
-			const_iterator(const iterator &other)
-			{ *this = other; }
-
-			node *getNode() const
-			{ return _node; }
-
-			const_iterator &operator=(const const_iterator &other)
-			{
-				_node = other._node;
-				return *this;
-			}
-
-			const_iterator &operator=(const iterator &other)
-			{
-				_node = other.getNode();
-				return *this;
-			}
-
-			bool operator==(const const_iterator &other)
-			{ return this->_node == other._node; }
-
-			bool operator!=(const const_iterator &other)
-			{ return this->_node != other._node; }
-
-			bool operator==(const iterator &other)
-			{ return this->_node == other.getNode(); }
-
-			bool operator!=(const iterator &other)
-			{ return this->_node != other.getNode(); }
-
-			const_reference operator*() const
-			{ return _node->value; }
-
-			const_pointer operator->() const
-			{ return &_node->value; }
-
-			const_iterator &operator++()
-			{
-				if (_node->isBegin)
-					_node = _node->parent;
-				else if (_node->right)
-					_node = find_min(_node->right);
-				else
-				{
-					node *tmp = _node->parent;
-					while (tmp && tmp->value.first < _node->value.first)
-						tmp = tmp->parent;
-					_node = tmp;
-				}
-				return *this;
-			}
-
-			const_iterator &operator--()
-			{
-				if (_node->isEnd)
-					_node = _node->parent;
-				else if (_node->left)
-					_node = find_max(_node->left);
-				else
-				{
-					node *tmp = _node->parent;
-					while (tmp && tmp->value.first > _node->value.first)
-						tmp = tmp->parent;
-					_node = tmp;
-				}
-				return *this;
-			}
-
-			const_iterator operator++(int)
-			{
-				const_iterator tmp(_node);
-				operator++();
-				return tmp;
-			}
-
-			const_iterator operator--(int)
-			{
-				const_iterator tmp(_node);
-				operator--();
-				return tmp;
-			}
-		};
-
-		/*    Reverse Iterator */
 		class reverse_iterator : public ft::reverse_iterator<iterator>
 		{
 		private:
@@ -323,12 +202,6 @@ namespace ft
 
 			bool operator!=(const reverse_iterator &other)
 			{ return this->_node != other._node; }
-
-			bool operator==(const const_reverse_iterator &other)
-			{ return this->_node == other.getNode(); }
-
-			bool operator!=(const const_reverse_iterator &other)
-			{ return this->_node != other.getNode(); }
 
 			reference operator*()
 			{ return _node->value; }
@@ -383,117 +256,6 @@ namespace ft
 			}
 		};
 
-		/*    Const Reverse Iterator    */
-		class const_reverse_iterator
-				: public ft::reverse_iterator<const_iterator>
-		{
-		private:
-			node *_node;
-
-			node *find_min(node *p)
-			{ return p->left ? find_min(p->left) : p; }
-
-			node *find_max(node *p)
-			{ return p->right ? find_max(p->right) : p; }
-
-		public:
-			const_reverse_iterator() : _node(nullptr)
-			{}
-
-			const_reverse_iterator(node *ptr) : _node(ptr)
-			{}
-
-			~const_reverse_iterator()
-			{}
-
-			const_reverse_iterator(const const_reverse_iterator &other)
-			{ *this = other; }
-
-			const_reverse_iterator(const reverse_iterator &other)
-			{ *this = other; }
-
-			node *getNode() const
-			{ return _node; }
-
-			const_reverse_iterator &
-			operator=(const const_reverse_iterator &other)
-			{
-				_node = other._node;
-				return *this;
-			}
-
-			const_reverse_iterator &operator=(const reverse_iterator &other)
-			{
-				_node = other.getNode();
-				return *this;
-			}
-
-			bool operator==(const const_reverse_iterator &other)
-			{ return this->_node == other._node; }
-
-			bool operator!=(const const_reverse_iterator &other)
-			{ return this->_node != other._node; }
-
-			bool operator==(const reverse_iterator &other)
-			{ return this->_node == other.getNode(); }
-
-			bool operator!=(const reverse_iterator &other)
-			{ return this->_node != other.getNode(); }
-
-			const_reference operator*()
-			{ return _node->value; }
-
-			const_pointer operator->()
-			{ return &_node->value; }
-
-			const_reverse_iterator &operator++()
-			{
-				if (_node->isEnd)
-					_node = _node->parent;
-				else if (_node->left)
-					_node = find_max(_node->left);
-				else
-				{
-					node *tmp = _node->parent;
-					while (tmp && tmp->value.first > _node->value.first)
-						tmp = tmp->parent;
-					_node = tmp;
-				}
-				return *this;
-			}
-
-			const_reverse_iterator &operator--()
-			{
-				if (_node->isBegin)
-					_node = _node->parent;
-				else if (_node->right)
-					_node = find_min(_node->right);
-				else
-				{
-					node *tmp = _node->parent;
-					while (tmp && tmp->value.first < _node->value.first)
-						tmp = tmp->parent;
-					_node = tmp;
-				}
-				return *this;
-			}
-
-			const_reverse_iterator operator++(int)
-			{
-				const_reverse_iterator tmp(_node);
-				operator++();
-				return tmp;
-			}
-
-			const_reverse_iterator operator--(int)
-			{
-				const_reverse_iterator tmp(_node);
-				operator--();
-				return tmp;
-			}
-		};
-
-
 		/*******************************************************************************
 		*===============================MEMBER_FUNCTIONS===============================*
 		********************************************************************************
@@ -539,41 +301,23 @@ namespace ft
 		iterator end()
 		{ return iterator(_endNode); }
 
-		const_iterator begin() const
+		iterator begin() const
 		{
-			return _size ? ++const_iterator(_beginNode) : const_iterator(
+			return _size ? ++iterator(_beginNode) : iterator(
 					_beginNode);
 		}
 
-		const_iterator end() const
-		{ return const_iterator(_endNode); }
+		iterator end() const
+		{ return iterator(_endNode); }
 
-		const_iterator cbegin() const
-		{
-			return _size ? ++const_iterator(_beginNode) : const_iterator(
-					_beginNode);
-		}
-
-		const_iterator cend() const
-		{ return const_iterator(_endNode); }
-
-		reverse_iterator rbegin()
-		{ return --reverse_iterator(_endNode); }
+		iterator cend() const
+		{ return iterator(_endNode); }
 
 		reverse_iterator rend()
 		{ return reverse_iterator(_beginNode); }
 
-		const_reverse_iterator rbegin() const
-		{ return --const_reverse_iterator(_endNode); }
-
-		const_reverse_iterator rend() const
-		{ return const_reverse_iterator(_beginNode); }
-
-		const_reverse_iterator crbegin() const
-		{ return --const_reverse_iterator(_endNode); }
-
-		const_reverse_iterator crend() const
-		{ return const_reverse_iterator(_beginNode); }
+		reverse_iterator rend() const
+		{ return reverse_iterator(_beginNode); }
 
 		size_t size() const
 		{ return _size; }
@@ -636,10 +380,10 @@ namespace ft
 														  : end();
 		}
 
-		const_iterator find(const key_type &key) const
+		iterator find(const key_type &key) const
 		{
 			node *res = find_node(_tree, key);
-			return keyCmp(res->value.first, key) == EQUAL ? const_iterator(res)
+			return keyCmp(res->value.first, key) == EQUAL ? iterator(res)
 														  : cend();
 		}
 
@@ -651,9 +395,9 @@ namespace ft
 			return it;
 		}
 
-		const_iterator lower_bound(const key_type &key) const
+		iterator lower_bound(const key_type &key) const
 		{
-			const_iterator it(find_node(_tree, key));
+			iterator it(find_node(_tree, key));
 			if (keyCmp((*it).first, key) == LESS)
 				++it;
 			return it;
@@ -668,9 +412,9 @@ namespace ft
 			return it;
 		}
 
-		const_iterator upper_bound(const key_type &key) const
+		iterator upper_bound(const key_type &key) const
 		{
-			const_iterator it(find_node(_tree, key));
+			iterator it(find_node(_tree, key));
 			int compare = keyCmp((*it).first, key);
 			if (compare == LESS || compare == EQUAL)
 				++it;
@@ -683,11 +427,11 @@ namespace ft
 								 iterator(upper_bound(key)));
 		}
 
-		ft::pair<const_iterator, const_iterator>
+		ft::pair<iterator, iterator>
 		equal_range(const key_type &key) const
 		{
-			return ft::make_pair(const_iterator(lower_bound(key)),
-								 const_iterator(upper_bound(key)));
+			return ft::make_pair(iterator(lower_bound(key)),
+								 iterator(upper_bound(key)));
 		}
 
 		ft::pair<iterator, bool> insert(const_reference value)
