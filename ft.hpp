@@ -146,9 +146,10 @@ namespace ft
 		/*						initialization constructor 						*/
 		pair(const first_type &a, const second_type &b) : first(a), second(b) {}
 
+
 		/*							move/copy constructor						*/
 		template<class U, class V>
-			explicit pair(const pair<U, V> &pr) : first(pr.first), second(pr.second) {}
+			pair(const pair<U, V> &pr) : first(pr.first), second(pr.second) {}
 
 			/*						ASSIGNMENT OPERATOR							*/
 			pair&    operator = (const pair &orig) {
