@@ -263,18 +263,23 @@ namespace ft
 		*******************************************************************************/
 
 /*    CONSTRUCTORS    */
-		map() : _tree(new node()), _size(0)
-		{ _beginNode = _endNode = _tree; }
+		map() :  _size(0)
+		{
+			_tree = new node();
+			_beginNode = _endNode = _tree;
+		}
 
 		template<class _InputIt>
-		map(_InputIt first, _InputIt last) : _tree(new node()), _size(0)
+		map(_InputIt first, _InputIt last) :  _size(0)
 		{
+			_tree = new node();
 			_beginNode = _endNode = _tree;
 			insert(first, last);
 		}
 
-		map(const map &other) : _tree(new node()), _size(0)
+		map(const map &other) : _size(0)
 		{
+			_tree = new node();
 			_beginNode = _endNode = _tree;
 			*this = other;
 		}
