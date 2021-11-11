@@ -345,6 +345,77 @@ namespace ft
 		/*******************************************************************************
 		*__________________________________Modifiers___________________________________*
 		*******************************************************************************/
+		ft::pair<iterator, bool> insert(const_reference value)
+		{
+//			std::cout << value.first << " " << value.second << std::endl;
+			node *newNode = find_node(_tree,
+									  value.first);    /*    ищем место для добавления элемента    */
+			if (_size && valueCmp(value, newNode->value) ==
+						 EQUAL)    /*    если элемент уже существует    */
+				return ft::make_pair(iterator(newNode), false);
+			if (!_size)    /*    вставка самого первого элемента    */
+			{
+				newNode = new node(
+						value);    /*    новый узел для вставки (корень всего дерева)    */
+				newNode->right = _tree;    /*    указатель на .end()    */
+				newNode->left = new node();    /*    указатель на .rend()    */
+				newNode->right->isBegin = 0;
+				newNode->left->isEnd = 0;
+				newNode->left->parent = newNode->right->parent = newNode;
+				_beginNode = newNode->left;    /*    указатель на начало депева (элемент перед первым)    */
+				_tree = newNode;    /*     новый корень всего дерева    */
+			} else    /*    newNode - родитель нового элемента!    */
+			{
+				if (valueCmp(value, newNode->value) ==
+					LESS)    /*    вставка слева    */
+				{
+					if (newNode->left)    /*    если newNode - миинимальный элемент дерева    */
+					{
+						node *tmp = new node(
+								value);    /*    новый узел для вставки (минимальный элемент)    */
+						tmp->left = newNode->left;    /*    указатель на .rend()    */
+						tmp->left->parent = tmp;
+						tmp->parent = newNode;
+						newNode->left = tmp;
+					} else    /*    обычная вставка слева    */
+					{
+						newNode->left = new node(value);
+						newNode->left->parent = newNode;
+					}
+					newNode = newNode->left;    /*    newNode - добавленный узел    */
+				} else if (valueCmp(value, newNode->value) ==
+						   GREATER)    /*    вставка справа    */
+				{
+					if (newNode->right)    /*    если newNode - максимальный элемент дерева    */
+					{
+						node *tmp = new node(
+								value);    /*    новый узел для вставки (максимальный элемент)    */
+						tmp->right = newNode->right;    /*    указатель на .end()    */
+						tmp->right->parent = tmp;
+						tmp->parent = newNode;
+						newNode->right = tmp;
+					} else    /*    обычная вставка справа    */
+					{
+						newNode->right = new node(value);
+						newNode->right->parent = newNode;
+					}
+					newNode = newNode->right;    /*    newNode - добавленный узел    */
+				}
+				makeBalance(
+						newNode);    /*    балансировка ветви от newNode до корня    */
+			}
+			_size++;
+			return ft::make_pair(iterator(newNode), true);
+		}
+
+
+		template<class _InputIt>
+		void insert(_InputIt first, _InputIt last)
+		{
+			for (; first != last; ++first)
+				insert(ft::make_pair(first->first, first->second));
+		}
+
 		//erase
 		void erase(iterator pos)
 		{
@@ -605,77 +676,6 @@ namespace ft
 		*******************************************************************************/
 
 
-		ft::pair<iterator, bool> insert(const_reference value)
-		{
-//			std::cout << value.first << " " << value.second << std::endl;
-			node *newNode = find_node(_tree,
-									  value.first);    /*    ищем место для добавления элемента    */
-			if (_size && valueCmp(value, newNode->value) ==
-							 EQUAL)    /*    если элемент уже существует    */
-				return ft::make_pair(iterator(newNode), false);
-			if (!_size)    /*    вставка самого первого элемента    */
-			{
-				newNode = new node(
-						value);    /*    новый узел для вставки (корень всего дерева)    */
-				newNode->right = _tree;    /*    указатель на .end()    */
-				newNode->left = new node();    /*    указатель на .rend()    */
-				newNode->right->isBegin = 0;
-				newNode->left->isEnd = 0;
-				newNode->left->parent = newNode->right->parent = newNode;
-				_beginNode = newNode->left;    /*    указатель на начало депева (элемент перед первым)    */
-				_tree = newNode;    /*     новый корень всего дерева    */
-			} else    /*    newNode - родитель нового элемента!    */
-			{
-				if (valueCmp(value, newNode->value) ==
-					LESS)    /*    вставка слева    */
-				{
-					if (newNode->left)    /*    если newNode - миинимальный элемент дерева    */
-					{
-						node *tmp = new node(
-								value);    /*    новый узел для вставки (минимальный элемент)    */
-						tmp->left = newNode->left;    /*    указатель на .rend()    */
-						tmp->left->parent = tmp;
-						tmp->parent = newNode;
-						newNode->left = tmp;
-					} else    /*    обычная вставка слева    */
-					{
-						newNode->left = new node(value);
-						newNode->left->parent = newNode;
-					}
-					newNode = newNode->left;    /*    newNode - добавленный узел    */
-				} else if (valueCmp(value, newNode->value) ==
-						   GREATER)    /*    вставка справа    */
-				{
-					if (newNode->right)    /*    если newNode - максимальный элемент дерева    */
-					{
-						node *tmp = new node(
-								value);    /*    новый узел для вставки (максимальный элемент)    */
-						tmp->right = newNode->right;    /*    указатель на .end()    */
-						tmp->right->parent = tmp;
-						tmp->parent = newNode;
-						newNode->right = tmp;
-					} else    /*    обычная вставка справа    */
-					{
-						newNode->right = new node(value);
-						newNode->right->parent = newNode;
-					}
-					newNode = newNode->right;    /*    newNode - добавленный узел    */
-				}
-				makeBalance(
-						newNode);    /*    балансировка ветви от newNode до корня    */
-			}
-			_size++;
-			return ft::make_pair(iterator(newNode), true);
-		}
-
-
-
-		template<class _InputIt>
-		void insert(_InputIt first, _InputIt last)
-		{
-			for (; first != last; ++first)
-				insert(ft::make_pair(first->first, first->second));
-		}
 
 
 
