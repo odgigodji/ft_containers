@@ -294,51 +294,37 @@ namespace ft
 			return *this;
 		}
 
-/*    MEMBER FUNCTIONS    */
-		iterator begin()
-		{ return _size ? ++iterator(_beginNode) : iterator(_beginNode); }
+		/*******************************************************************************
+		*__________________________________Iterators___________________________________*
+		*******************************************************************************/
+		iterator            begin() { return _size ? ++iterator(_beginNode) : iterator(_beginNode); }
+		iterator            end() { return iterator(_endNode); }
+		iterator            begin() const { return _size ? ++iterator(_beginNode) : iterator(_beginNode); }
+		iterator            end() const { return iterator(_endNode); }
 
-		iterator end()
-		{ return iterator(_endNode); }
+//		iterator            cbegin() const { return _size ? ++iterator(_beginNode) : iterator(_beginNode); }
+//		iterator            cend() const { return iterator(_endNode); }
 
-		iterator begin() const
-		{
-			return _size ? ++iterator(_beginNode) : iterator(
-					_beginNode);
-		}
+		reverse_iterator        rbegin() { return --reverse_iterator(_endNode); }
+		reverse_iterator        rend() { return reverse_iterator(_beginNode); }
+//		reverse_iterator    rbegin() const { return --reverse_iterator(_endNode); }
+//		reverse_iterator    rend() const { return reverse_iterator(_beginNode); }
 
-		iterator end() const
-		{ return iterator(_endNode); }
+//		reverse_iterator    crbegin() const { return --reverse_iterator(_endNode); }
+//		reverse_iterator    crend() const { return reverse_iterator(_beginNode); }
 
-		iterator cend() const
-		{ return iterator(_endNode); }
+		/*******************************************************************************
+		*_________________________________Capacity:____________________________________*
+		*******************************************************************************/
+		bool                    empty() const { return _size ? false : true; }
+		size_t                    size() const { return _size; }
+		size_t                    max_size() const { return _alloc.max_size() / 2; }
 
-		reverse_iterator rend()
-		{ return reverse_iterator(_beginNode); }
-
-		reverse_iterator rend() const
-		{ return reverse_iterator(_beginNode); }
-
-		size_t size() const
-		{ return _size; }
-
-		size_t max_size() const
-		{ return _alloc.max_size() / 2; }
-
-		bool empty() const
-		{ return _size ? false : true; }
-
-		allocator_type get_allocator() const
-		{ return _alloc; }
-
-		key_compare key_comp() const
-		{ return _cmp; }
-
-		value_compare value_comp() const
-		{ return value_compare(_cmp); }
-
-		const mapped_type &at(const key_type &key) const
-		{ return at(key); }
+		/*******************************************************************************
+		*______________________________Element_access__________________________________*
+		*******************************************************************************/
+		//	operator[]
+		const mapped_type&        at(const key_type& key) const { return at(key); }
 
 		mapped_type &at(const key_type &key)
 		{
@@ -356,147 +342,10 @@ namespace ft
 			return (*res.first).second;
 		}
 
-		size_t count(const key_type &key) const
-		{
-			node *res = find_node(_tree, key);
-			return keyCmp(key, res->value.first) == EQUAL ? 1 : 0;
-		}
-
-		void clear()
-		{
-			if (_size)
-			{
-				delete_tree(_tree);
-				_tree = new node();
-				_beginNode = _endNode = _tree;
-				_size = 0;
-			}
-		}
-
-		iterator find(const key_type &key)
-		{
-			node *res = find_node(_tree, key);
-			return keyCmp(res->value.first, key) == EQUAL ? iterator(res)
-														  : end();
-		}
-
-		iterator find(const key_type &key) const
-		{
-			node *res = find_node(_tree, key);
-			return keyCmp(res->value.first, key) == EQUAL ? iterator(res)
-														  : cend();
-		}
-
-		iterator lower_bound(const key_type &key)
-		{
-			iterator it(find_node(_tree, key));
-			if (keyCmp((*it).first, key) == LESS)
-				++it;
-			return it;
-		}
-
-		iterator lower_bound(const key_type &key) const
-		{
-			iterator it(find_node(_tree, key));
-			if (keyCmp((*it).first, key) == LESS)
-				++it;
-			return it;
-		}
-
-		iterator upper_bound(const key_type &key)
-		{
-			iterator it(find_node(_tree, key));
-			int compare = keyCmp((*it).first, key);
-			if (compare == LESS || compare == EQUAL)
-				++it;
-			return it;
-		}
-
-		iterator upper_bound(const key_type &key) const
-		{
-			iterator it(find_node(_tree, key));
-			int compare = keyCmp((*it).first, key);
-			if (compare == LESS || compare == EQUAL)
-				++it;
-			return it;
-		}
-
-		ft::pair<iterator, iterator> equal_range(const key_type &key)
-		{
-			return ft::make_pair(iterator(lower_bound(key)),
-								 iterator(upper_bound(key)));
-		}
-
-		ft::pair<iterator, iterator>
-		equal_range(const key_type &key) const
-		{
-			return ft::make_pair(iterator(lower_bound(key)),
-								 iterator(upper_bound(key)));
-		}
-
-		ft::pair<iterator, bool> insert(const_reference value)
-		{
-//			std::cout << value.first << " " << value.second << std::endl;
-			node *newNode = find_node(_tree,
-									  value.first);    /*    ищем место для добавления элемента    */
-			if (_size && valueCmp(value, newNode->value) ==
-							 EQUAL)    /*    если элемент уже существует    */
-				return ft::make_pair(iterator(newNode), false);
-			if (!_size)    /*    вставка самого первого элемента    */
-			{
-				newNode = new node(
-						value);    /*    новый узел для вставки (корень всего дерева)    */
-				newNode->right = _tree;    /*    указатель на .end()    */
-				newNode->left = new node();    /*    указатель на .rend()    */
-				newNode->right->isBegin = 0;
-				newNode->left->isEnd = 0;
-				newNode->left->parent = newNode->right->parent = newNode;
-				_beginNode = newNode->left;    /*    указатель на начало депева (элемент перед первым)    */
-				_tree = newNode;    /*     новый корень всего дерева    */
-			} else    /*    newNode - родитель нового элемента!    */
-			{
-				if (valueCmp(value, newNode->value) ==
-					LESS)    /*    вставка слева    */
-				{
-					if (newNode->left)    /*    если newNode - миинимальный элемент дерева    */
-					{
-						node *tmp = new node(
-								value);    /*    новый узел для вставки (минимальный элемент)    */
-						tmp->left = newNode->left;    /*    указатель на .rend()    */
-						tmp->left->parent = tmp;
-						tmp->parent = newNode;
-						newNode->left = tmp;
-					} else    /*    обычная вставка слева    */
-					{
-						newNode->left = new node(value);
-						newNode->left->parent = newNode;
-					}
-					newNode = newNode->left;    /*    newNode - добавленный узел    */
-				} else if (valueCmp(value, newNode->value) ==
-						   GREATER)    /*    вставка справа    */
-				{
-					if (newNode->right)    /*    если newNode - максимальный элемент дерева    */
-					{
-						node *tmp = new node(
-								value);    /*    новый узел для вставки (максимальный элемент)    */
-						tmp->right = newNode->right;    /*    указатель на .end()    */
-						tmp->right->parent = tmp;
-						tmp->parent = newNode;
-						newNode->right = tmp;
-					} else    /*    обычная вставка справа    */
-					{
-						newNode->right = new node(value);
-						newNode->right->parent = newNode;
-					}
-					newNode = newNode->right;    /*    newNode - добавленный узел    */
-				}
-				makeBalance(
-						newNode);    /*    балансировка ветви от newNode до корня    */
-			}
-			_size++;
-			return ft::make_pair(iterator(newNode), true);
-		}
-
+		/*******************************************************************************
+		*__________________________________Modifiers___________________________________*
+		*******************************************************************************/
+		//erase
 		void erase(iterator pos)
 		{
 			node *rm = pos.getNode(); /*    указатель на узел для длаления    */
@@ -616,13 +465,6 @@ namespace ft
 			return;
 		}
 
-		template<class _InputIt>
-		void insert(_InputIt first, _InputIt last)
-		{
-			for (; first != last; ++first)
-				insert(ft::make_pair(first->first, first->second));
-		}
-
 		void erase(iterator first, iterator last)
 		{
 			while (first != last)
@@ -640,7 +482,7 @@ namespace ft
 			}
 			return 0;
 		}
-
+		//swap
 		void swap(map &other)
 		{
 			if (this != &other)
@@ -661,6 +503,182 @@ namespace ft
 				other._size = sizeTmp;
 			}
 		}
+		//clear
+		void clear()
+		{
+			if (_size)
+			{
+				delete_tree(_tree);
+				_tree = new node();
+				_beginNode = _endNode = _tree;
+				_size = 0;
+			}
+		}
+
+		/*******************************************************************************
+		*__________________________________Observers___________________________________*
+		*******************************************************************************/
+		//key_comp
+		//value_comp
+		key_compare                key_comp() const { return _cmp; }
+		value_compare            value_comp() const { return value_compare(_cmp); }
+
+		/*******************************************************************************
+		*__________________________________Operations__________________________________*
+		*******************************************************************************/
+		//find
+		iterator find(const key_type &key)
+		{
+			node *res = find_node(_tree, key);
+			return keyCmp(res->value.first, key) == EQUAL ? iterator(res)
+														  : end();
+		}
+
+		iterator find(const key_type &key) const
+		{
+			node *res = find_node(_tree, key);
+			return keyCmp(res->value.first, key) == EQUAL ? iterator(res)
+														  : end();
+		}
+		//count
+		size_t count(const key_type &key) const
+		{
+			node *res = find_node(_tree, key);
+			return keyCmp(key, res->value.first) == EQUAL ? 1 : 0;
+		}
+		//lower_bound
+		iterator lower_bound(const key_type &key)
+		{
+			iterator it(find_node(_tree, key));
+			if (keyCmp((*it).first, key) == LESS)
+				++it;
+			return it;
+		}
+
+		iterator lower_bound(const key_type &key) const
+		{
+			iterator it(find_node(_tree, key));
+			if (keyCmp((*it).first, key) == LESS)
+				++it;
+			return it;
+		}
+		//upper_bound
+		iterator upper_bound(const key_type &key)
+		{
+			iterator it(find_node(_tree, key));
+			int compare = keyCmp((*it).first, key);
+			if (compare == LESS || compare == EQUAL)
+				++it;
+			return it;
+		}
+
+		iterator upper_bound(const key_type &key) const
+		{
+			iterator it(find_node(_tree, key));
+			int compare = keyCmp((*it).first, key);
+			if (compare == LESS || compare == EQUAL)
+				++it;
+			return it;
+		}
+		//equal_range
+		ft::pair<iterator, iterator> equal_range(const key_type &key)
+		{
+			return ft::make_pair(iterator(lower_bound(key)),
+								 iterator(upper_bound(key)));
+		}
+
+		ft::pair<iterator, iterator>
+		equal_range(const key_type &key) const
+		{
+			return ft::make_pair(iterator(lower_bound(key)),
+								 iterator(upper_bound(key)));
+		}
+
+		/*******************************************************************************
+		*__________________________________Allocator___________________________________*
+		*******************************************************************************/
+		//get_allocator
+		allocator_type            get_allocator() const { return _alloc; }
+
+		/*******************************************************************************
+		*__________________________________Utilities___________________________________*
+		*******************************************************************************/
+
+
+		ft::pair<iterator, bool> insert(const_reference value)
+		{
+//			std::cout << value.first << " " << value.second << std::endl;
+			node *newNode = find_node(_tree,
+									  value.first);    /*    ищем место для добавления элемента    */
+			if (_size && valueCmp(value, newNode->value) ==
+							 EQUAL)    /*    если элемент уже существует    */
+				return ft::make_pair(iterator(newNode), false);
+			if (!_size)    /*    вставка самого первого элемента    */
+			{
+				newNode = new node(
+						value);    /*    новый узел для вставки (корень всего дерева)    */
+				newNode->right = _tree;    /*    указатель на .end()    */
+				newNode->left = new node();    /*    указатель на .rend()    */
+				newNode->right->isBegin = 0;
+				newNode->left->isEnd = 0;
+				newNode->left->parent = newNode->right->parent = newNode;
+				_beginNode = newNode->left;    /*    указатель на начало депева (элемент перед первым)    */
+				_tree = newNode;    /*     новый корень всего дерева    */
+			} else    /*    newNode - родитель нового элемента!    */
+			{
+				if (valueCmp(value, newNode->value) ==
+					LESS)    /*    вставка слева    */
+				{
+					if (newNode->left)    /*    если newNode - миинимальный элемент дерева    */
+					{
+						node *tmp = new node(
+								value);    /*    новый узел для вставки (минимальный элемент)    */
+						tmp->left = newNode->left;    /*    указатель на .rend()    */
+						tmp->left->parent = tmp;
+						tmp->parent = newNode;
+						newNode->left = tmp;
+					} else    /*    обычная вставка слева    */
+					{
+						newNode->left = new node(value);
+						newNode->left->parent = newNode;
+					}
+					newNode = newNode->left;    /*    newNode - добавленный узел    */
+				} else if (valueCmp(value, newNode->value) ==
+						   GREATER)    /*    вставка справа    */
+				{
+					if (newNode->right)    /*    если newNode - максимальный элемент дерева    */
+					{
+						node *tmp = new node(
+								value);    /*    новый узел для вставки (максимальный элемент)    */
+						tmp->right = newNode->right;    /*    указатель на .end()    */
+						tmp->right->parent = tmp;
+						tmp->parent = newNode;
+						newNode->right = tmp;
+					} else    /*    обычная вставка справа    */
+					{
+						newNode->right = new node(value);
+						newNode->right->parent = newNode;
+					}
+					newNode = newNode->right;    /*    newNode - добавленный узел    */
+				}
+				makeBalance(
+						newNode);    /*    балансировка ветви от newNode до корня    */
+			}
+			_size++;
+			return ft::make_pair(iterator(newNode), true);
+		}
+
+
+
+		template<class _InputIt>
+		void insert(_InputIt first, _InputIt last)
+		{
+			for (; first != last; ++first)
+				insert(ft::make_pair(first->first, first->second));
+		}
+
+
+
 
 		/*    SECONDARY FUNCTIONS    */
 		int keyCmp(const key_type &key1,
