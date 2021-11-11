@@ -1,1 +1,245 @@
-
+../map_tests/insert(hint).cpp:27:12: error: no matching member function for call to 'insert'
+        mp.insert(it, _make_pair(i, j));
+        ~~~^~~~~~
+../map_tests/insert(hint).cpp:40:69: note: in instantiation of function template specialization 'insert_test_3<int, int>' requested here
+    exit(run_map_unit_test<int, int>("insert(hint)", insert_test_3, insert_test_3));
+                                                                    ^
+../map_tests/../../../MMMAp.hpp:876:8: note: candidate template ignored: deduced conflicting types for parameter '_InputIt' ('ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' vs. 'ft::pair<int, int>')
+                void insert(_InputIt first, _InputIt last)
+                     ^
+../map_tests/../../../MMMAp.hpp:693:28: note: candidate function not viable: requires single argument 'value', but 2 arguments were provided
+                ft::pair<iterator, bool> insert(const_reference value)
+                                         ^
+1 error generated.
+ode(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::plus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:76:40: error: no viable conversion from 'ft::map<int, int, std::__1::plus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = --mp3.end(); it != mp3.begin(); it--) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::plus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::node *' for 1st argument
+                        iterator(node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::plus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:79:40: error: no viable conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = mp4.begin(); it != mp4.end(); it++) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::node *' for 1st argument
+                        iterator(node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:80:40: error: no viable conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = --mp4.end(); it != mp4.begin(); it--) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::node *' for 1st argument
+                        iterator(node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:83:40: error: no viable conversion from 'ft::map<int, int, std::__1::greater_equal<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = mp5.begin(); it != mp5.end(); it++) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::greater_equal<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::node *' for 1st argument
+                        iterator(node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::greater_equal<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:84:40: error: no viable conversion from 'ft::map<int, int, std::__1::greater_equal<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = --mp5.end(); it != mp5.begin(); it--) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::greater_equal<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::node *' for 1st argument
+                        iterator(node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::greater_equal<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:87:40: error: no viable conversion from 'ft::map<int, int, std::__1::multiplies<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = mp6.begin(); it != mp6.end(); it++) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::multiplies<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::node *' for 1st argument
+                        iterator(node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::multiplies<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:88:40: error: no viable conversion from 'ft::map<int, int, std::__1::multiplies<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = --mp6.end(); it != mp6.begin(); it--) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::multiplies<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::node *' for 1st argument
+                        iterator(node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::multiplies<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:91:40: error: no viable conversion from 'ft::map<int, int, std::__1::bit_xor<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = mp7.begin(); it != mp7.end(); it++) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::bit_xor<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::node *' for 1st argument
+                        iterator(node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::bit_xor<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:92:40: error: no viable conversion from 'ft::map<int, int, std::__1::bit_xor<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = --mp7.end(); it != mp7.begin(); it--) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::bit_xor<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::node *' for 1st argument
+                        iterator(node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::bit_xor<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+10 errors generated.
+ontents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:1585:1: note: candidate template ignored: could not match '__wrap_iter' against 'pair'
+operator>(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter1>& __y) _NOEXCEPT_DEBUG
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:2985:1: note: candidate template ignored: could not match 'unique_ptr' against 'pair'
+operator> (const unique_ptr<_T1, _D1>& __x, const unique_ptr<_T2, _D2>& __y) {return __y < __x;}
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:3050:1: note: candidate template ignored: could not match 'unique_ptr' against 'pair'
+operator>(const unique_ptr<_T1, _D1>& __x, nullptr_t)
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:3058:1: note: candidate template ignored: could not match 'unique_ptr' against 'pair'
+operator>(nullptr_t, const unique_ptr<_T1, _D1>& __x)
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4826:1: note: candidate template ignored: could not match 'shared_ptr' against 'pair'
+operator>(const shared_ptr<_Tp>& __x, const shared_ptr<_Up>& __y) _NOEXCEPT
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4898:1: note: candidate template ignored: could not match 'shared_ptr' against 'pair'
+operator>(const shared_ptr<_Tp>& __x, nullptr_t) _NOEXCEPT
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4906:1: note: candidate template ignored: could not match 'shared_ptr' against 'pair'
+operator>(nullptr_t, const shared_ptr<_Tp>& __x) _NOEXCEPT
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/array:397:1: note: candidate template ignored: could not match 'array' against 'pair'
+operator>(const array<_Tp, _Size>& __x, const array<_Tp, _Size>& __y)
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/vector:3386:1: note: candidate template ignored: could not match 'vector' against 'pair'
+operator> (const vector<_Tp, _Allocator>& __x, const vector<_Tp, _Allocator>& __y)
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:1586:1: note: candidate template ignored: could not match 'map' against 'pair'
+operator> (const map<_Key, _Tp, _Compare, _Allocator>& __x,
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:2131:1: note: candidate template ignored: could not match 'multimap' against 'pair'
+operator> (const multimap<_Key, _Tp, _Compare, _Allocator>& __x,
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/set:886:1: note: candidate template ignored: could not match 'set' against 'pair'
+operator> (const set<_Key, _Compare, _Allocator>& __x,
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/set:1374:1: note: candidate template ignored: could not match 'multiset' against 'pair'
+operator> (const multiset<_Key, _Compare, _Allocator>& __x,
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/deque:2906:1: note: candidate template ignored: could not match 'deque' against 'pair'
+operator> (const deque<_Tp, _Allocator>& __x, const deque<_Tp, _Allocator>& __y)
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/stack:281:1: note: candidate template ignored: could not match 'stack' against 'pair'
+operator> (const stack<_Tp, _Container>& __x, const stack<_Tp, _Container>& __y)
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:699:6: note: candidate template ignored: could not match 'basic_string_view' against 'pair'
+bool operator> (basic_string_view<_CharT, _Traits> __lhs, basic_string_view<_CharT, _Traits> __rhs) _NOEXCEPT
+     ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:706:6: note: candidate template ignored: could not match 'basic_string_view' against 'pair'
+bool operator>(basic_string_view<_CharT, _Traits> __lhs,
+     ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:714:6: note: candidate template ignored: could not match 'basic_string_view' against 'pair'
+bool operator>(typename common_type<basic_string_view<_CharT, _Traits> >::type __lhs, 
+     ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:3950:1: note: candidate template ignored: could not match 'basic_string' against 'pair'
+operator> (const basic_string<_CharT, _Traits, _Allocator>& __lhs,
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:3959:1: note: candidate template ignored: could not match 'basic_string' against 'pair'
+operator> (const basic_string<_CharT, _Traits, _Allocator>& __lhs,
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:3968:1: note: candidate template ignored: could not match 'const _CharT *' against 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::value_type' (aka 'pair<const int, int>')
+operator> (const _CharT* __lhs,
+^
+../map_tests/reverse iterators.cpp:55:23: error: invalid operands to binary expression ('ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::value_type' (aka 'pair<const int, int>') and 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::value_type')
+    v.push_back(*rit2 < *rit);
+                ~~~~~ ^ ~~~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/system_error:306:1: note: candidate function not viable: no known conversion from 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::value_type' (aka 'pair<const int, int>') to 'const std::__1::error_condition' for 1st argument
+operator<(const error_condition& __x, const error_condition& __y) _NOEXCEPT
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/system_error:383:1: note: candidate function not viable: no known conversion from 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::value_type' (aka 'pair<const int, int>') to 'const std::__1::error_code' for 1st argument
+operator<(const error_code& __x, const error_code& __y) _NOEXCEPT
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/utility:596:1: note: candidate template ignored: could not match 'std::__1::pair' against 'ft::pair'
+operator< (const pair<_T1,_T2>& __x, const pair<_T1,_T2>& __y)
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:720:1: note: candidate template ignored: could not match 'reverse_iterator' against 'pair'
+operator<(const reverse_iterator<_Iter1>& __x, const reverse_iterator<_Iter2>& __y)
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:1161:1: note: candidate template ignored: could not match 'move_iterator' against 'pair'
+operator<(const move_iterator<_Iter1>& __x, const move_iterator<_Iter2>& __y)
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iterator:1533:1: note: candidate template ignored: could not match '__wrap_iter' against 'pair'
+operator<(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter2>& __y) _NOEXCEPT_DEBUG
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:2974:1: note: candidate template ignored: could not match 'unique_ptr' against 'pair'
+operator< (const unique_ptr<_T1, _D1>& __x, const unique_ptr<_T2, _D2>& __y)
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:3032:1: note: candidate template ignored: could not match 'unique_ptr' against 'pair'
+operator<(const unique_ptr<_T1, _D1>& __x, nullptr_t)
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:3041:1: note: candidate template ignored: could not match 'unique_ptr' against 'pair'
+operator<(nullptr_t, const unique_ptr<_T1, _D1>& __x)
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4812:1: note: candidate template ignored: could not match 'shared_ptr' against 'pair'
+operator<(const shared_ptr<_Tp>& __x, const shared_ptr<_Up>& __y) _NOEXCEPT
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4882:1: note: candidate template ignored: could not match 'shared_ptr' against 'pair'
+operator<(const shared_ptr<_Tp>& __x, nullptr_t) _NOEXCEPT
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/memory:4890:1: note: candidate template ignored: could not match 'shared_ptr' against 'pair'
+operator<(nullptr_t, const shared_ptr<_Tp>& __x) _NOEXCEPT
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/array:388:1: note: candidate template ignored: could not match 'array' against 'pair'
+operator<(const array<_Tp, _Size>& __x, const array<_Tp, _Size>& __y)
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/vector:3378:1: note: candidate template ignored: could not match 'vector' against 'pair'
+operator< (const vector<_Tp, _Allocator>& __x, const vector<_Tp, _Allocator>& __y)
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:1568:1: note: candidate template ignored: could not match 'map' against 'pair'
+operator< (const map<_Key, _Tp, _Compare, _Allocator>& __x,
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/map:2113:1: note: candidate template ignored: could not match 'multimap' against 'pair'
+operator< (const multimap<_Key, _Tp, _Compare, _Allocator>& __x,
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/set:868:1: note: candidate template ignored: could not match 'set' against 'pair'
+operator< (const set<_Key, _Compare, _Allocator>& __x,
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/set:1356:1: note: candidate template ignored: could not match 'multiset' against 'pair'
+operator< (const multiset<_Key, _Compare, _Allocator>& __x,
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/deque:2898:1: note: candidate template ignored: could not match 'deque' against 'pair'
+operator< (const deque<_Tp, _Allocator>& __x, const deque<_Tp, _Allocator>& __y)
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/stack:265:1: note: candidate template ignored: could not match 'stack' against 'pair'
+operator< (const stack<_Tp, _Container>& __x, const stack<_Tp, _Container>& __y)
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:674:6: note: candidate template ignored: could not match 'basic_string_view' against 'pair'
+bool operator<(basic_string_view<_CharT, _Traits> __lhs, basic_string_view<_CharT, _Traits> __rhs) _NOEXCEPT
+     ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:681:6: note: candidate template ignored: could not match 'basic_string_view' against 'pair'
+bool operator<(basic_string_view<_CharT, _Traits> __lhs,
+     ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string_view:689:6: note: candidate template ignored: could not match 'basic_string_view' against 'pair'
+bool operator<(typename common_type<basic_string_view<_CharT, _Traits> >::type __lhs, 
+     ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:3921:1: note: candidate template ignored: could not match 'basic_string' against 'pair'
+operator< (const basic_string<_CharT, _Traits, _Allocator>& __lhs,
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:3930:1: note: candidate template ignored: could not match 'basic_string' against 'pair'
+operator< (const basic_string<_CharT, _Traits, _Allocator>& __lhs,
+^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:3939:1: note: candidate template ignored: could not match 'const _CharT *' against 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::value_type' (aka 'pair<const int, int>')
+operator< (const _CharT* __lhs,
+^
+3 errors generated.

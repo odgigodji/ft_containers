@@ -89,231 +89,47 @@ namespace ft
 		key_compare								_cmp;
 		allocator_rebind_node					_nodeAlloc;
 
-/*    SECONDARY FUNCTIONS    */
-		int keyCmp(const key_type &key1,
-				   const key_type &key2) const /*    сравнение ключей    */
-		{
-			return _cmp(key1, key2) + _cmp(key2, key1) *
-									  2; /*    0(key1 == key2), 1(key1 < key2), 2(key1 > key2)    */
-		}
-
-		int valueCmp(const_reference val1,
-					 const_reference val2) const /*    сравнение двух пар по ключу    */
-		{
-			return keyCmp(val1.first, val2.first);
-		}
-
-		size_t height(node *p)    /*    получение высоты поддерева    */
-		{
-			return p ? p->height : 0;
-		}
-
-		int b_factor(
-				node *p)    /*    balance factor        (-1, 0 или 1) - поддерево сбалансированно    */
-		{
-			return height(p->right) -
-				   height(p->left);    /*    (-2 или 2) - требуется балансировка левого или правого поддерева , соответственно    */
-		}
-
-		void fix_height(
-				node *p)    /*    корректировка высоты поддерева после вставки или удаления узла    */
-		{
-			size_t hl = height(p->left);
-			size_t hr = height(p->right);
-			p->height = (hl > hr ? hl : hr) + 1;
-		}
-
-		/*    повороты вокруг узла, balance factor корого == 2 или == -2,
-		т.е. возникает расбалансировка одного из поддеревьев    */
-
-		node *
-		rotate_right(node *p)    /*    правый поворот вокруг узла 'p'    */
-		{
-			node *q = p->left;    /*    узел, который после поворота займёт место 'p' и станет корнем данного поддерева    */
-			/*    поворот    */
-			p->left = q->right;
-			q->right = p;
-			/*    меняем местами родителей повёрнутых узлов    */
-			q->parent = p->parent;
-			p->parent = q;
-			if (q->right->left)
-				q->right->left->parent = p;
-			/*    корректировка высот новых поддеревьев    */
-			fix_height(p);
-			fix_height(q);
-			return q;    /*    возвращаем новый корень данного поддерева    */
-		}
-
-		node *rotate_left(node *q)    /*    левый поворот вокруг узла 'q'    */
-		{
-			node *p = q->right;    /*    узел, который после поворота займёт место 'q' и станет корнем данного поддерева    */
-			/*    поворот    */
-			q->right = p->left;
-			p->left = q;
-			/*    меняем местами родителей повёрнутых узлов    */
-			p->parent = q->parent;
-			q->parent = p;
-			if (p->left->right)
-				p->left->right->parent = q;
-			/*    корректировка высот новых поддеревьев    */
-			fix_height(q);
-			fix_height(p);
-			return p;    /*    возвращаем новый корень данного поддерева    */
-		}
-
-		node *balance(node *p)    /*    балансировка узла 'p'    */
-		{
-			node *tmp = p->parent;    /*    запоминаем родителя данного узла    */
-			fix_height(p);    /*    корректировка высоты данного поддерева    */
-			if (b_factor(p) ==
-				2)    /*    правое поддерево от 'p' выше левого    */
-			{
-				if (b_factor(p->right) <
-					0)    /*    требуется поворот правого поддерева от 'p'    */
-					p->right = rotate_right(p->right);
-				if (!tmp)    /*    т.е. 'p' - корень всего дерева    */
-					return _tree = rotate_left(
-							p);    /*    балансировка корня всего дерева    */
-				/*    балансировка поддерева с корнем 'p'    */
-				if (tmp->left == p)
-					return (tmp->left = rotate_left(p));
-				else
-					return (tmp->right = rotate_left(p));
-			}
-			if (b_factor(p) ==
-				-2)    /*    левое поддерево от 'p' выше правого    */
-			{
-				if (b_factor(p->left) >
-					0)    /*    требуется поворот левого поддерева от 'p'    */
-					p->left = rotate_left(p->left);
-				if (!tmp)    /*    т.е. 'p' - корень всего дерева    */
-					return _tree = rotate_right(
-							p);    /*    балансировка корня всего дерева    */
-				/*    балансировка поддерева с корнем 'p'    */
-				if (tmp->right == p)
-					return (tmp->right = rotate_right(p));
-				else
-					return (tmp->left = rotate_right(p));
-			}
-			return p;    /*    балансировка не потребовалась    */
-		}
-
-		node *find_min(
-				node *p)    /*    поиск узла с минимальным ключом в дереве 'p'    */
-		{
-			return p->left ? find_min(p->left) : p;
-		}
-
-		node *find_max(
-				node *p)    /*    поиск узла с максимальным ключом в дереве 'p'    */
-		{
-			return p->right ? find_max(p->right) : p;
-		}
-
-		node *
-		find_node(node *p, key_type k) const    /*    поиск узла по ключу    */
-		{
-			int compare = keyCmp(k, p->value.first);
-			if (compare == LESS)
-			{
-				if (p->left && p->left != _beginNode)
-					return find_node(p->left, k);
-			} else if (compare == GREATER)
-			{
-				if (p->right && p->right != _endNode)
-					return find_node(p->right, k);
-			}
-			return p;    /*    если узел с данным ключом отсутствует, то вернётся узел, ближайший по ключу    */
-		}
-
-		void delete_tree(node *p)    /*    очистка дерева    */
-		{
-			if (p->left != nullptr)
-				delete_tree(p->left);
-			if (p->right != nullptr)
-				delete_tree(p->right);
-			delete p;
-		}
-
-		void
-		makeBalance(node *node)    /*    балансировка от node до корня    */
-		{
-			for (; node != nullptr; node = node->parent)
-				node = balance(node);
-		}
-
+		/*******************************************************************************
+		*_______________________________Iterators_classes______________________________*
+		*******************************************************************************/
 	public:
-/*    ITERATORS    */
 		class iterator;
 
-		class const_iterator;
-
-		class reverse_iterator;
-
-		class const_reverse_iterator;
-
-		/*    Iterator    */
-		class iterator
-				: public ft::iterator_traits<std::bidirectional_iterator_tag, value_type>
-		{
+		class    iterator : public ft::iterator_traits<std::bidirectional_iterator_tag, value_type> {
 		private:
-			node *_node;
+			node*	_node;
 
-			node *find_min(node *p)
-			{ return p->left ? find_min(p->left) : p; }
-
-			node *find_max(node *p)
-			{ return p->right ? find_max(p->right) : p; }
+			node*	find_min(node *p) {
+				return p->left ? find_min(p->left) : p;
+			}
+			node*	find_max(node *p) {
+				return p->right ? find_max(p->right) : p;
+			}
 
 		public:
-			iterator() : _node(nullptr)
-			{}
+			iterator() : _node(nullptr) {}
+			iterator(node *ptr) : _node(ptr) {}
+			~iterator() {}
+			iterator(const iterator &other) { *this = other; }
 
-			iterator(node *ptr) : _node(ptr)
-			{}
+			node*			getNode() const { return _node; }
 
-			~iterator()
-			{}
-
-			iterator(const iterator &other)
-			{ *this = other; }
-
-			node *getNode() const
-			{ return _node; }
-
-			iterator &operator=(const iterator &other)
-			{
+			iterator&		operator = (const iterator &other) {
 				_node = other._node;
 				return *this;
 			}
+			reference	operator*() { return _node->value; }
+			pointer		operator->() { return &_node->value; }
+			bool    operator==(const iterator &rhs) { return this->_node == rhs._node; }
+			bool    operator!=(const iterator &hrs) { return this->_node != hrs._node; }
 
-			bool operator==(const iterator &other)
-			{ return this->_node == other._node; }
-
-			bool operator!=(const iterator &other)
-			{ return this->_node != other._node; }
-
-			bool operator==(const const_iterator &other)
-			{ return this->_node == other.getNode(); }
-
-			bool operator!=(const const_iterator &other)
-			{ return this->_node != other.getNode(); }
-
-			reference operator*()
-			{ return _node->value; }
-
-			pointer operator->()
-			{ return &_node->value; }
-
-			iterator &operator++()
-			{
+			iterator&    operator++() {
 				if (_node->isBegin)
 					_node = _node->parent;
 				else if (_node->right)
 					_node = find_min(_node->right);
-				else
-				{
-					node *tmp = _node->parent;
+				else {
+					node    *tmp = _node->parent;
 					while (tmp && tmp->value.first < _node->value.first)
 						tmp = tmp->parent;
 					_node = tmp;
@@ -321,15 +137,13 @@ namespace ft
 				return *this;
 			}
 
-			iterator &operator--()
-			{
+			iterator&        operator--() {
 				if (_node->isEnd)
 					_node = _node->parent;
 				else if (_node->left)
 					_node = find_max(_node->left);
-				else
-				{
-					node *tmp = _node->parent;
+				else {
+					node    *tmp = _node->parent;
 					while (tmp && tmp->value.first > _node->value.first)
 						tmp = tmp->parent;
 					_node = tmp;
@@ -337,20 +151,29 @@ namespace ft
 				return *this;
 			}
 
-			iterator operator++(int)
-			{
-				iterator tmp(_node);
+			iterator        operator++(int) {
+				iterator    tmp(_node);
 				operator++();
 				return tmp;
 			}
 
-			iterator operator--(int)
-			{
-				iterator tmp(_node);
+			iterator        operator--(int) {
+				iterator    tmp(_node);
 				operator--();
 				return tmp;
 			}
 		};
+
+	public:
+/*    ITERATORS    */
+//		class iterator;
+
+		class const_iterator;
+
+		class reverse_iterator;
+
+		class const_reverse_iterator;
+
 
 		/*    Const Iterator    */
 		class const_iterator
@@ -669,6 +492,13 @@ namespace ft
 				return tmp;
 			}
 		};
+
+
+		/*******************************************************************************
+		*===============================MEMBER_FUNCTIONS===============================*
+		********************************************************************************
+		*__________________________Constructors_and_destructor_________________________*
+		*******************************************************************************/
 
 /*    CONSTRUCTORS    */
 		map() : _tree(new node()), _size(0)
@@ -1087,5 +917,159 @@ namespace ft
 				other._size = sizeTmp;
 			}
 		}
+
+		/*    SECONDARY FUNCTIONS    */
+		int keyCmp(const key_type &key1,
+				   const key_type &key2) const /*    сравнение ключей    */
+		{
+			return _cmp(key1, key2) + _cmp(key2, key1) *
+									  2; /*    0(key1 == key2), 1(key1 < key2), 2(key1 > key2)    */
+		}
+
+		int valueCmp(const_reference val1,
+					 const_reference val2) const /*    сравнение двух пар по ключу    */
+		{
+			return keyCmp(val1.first, val2.first);
+		}
+
+		size_t height(node *p)    /*    получение высоты поддерева    */
+		{
+			return p ? p->height : 0;
+		}
+
+		int b_factor(
+				node *p)    /*    balance factor        (-1, 0 или 1) - поддерево сбалансированно    */
+		{
+			return height(p->right) -
+				   height(p->left);    /*    (-2 или 2) - требуется балансировка левого или правого поддерева , соответственно    */
+		}
+
+		void fix_height(
+				node *p)    /*    корректировка высоты поддерева после вставки или удаления узла    */
+		{
+			size_t hl = height(p->left);
+			size_t hr = height(p->right);
+			p->height = (hl > hr ? hl : hr) + 1;
+		}
+
+		/*    повороты вокруг узла, balance factor корого == 2 или == -2,
+		т.е. возникает расбалансировка одного из поддеревьев    */
+
+		node *
+		rotate_right(node *p)    /*    правый поворот вокруг узла 'p'    */
+		{
+			node *q = p->left;    /*    узел, который после поворота займёт место 'p' и станет корнем данного поддерева    */
+			/*    поворот    */
+			p->left = q->right;
+			q->right = p;
+			/*    меняем местами родителей повёрнутых узлов    */
+			q->parent = p->parent;
+			p->parent = q;
+			if (q->right->left)
+				q->right->left->parent = p;
+			/*    корректировка высот новых поддеревьев    */
+			fix_height(p);
+			fix_height(q);
+			return q;    /*    возвращаем новый корень данного поддерева    */
+		}
+
+		node *rotate_left(node *q)    /*    левый поворот вокруг узла 'q'    */
+		{
+			node *p = q->right;    /*    узел, который после поворота займёт место 'q' и станет корнем данного поддерева    */
+			/*    поворот    */
+			q->right = p->left;
+			p->left = q;
+			/*    меняем местами родителей повёрнутых узлов    */
+			p->parent = q->parent;
+			q->parent = p;
+			if (p->left->right)
+				p->left->right->parent = q;
+			/*    корректировка высот новых поддеревьев    */
+			fix_height(q);
+			fix_height(p);
+			return p;    /*    возвращаем новый корень данного поддерева    */
+		}
+
+		node *balance(node *p)    /*    балансировка узла 'p'    */
+		{
+			node *tmp = p->parent;    /*    запоминаем родителя данного узла    */
+			fix_height(p);    /*    корректировка высоты данного поддерева    */
+			if (b_factor(p) ==
+				2)    /*    правое поддерево от 'p' выше левого    */
+			{
+				if (b_factor(p->right) <
+					0)    /*    требуется поворот правого поддерева от 'p'    */
+					p->right = rotate_right(p->right);
+				if (!tmp)    /*    т.е. 'p' - корень всего дерева    */
+					return _tree = rotate_left(
+							p);    /*    балансировка корня всего дерева    */
+				/*    балансировка поддерева с корнем 'p'    */
+				if (tmp->left == p)
+					return (tmp->left = rotate_left(p));
+				else
+					return (tmp->right = rotate_left(p));
+			}
+			if (b_factor(p) ==
+				-2)    /*    левое поддерево от 'p' выше правого    */
+			{
+				if (b_factor(p->left) >
+					0)    /*    требуется поворот левого поддерева от 'p'    */
+					p->left = rotate_left(p->left);
+				if (!tmp)    /*    т.е. 'p' - корень всего дерева    */
+					return _tree = rotate_right(
+							p);    /*    балансировка корня всего дерева    */
+				/*    балансировка поддерева с корнем 'p'    */
+				if (tmp->right == p)
+					return (tmp->right = rotate_right(p));
+				else
+					return (tmp->left = rotate_right(p));
+			}
+			return p;    /*    балансировка не потребовалась    */
+		}
+
+		node *find_min(
+				node *p)    /*    поиск узла с минимальным ключом в дереве 'p'    */
+		{
+			return p->left ? find_min(p->left) : p;
+		}
+
+		node *find_max(
+				node *p)    /*    поиск узла с максимальным ключом в дереве 'p'    */
+		{
+			return p->right ? find_max(p->right) : p;
+		}
+
+		node *
+		find_node(node *p, key_type k) const    /*    поиск узла по ключу    */
+		{
+			int compare = keyCmp(k, p->value.first);
+			if (compare == LESS)
+			{
+				if (p->left && p->left != _beginNode)
+					return find_node(p->left, k);
+			} else if (compare == GREATER)
+			{
+				if (p->right && p->right != _endNode)
+					return find_node(p->right, k);
+			}
+			return p;    /*    если узел с данным ключом отсутствует, то вернётся узел, ближайший по ключу    */
+		}
+
+		void delete_tree(node *p)    /*    очистка дерева    */
+		{
+			if (p->left != nullptr)
+				delete_tree(p->left);
+			if (p->right != nullptr)
+				delete_tree(p->right);
+			delete p;
+		}
+
+		void
+		makeBalance(node *node)    /*    балансировка от node до корня    */
+		{
+			for (; node != nullptr; node = node->parent)
+				node = balance(node);
+		}
+
 	};
 }

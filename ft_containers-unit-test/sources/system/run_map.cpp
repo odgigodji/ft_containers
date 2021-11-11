@@ -7,7 +7,7 @@ int main(int argc, char* argv[], char* env[]) {
 	printElement("FUNCTION"); printElement(WHITE + "RESULT" + RESET); printElement(WHITE + "FT TIME" + RESET); printElement(WHITE + "STD TIME" + RESET);
 	printElement(WHITE + "LEAKS" + RESET); cout << endl;
 
-	runNonCompilable("../map_tests/key_redefinition.cpp", argv, env);
+//	runNonCompilable("../map_tests/key_redefinition.cpp", argv, env);
 	runFunctionTest("../map_tests/constructor.cpp", argv, env);
 	runFunctionTest("../map_tests/assign overload.cpp", argv, env);
 	runFunctionTest("../map_tests/iterators.cpp", argv, env);
