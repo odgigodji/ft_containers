@@ -36,7 +36,7 @@ namespace ft
 		*******************************************************************************/
 	private:
 		struct	Node {
-			value_type	value; 			/*    пара ключ - значение            */
+			value_type	content; 		/*    пара ключ - значение            */
 			size_t		height;			/*    высота поддерева                */
 			Node*		parent;			/*    указатель на родителя           */
 			Node*		right;			/*    указатель на правое поддерево   */
@@ -52,7 +52,7 @@ namespace ft
 												isBegin(true),
 												isEnd(true) {}
 
-			explicit Node(const_reference val):	value(ft::make_pair(val.first, val.second)),
+			explicit Node(const_reference val):	content(ft::make_pair(val.first, val.second)),
 											   	height(1),
 											   	parent(nullptr),
 											   	right(nullptr),
@@ -121,8 +121,8 @@ namespace ft
 				_node = other._node;
 				return *this;
 			}
-			reference	operator*() { return _node->value; }
-			pointer		operator->() { return &_node->value; }
+			reference	operator*() { return _node->content; }
+			pointer		operator->() { return &_node->content; }
 			bool    operator==(const iterator &rhs) { return this->_node == rhs._node; }
 			bool    operator!=(const iterator &hrs) { return this->_node != hrs._node; }
 
@@ -133,7 +133,7 @@ namespace ft
 					_node = find_min(_node->right);
 				else {
 					Node    *tmp = _node->parent;
-					while (tmp && tmp->value.first < _node->value.first)
+					while (tmp && tmp->content.first < _node->content.first)
 						tmp = tmp->parent;
 					_node = tmp;
 				}
@@ -147,7 +147,7 @@ namespace ft
 					_node = find_max(_node->left);
 				else {
 					Node    *tmp = _node->parent;
-					while (tmp && tmp->value.first > _node->value.first)
+					while (tmp && tmp->content.first > _node->content.first)
 						tmp = tmp->parent;
 					_node = tmp;
 				}
@@ -304,7 +304,8 @@ namespace ft
 		{
 			delete_tree(_tree);
 //			_allocNode.destroy(_tree);
-//			_allocNode.deallocate(_tree, 100);
+//			_allocNode.deallocate(_tree, 1);
+
 		}
 
 /*    ASSIGNATION OPERATOR OVERLOAD    */
@@ -341,9 +342,9 @@ namespace ft
 		/*******************************************************************************
 		*_________________________________Capacity:____________________________________*
 		*******************************************************************************/
-		bool                    empty() const { return _size ? false : true; }
-		size_t                    size() const { return _size; }
-		size_t                    max_size() const { return _allocPair.max_size() / 2; }
+		bool				empty() const { return !_size; }
+		size_t				size() const { return _size; }
+		size_t				max_size() const { return _allocPair.max_size() / 2; }
 
 		/*******************************************************************************
 		*______________________________Element_access__________________________________*
@@ -354,8 +355,8 @@ namespace ft
 		mapped_type &at(const key_type &key)
 		{
 			Node *res = find_node(_tree, key);
-			if (keyCmp(key, res->value.first) == EQUAL)
-				return res->value.second;
+			if (keyCmp(key, res->content.first) == EQUAL)
+				return res->content.second;
 			else
 				throw std::out_of_range("map::at:  key not found");
 		}
@@ -373,15 +374,12 @@ namespace ft
 		ft::pair<iterator, bool> insert(const_reference value)
 		{
 //			std::cout << value.first << " " << value.second << std::endl;
-			Node *newNode = find_node(_tree,
-									  value.first);    /*    ищем место для добавления элемента    */
-			if (_size && valueCmp(value, newNode->value) ==
-						 EQUAL)    /*    если элемент уже существует    */
+			Node *newNode = find_node(_tree, value.first);    /*    ищем место для добавления элемента    */
+			if (_size && valueCmp(value, newNode->content) == EQUAL)    /*    если элемент уже существует    */
 				return ft::make_pair(iterator(newNode), false);
 			if (!_size)    /*    вставка самого первого элемента    */
 			{
-				newNode = new Node(
-						value);    /*    новый узел для вставки (корень всего дерева)    */
+				newNode = new Node(value);    /*    новый узел для вставки (корень всего дерева)    */
 				newNode->right = _tree;    /*    указатель на .end()    */
 				newNode->left = new Node();    /*    указатель на .rend()    */
 				newNode->right->isBegin = 0;
@@ -389,15 +387,14 @@ namespace ft
 				newNode->left->parent = newNode->right->parent = newNode;
 				_beginNode = newNode->left;    /*    указатель на начало депева (элемент перед первым)    */
 				_tree = newNode;    /*     новый корень всего дерева    */
-			} else    /*    newNode - родитель нового элемента!    */
+			}
+			else    /*    newNode - родитель нового элемента!    */
 			{
-				if (valueCmp(value, newNode->value) ==
-					LESS)    /*    вставка слева    */
+				if (valueCmp(value, newNode->content) == LESS)    /*    вставка слева    */
 				{
 					if (newNode->left)    /*    если newNode - миинимальный элемент дерева    */
 					{
-						Node *tmp = new Node(
-								value);    /*    новый узел для вставки (минимальный элемент)    */
+						Node *tmp = new Node( value);    /*    новый узел для вставки (минимальный элемент)    */
 						tmp->left = newNode->left;    /*    указатель на .rend()    */
 						tmp->left->parent = tmp;
 						tmp->parent = newNode;
@@ -408,13 +405,11 @@ namespace ft
 						newNode->left->parent = newNode;
 					}
 					newNode = newNode->left;    /*    newNode - добавленный узел    */
-				} else if (valueCmp(value, newNode->value) ==
-						   GREATER)    /*    вставка справа    */
+				} else if (valueCmp(value, newNode->content) == GREATER)    /*    вставка справа    */
 				{
 					if (newNode->right)    /*    если newNode - максимальный элемент дерева    */
 					{
-						Node *tmp = new Node(
-								value);    /*    новый узел для вставки (максимальный элемент)    */
+						Node *tmp = new Node( value);    /*    новый узел для вставки (максимальный элемент)    */
 						tmp->right = newNode->right;    /*    указатель на .end()    */
 						tmp->right->parent = tmp;
 						tmp->parent = newNode;
@@ -426,8 +421,7 @@ namespace ft
 					}
 					newNode = newNode->right;    /*    newNode - добавленный узел    */
 				}
-				makeBalance(
-						newNode);    /*    балансировка ветви от newNode до корня    */
+				makeBalance( newNode);    /*    балансировка ветви от newNode до корня    */
 			}
 			_size++;
 			return ft::make_pair(iterator(newNode), true);
@@ -441,10 +435,9 @@ namespace ft
 				insert(ft::make_pair(first->first, first->second));
 		}
 
-//		void insert (iterator position, const value_type& val) {
-//			;
-//		}
-
+		void insert (iterator position, const value_type& val) {
+			;
+		}
 
 		//erase
 		void erase(iterator pos)
@@ -576,7 +569,7 @@ namespace ft
 		{
 			Node *node = find_node(_tree, key);
 
-			if (keyCmp(node->value.first, key) == EQUAL)
+			if (keyCmp(node->content.first, key) == EQUAL)
 			{
 				erase(iterator(node));
 				return 1;
@@ -621,51 +614,45 @@ namespace ft
 		*******************************************************************************/
 		//key_comp
 		//value_comp
-		key_compare                key_comp() const { return _cmp; }
-		value_compare            value_comp() const { return value_compare(_cmp); }
+		key_compare				key_comp() const { return _cmp; }
+		value_compare			value_comp() const { return value_compare(_cmp); }
 
 		/*******************************************************************************
 		*__________________________________Operations__________________________________*
 		*******************************************************************************/
 		//find
-		iterator find(const key_type &key)
-		{
+		iterator find(const key_type &key) {
 			Node *res = find_node(_tree, key);
-			return keyCmp(res->value.first, key) == EQUAL ? iterator(res)
+			return keyCmp(res->content.first, key) == EQUAL ? iterator(res)
 														  : end();
 		}
 
-		iterator find(const key_type &key) const
-		{
+		iterator find(const key_type &key) const {
 			Node *res = find_node(_tree, key);
-			return keyCmp(res->value.first, key) == EQUAL ? iterator(res)
+			return keyCmp(res->content.first, key) == EQUAL ? iterator(res)
 														  : end();
 		}
 		//count
-		size_t count(const key_type &key) const
-		{
+		size_t count(const key_type &key) const {
 			Node *res = find_node(_tree, key);
-			return keyCmp(key, res->value.first) == EQUAL ? 1 : 0;
+			return keyCmp(key, res->content.first) == EQUAL ? 1 : 0;
 		}
 		//lower_bound
-		iterator lower_bound(const key_type &key)
-		{
+		iterator lower_bound(const key_type &key) {
 			iterator it(find_node(_tree, key));
 			if (keyCmp((*it).first, key) == LESS)
 				++it;
 			return it;
 		}
 
-		iterator lower_bound(const key_type &key) const
-		{
+		iterator lower_bound(const key_type &key) const {
 			iterator it(find_node(_tree, key));
 			if (keyCmp((*it).first, key) == LESS)
 				++it;
 			return it;
 		}
 		//upper_bound
-		iterator upper_bound(const key_type &key)
-		{
+		iterator upper_bound(const key_type &key) {
 			iterator it(find_node(_tree, key));
 			int compare = keyCmp((*it).first, key);
 			if (compare == LESS || compare == EQUAL)
@@ -673,24 +660,21 @@ namespace ft
 			return it;
 		}
 
-		iterator upper_bound(const key_type &key) const
-		{
+		iterator upper_bound(const key_type &key) const {
 			iterator it(find_node(_tree, key));
 			int compare = keyCmp((*it).first, key);
 			if (compare == LESS || compare == EQUAL)
 				++it;
 			return it;
 		}
+
 		//equal_range
-		ft::pair<iterator, iterator> equal_range(const key_type &key)
-		{
+		ft::pair<iterator, iterator> equal_range(const key_type &key) {
 			return ft::make_pair(iterator(lower_bound(key)),
 								 iterator(upper_bound(key)));
 		}
 
-		ft::pair<iterator, iterator>
-		equal_range(const key_type &key) const
-		{
+		ft::pair<iterator, iterator> equal_range(const key_type &key) const {
 			return ft::make_pair(iterator(lower_bound(key)),
 								 iterator(upper_bound(key)));
 		}
@@ -834,7 +818,7 @@ namespace ft
 		Node *
 		find_node(Node *p, key_type k) const    /*    поиск узла по ключу    */
 		{
-			int compare = keyCmp(k, p->value.first);
+			int compare = keyCmp(k, p->content.first);
 			if (compare == LESS)
 			{
 				if (p->left && p->left != _beginNode)
