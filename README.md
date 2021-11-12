@@ -1,4 +1,4 @@
-# containers
+# FT_containers
 ### Implementation:
 ```
 std::vector
@@ -24,3 +24,7 @@ std::make_pair
 3. MAP <br>
 Cтандартный шаблонный класс библиотеки языка программирования C++, предназначенный для реализации абстракции отображения в виде упорядоченного ассоциативного контейнера. Его объявление расположено в пространстве имён std заголовочного файла <map> библиотеки STL.
 
+## Resources
+1. [Ravesli](https://ravesli.com/uroki-cpp/)
+2. [cplusplus.com](https://www.cplusplus.com/)
+3. [Ромбовидное наследование](https://www.youtube.com/watch?v=oqpx7L5ipbw&ab_channel=%23SimpleCode)
