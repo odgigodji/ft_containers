@@ -114,9 +114,6 @@ namespace ft
 
 			Node*			getNode() const { return _node; }
 
-//ft::map<int, int, std::__1::greater<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator
-//const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator
-
 			iterator&		operator = (const iterator &other) {
 				_node = other._node;
 				return *this;
@@ -167,7 +164,7 @@ namespace ft
 			}
 		};
 
-		/*
+
 		class reverse_iterator : public ft::reverse_iterator<iterator>
 		{
 		private:
@@ -259,7 +256,6 @@ namespace ft
 				return tmp;
 			}
 		};
-		 */
 
 		/*******************************************************************************
 		*===============================MEMBER_FUNCTIONS===============================*
@@ -322,8 +318,10 @@ namespace ft
 //		iterator            cbegin() const { return _size ? ++iterator(_beginNode) : iterator(_beginNode); }
 //		iterator            cend() const { return iterator(_endNode); }
 
-//		reverse_iterator        rbegin() { return --reverse_iterator(_endNode); } //fixme
-//		reverse_iterator        rend() { return reverse_iterator(_beginNode); }
+//ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::value_type
+//ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::value_type
+		reverse_iterator        rbegin() { return --reverse_iterator(_endNode); } //fixme
+		reverse_iterator        rend() { return reverse_iterator(_beginNode); }
 
 //		reverse_iterator    rbegin() const { return --reverse_iterator(_endNode); }
 //		reverse_iterator    rend() const { return reverse_iterator(_beginNode); }
@@ -387,7 +385,7 @@ namespace ft
 				{
 					if (newNode->left)    /*    если newNode - миинимальный элемент дерева    */
 					{
-						Node *tmp = new Node( value);    /*    новый узел для вставки (минимальный элемент)    */
+						Node *tmp = new Node(value);    /*    новый узел для вставки (минимальный элемент)    */
 						tmp->left = newNode->left;    /*    указатель на .rend()    */
 						tmp->left->parent = tmp;
 						tmp->parent = newNode;
@@ -616,14 +614,12 @@ namespace ft
 		//find
 		iterator find(const key_type &key) {
 			Node *res = find_node(_tree, key);
-			return keyCmp(res->content.first, key) == EQUAL ? iterator(res)
-														  : end();
+			return keyCmp(res->content.first, key) == EQUAL ? iterator(res) : end();
 		}
 
 		iterator find(const key_type &key) const {
 			Node *res = find_node(_tree, key);
-			return keyCmp(res->content.first, key) == EQUAL ? iterator(res)
-														  : end();
+			return keyCmp(res->content.first, key) == EQUAL ? iterator(res) : end();
 		}
 		//count
 		size_t count(const key_type &key) const {
@@ -631,12 +627,6 @@ namespace ft
 			return keyCmp(key, res->content.first) == EQUAL ? 1 : 0;
 		}
 		//lower_bound
-		iterator lower_bound(const key_type &key) {
-			iterator it(find_node(_tree, key));
-			if (keyCmp((*it).first, key) == LESS)
-				++it;
-			return it;
-		}
 
 		iterator lower_bound(const key_type &key) const {
 			iterator it(find_node(_tree, key));
@@ -645,14 +635,6 @@ namespace ft
 			return it;
 		}
 		//upper_bound
-		iterator upper_bound(const key_type &key) {
-			iterator it(find_node(_tree, key));
-			int compare = keyCmp((*it).first, key);
-			if (compare == LESS || compare == EQUAL)
-				++it;
-			return it;
-		}
-
 		iterator upper_bound(const key_type &key) const {
 			iterator it(find_node(_tree, key));
 			int compare = keyCmp((*it).first, key);
@@ -662,11 +644,6 @@ namespace ft
 		}
 
 		//equal_range
-		ft::pair<iterator, iterator> equal_range(const key_type &key) {
-			return ft::make_pair(iterator(lower_bound(key)),
-								 iterator(upper_bound(key)));
-		}
-
 		ft::pair<iterator, iterator> equal_range(const key_type &key) const {
 			return ft::make_pair(iterator(lower_bound(key)),
 								 iterator(upper_bound(key)));
@@ -702,8 +679,7 @@ namespace ft
 
 		int b_factor(Node *p)    /*    balance factor        (-1, 0 или 1) - поддерево сбалансированно    */
 		{
-			return height(p->right) -
-				   height(p->left);    /*    (-2 или 2) - требуется балансировка левого или правого поддерева , соответственно    */
+			return height(p->right) - height(p->left);    /*    (-2 или 2) - требуется балансировка левого или правого поддерева , соответственно    */
 		}
 
 		void fix_height(Node *p)    /*    корректировка высоты поддерева после вставки или удаления узла    */
@@ -818,6 +794,8 @@ namespace ft
 				delete_tree(p->left);
 			if (p->right != nullptr)
 				delete_tree(p->right);
+//			_allocNode.destroy(p);
+//			_allocNode.deallocate(p, 1);
 			delete p;
 		}
 
