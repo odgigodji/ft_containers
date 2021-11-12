@@ -1,4 +1,4 @@
-NAME = a.out
+NAME = ft_containers
 
 SRC = main.cpp
 

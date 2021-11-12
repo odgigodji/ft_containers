@@ -7,11 +7,8 @@
 /**************************************************/
 #define VECTOR			"../../../vector.hpp"
 #define STACK			"../../../stack.hpp"
-#define MAP			  	"../../../MMMAp.hpp"
+#define MAP			  	"../../../map.hpp"
 #define UTILITIES		"../../../ft.hpp"
-
-/* comment this to turn OFF flags (-WWW, -std=98) */
-//#define FLAGS
 
 /**************************************************/
 /*		Change template names of your classes	  */
