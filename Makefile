@@ -2,7 +2,10 @@ NAME = ft_containers
 
 SRC = main.cpp
 
-#INC = Fixed.hpp
+INC =	map.hpp 	\
+		stack.hpp 	\
+		vector.hpp	\
+		ft.hpp
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
