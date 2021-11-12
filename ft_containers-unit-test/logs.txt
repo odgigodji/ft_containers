@@ -1,44 +1,78 @@
-../map_tests/compare class.cpp:75:40: error: no viable conversion from 'ft::map<int, int, std::__1::plus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
-    for (typename _map<T, V>::iterator it = mp3.begin(); it != mp3.end(); it++) { v.push_back(it->first); }
-                                       ^    ~~~~~~~~~~~
-../map_tests/compare class.cpp:106:72: note: in instantiation of function template specialization 'comparator_test<int, int>' requested here
-    exit(run_map_unit_test<int, int>("compare class", comparator_test, comparator_test));
-                                                                       ^
-../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::plus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::Node *' for 1st argument
-                        iterator(Node *ptr) : _node(ptr) {}
-                        ^
-../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::plus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
-                        iterator(const iterator &other) { *this = other; }
-                        ^
-../map_tests/compare class.cpp:76:40: error: no viable conversion from 'ft::map<int, int, std::__1::plus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
-    for (typename _map<T, V>::iterator it = --mp3.end(); it != mp3.begin(); it--) { v.push_back(it->first); }
-                                       ^    ~~~~~~~~~~~
-../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::plus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::Node *' for 1st argument
-                        iterator(Node *ptr) : _node(ptr) {}
-                        ^
-../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::plus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
-                        iterator(const iterator &other) { *this = other; }
-                        ^
-../map_tests/compare class.cpp:79:40: error: no viable conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
-    for (typename _map<T, V>::iterator it = mp4.begin(); it != mp4.end(); it++) { v.push_back(it->first); }
-                                       ^    ~~~~~~~~~~~
-../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::Node *' for 1st argument
-                        iterator(Node *ptr) : _node(ptr) {}
-                        ^
-../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
-                        iterator(const iterator &other) { *this = other; }
-                        ^
-../map_tests/compare class.cpp:80:40: error: no viable conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
-    for (typename _map<T, V>::iterator it = --mp4.end(); it != mp4.begin(); it--) { v.push_back(it->first); }
-                                       ^    ~~~~~~~~~~~
-../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::Node *' for 1st argument
-                        iterator(Node *ptr) : _node(ptr) {}
-                        ^
-../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
-                        iterator(const iterator &other) { *this = other; }
-                        ^
-../map_tests/compare class.cpp:83:40: error: no viable conversion from 'ft::map<int, int, std::__1::greater_equal<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
-    for (typename _map<T, V>::iterator it = mp5.begin(); it != mp5.end(); it++) { v.push_back(it->first); }
+../map_tests/equal_range().cpp:43:33: error: no member named 'const_iterator' in 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >'
+    const _pair<_map<int, int>::const_iterator , _map<int, int>::const_iterator>& pair = mp.equal_range(10);
+                ~~~~~~~~~~~~~~~~^
+../map_tests/equal_range().cpp:43:66: error: definition or redeclaration of 'const_iterator' cannot name the global scope
+    const _pair<_map<int, int>::const_iterator , _map<int, int>::const_iterator>& pair = mp.equal_range(10);
+                                                               ~~^
+../map_tests/equal_range().cpp:43:66: error: no member named 'const_iterator' in the global namespace
+    const _pair<_map<int, int>::const_iterator , _map<int, int>::const_iterator>& pair = mp.equal_range(10);
+                                                               ~~^
+../map_tests/equal_range().cpp:43:80: error: expected ';' at end of declaration
+    const _pair<_map<int, int>::const_iterator , _map<int, int>::const_iterator>& pair = mp.equal_range(10);
+                                                                               ^
+                                                                               ;
+../map_tests/equal_range().cpp:44:33: error: no member named 'const_iterator' in 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >'
+    const _pair<_map<int, int>::const_iterator , _map<int, int>::const_iterator>& pair2 = mp.equal_range(11);
+                ~~~~~~~~~~~~~~~~^
+../map_tests/equal_range().cpp:44:66: error: definition or redeclaration of 'const_iterator' cannot name the global scope
+    const _pair<_map<int, int>::const_iterator , _map<int, int>::const_iterator>& pair2 = mp.equal_range(11);
+                                                               ~~^
+../map_tests/equal_range().cpp:44:80: error: expected ';' at end of declaration
+    const _pair<_map<int, int>::const_iterator , _map<int, int>::const_iterator>& pair2 = mp.equal_range(11);
+                                                                               ^
+                                                                               ;
+../map_tests/equal_range().cpp:45:33: error: no member named 'const_iterator' in 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >'
+    const _pair<_map<int, int>::const_iterator , _map<int, int>::const_iterator>& pair3 = mp.equal_range(1);
+                ~~~~~~~~~~~~~~~~^
+../map_tests/equal_range().cpp:45:66: error: definition or redeclaration of 'const_iterator' cannot name the global scope
+    const _pair<_map<int, int>::const_iterator , _map<int, int>::const_iterator>& pair3 = mp.equal_range(1);
+                                                               ~~^
+../map_tests/equal_range().cpp:45:80: error: expected ';' at end of declaration
+    const _pair<_map<int, int>::const_iterator , _map<int, int>::const_iterator>& pair3 = mp.equal_range(1);
+                                                                               ^
+                                                                               ;
+../map_tests/equal_range().cpp:47:17: error: use of class template 'pair' requires template arguments
+    v.push_back(pair.first->first);
+                ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/utility:316:29: note: template is declared here
+struct _LIBCPP_TEMPLATE_VIS pair
+                            ^
+../map_tests/equal_range().cpp:48:17: error: use of class template 'pair' requires template arguments
+    v.push_back(pair.first->second);
+                ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/utility:316:29: note: template is declared here
+struct _LIBCPP_TEMPLATE_VIS pair
+                            ^
+../map_tests/equal_range().cpp:49:17: error: use of class template 'pair' requires template arguments
+    v.push_back(pair.second->first);
+                ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/utility:316:29: note: template is declared here
+struct _LIBCPP_TEMPLATE_VIS pair
+                            ^
+../map_tests/equal_range().cpp:50:17: error: use of class template 'pair' requires template arguments
+    v.push_back(pair.second->second);
+                ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/utility:316:29: note: template is declared here
+struct _LIBCPP_TEMPLATE_VIS pair
+                            ^
+../map_tests/equal_range().cpp:51:17: error: use of undeclared identifier 'pair2'
+    v.push_back(pair2.first->first);
+                ^
+../map_tests/equal_range().cpp:52:17: error: use of undeclared identifier 'pair2'
+    v.push_back(pair2.first->second);
+                ^
+../map_tests/equal_range().cpp:53:17: error: use of undeclared identifier 'pair2'
+    v.push_back(pair2.second->first);
+                ^
+../map_tests/equal_range().cpp:54:17: error: use of undeclared identifier 'pair2'
+    v.push_back(pair2.second->second);
+                ^
+../map_tests/equal_range().cpp:55:17: error: use of undeclared identifier 'pair3'
+    v.push_back(pair3.first->first);
+                ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+erator it = mp5.begin(); it != mp5.end(); it++) { v.push_back(it->first); }
                                        ^    ~~~~~~~~~~~
 ../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::greater_equal<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::Node *' for 1st argument
                         iterator(Node *ptr) : _node(ptr) {}

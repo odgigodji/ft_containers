@@ -290,13 +290,13 @@ namespace ft
 			insert(first, last);
 		}
 
-		map(const map &other) : _size(0)
+		map(const map &x) : _size(0)
 		{
 //			_tree = new Node();
 			_tree = _allocNode.allocate(1);
 			_allocNode.construct(_tree);
 			_beginNode = _endNode = _tree;
-			*this = other;
+			*this = x;
 		}
 
 /*    DESTRUCTOR    */
