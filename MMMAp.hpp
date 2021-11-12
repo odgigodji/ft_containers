@@ -322,60 +322,61 @@ namespace ft
 		/*******************************************************************************
 		*__________________________________Modifiers___________________________________*
 		*******************************************************************************/
-		//void construct( pointer p, const_reference val );  value_type* , value_type&
 		ft::pair<iterator, bool> insert(const_reference value)
 		{
 //			std::cout << value.first << " " << value.second << std::endl;
-			Node *newNode = findNode(_base, value.first);    /*    ищем место для добавления элемента    */
-			if (_size && value_compare(value, newNode->content) == IS_EQUAL)    /*    если элемент уже существует    */
+			Node *newNode = findNode(_base, value.first);    /*	find space for new node	*/
+			/*							if node exist						*/
+			if (_size && value_compare(value, newNode->content) == IS_EQUAL)
 				return ft::make_pair(iterator(newNode), false);
-			if (!_size)    /*    вставка самого первого элемента    */
-			{
-				newNode = new Node(value);    /*    новый узел для вставки (корень всего дерева)    */
-				newNode->right = _base;    /*    указатель на .end()    */
-				newNode->left = new Node();    /*    указатель на .rend()    */
-				newNode->right->isBegin = 0;
-				newNode->left->isEnd = 0;
+			if (!_size) {
+				newNode = new Node(value);
+				newNode->right = _base;
+				newNode->left = new Node();
+				newNode->right->isBegin = newNode->left->isEnd = 0;
 				newNode->left->parent = newNode->right->parent = newNode;
-				_firstNode = newNode->left;    /*    указатель на начало депева (элемент перед первым)    */
-				_base = newNode;    /*     новый корень всего дерева    */
+				_firstNode = newNode->left;
+				_base = newNode;
 			}
-			else    /*    newNode - родитель нового элемента!    */
+			else    /*	"newNode" - parent of new element						*/
 			{
-				if (value_compare(value, newNode->content) == IS_LESS)    /*    вставка слева    */
+				/* 					insert to left side*/
+				if (value_compare(value, newNode->content) == IS_LESS)
 				{
-					if (newNode->left)    /*    если newNode - миинимальный элемент дерева    */
+					if (newNode->left) /*newNode is min elem of tree*/
 					{
-						Node *tmp = new Node(value);    /*    новый узел для вставки (минимальный элемент)    */
-						tmp->left = newNode->left;    /*    указатель на .rend()    */
-						tmp->left->parent = tmp;
-						tmp->parent = newNode;
-						newNode->left = tmp;
-					} else    /*    обычная вставка слева    */
-					{
+						Node *t = new Node(value);
+						t->left = newNode->left;
+						t->left->parent = t;
+						t->parent = newNode;
+						newNode->left = t;
+					}
+					else {
 						newNode->left = new Node(value);
 						newNode->left->parent = newNode;
 					}
 					newNode = newNode->left;    /*    newNode - добавленный узел    */
-				} else if (value_compare(value, newNode->content) == IS_GREATER)    /*    вставка справа    */
+				}
+				/* 					insert to right side */
+				else if (value_compare(value, newNode->content) == IS_GREATER)
 				{
-					if (newNode->right)    /*    если newNode - максимальный элемент дерева    */
+					if (newNode->right)	/* newNode - max elem of the tree */
 					{
-						Node *tmp = new Node( value);    /*    новый узел для вставки (максимальный элемент)    */
-						tmp->right = newNode->right;    /*    указатель на .end()    */
+						Node *tmp = new Node( value);
+						tmp->right = newNode->right;
 						tmp->right->parent = tmp;
 						tmp->parent = newNode;
 						newNode->right = tmp;
-					} else    /*    обычная вставка справа    */
-					{
+					}
+					else {
 						newNode->right = new Node(value);
 						newNode->right->parent = newNode;
 					}
-					newNode = newNode->right;    /*    newNode - добавленный узел    */
+					newNode = newNode->right;
 				}
-				makeBalance( newNode);    /*    балансировка ветви от newNode до корня    */
+				BalanceTree( newNode);		/*	balance tree from 'newNode' to root	*/
 			}
-			_size++;
+			++_size;
 			return ft::make_pair(iterator(newNode), true);
 		}
 
@@ -422,7 +423,7 @@ namespace ft
 					_firstNode->parent = parent;
 				}
 				if (parent)
-					makeBalance(parent);
+					BalanceTree(parent);
 				delete curr;
 				_size--;
 				return;
@@ -445,7 +446,7 @@ namespace ft
 					parent->right = _lastNode;
 				}
 				if (parent)
-					makeBalance(parent);
+					BalanceTree(parent);
 				delete curr;
 				_size--;
 				return;
@@ -467,7 +468,7 @@ namespace ft
 							parent->right = replacement;
 					} else
 						_base = replacement;
-					makeBalance(replacement);
+					BalanceTree(replacement);
 					delete curr;
 					_size--;
 					return;
@@ -489,7 +490,7 @@ namespace ft
 						parent->right = replacement;
 				} else
 					_base = replacement;
-				makeBalance(replacement);
+				BalanceTree(replacement);
 			} else
 			{
 				if (parent->left == curr)
@@ -501,7 +502,7 @@ namespace ft
 					if ((parent->right = right))
 						parent->right->parent = parent;
 				}
-				makeBalance(parent);
+				BalanceTree(parent);
 			}
 			delete curr;
 			_size--;
@@ -740,19 +741,14 @@ namespace ft
 			return p;    /*    если узел с данным ключом отсутствует, то вернётся узел, ближайший по ключу    */
 		}
 
-		void del_tree(Node *p)    /*    очистка дерева    */
-		{
-			if (p->left != nullptr)
-				del_tree(p->left);
-			if (p->right != nullptr)
-				del_tree(p->right);
+		void del_tree(Node *p) {
+			if (p->left != nullptr) { del_tree(p->left); }
+			if (p->right != nullptr) { del_tree(p->right); }
 			delete p;
 		}
 
-		void makeBalance(Node *node)    /*    балансировка от node до корня    */
-		{
-			for (; node != nullptr; node = node->parent)
-				node = balance(node);
+		void BalanceTree(Node *node) {
+			for (; node != nullptr; node = node->parent) { node = balance(node); }
 		}
 	};
 }
