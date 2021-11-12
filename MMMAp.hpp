@@ -681,11 +681,6 @@ namespace ft
 		*__________________________________Utilities___________________________________*
 		*******************************************************************************/
 
-
-
-
-
-
 		/*    SECONDARY FUNCTIONS    */
 		int keyCmp(const key_type &key1, const key_type &key2) const /*    сравнение ключей    */
 		{
@@ -703,15 +698,13 @@ namespace ft
 			return p ? p->height : 0;
 		}
 
-		int b_factor(
-				Node *p)    /*    balance factor        (-1, 0 или 1) - поддерево сбалансированно    */
+		int b_factor(Node *p)    /*    balance factor        (-1, 0 или 1) - поддерево сбалансированно    */
 		{
 			return height(p->right) -
 				   height(p->left);    /*    (-2 или 2) - требуется балансировка левого или правого поддерева , соответственно    */
 		}
 
-		void fix_height(
-				Node *p)    /*    корректировка высоты поддерева после вставки или удаления узла    */
+		void fix_height(Node *p)    /*    корректировка высоты поддерева после вставки или удаления узла    */
 		{
 			size_t hl = height(p->left);
 			size_t hr = height(p->right);
@@ -721,8 +714,7 @@ namespace ft
 		/*    повороты вокруг узла, balance factor корого == 2 или == -2,
 		т.е. возникает расбалансировка одного из поддеревьев    */
 
-		Node *
-		rotate_right(Node *p)    /*    правый поворот вокруг узла 'p'    */
+		Node * rotate_right(Node *p)    /*    правый поворот вокруг узла 'p'    */
 		{
 			Node *q = p->left;    /*    узел, который после поворота займёт место 'p' и станет корнем данного поддерева    */
 			/*    поворот    */
@@ -793,14 +785,12 @@ namespace ft
 			return p;    /*    балансировка не потребовалась    */
 		}
 
-		Node *find_min(
-				Node *p)    /*    поиск узла с минимальным ключом в дереве 'p'    */
+		Node *find_min(Node *p)    /*    поиск узла с минимальным ключом в дереве 'p'    */
 		{
 			return p->left ? find_min(p->left) : p;
 		}
 
-		Node *find_max(
-				Node *p)    /*    поиск узла с максимальным ключом в дереве 'p'    */
+		Node *find_max( Node *p)    /*    поиск узла с максимальным ключом в дереве 'p'    */
 		{
 			return p->right ? find_max(p->right) : p;
 		}
@@ -830,8 +820,7 @@ namespace ft
 			delete p;
 		}
 
-		void
-		makeBalance(Node *node)    /*    балансировка от node до корня    */
+		void makeBalance(Node *node)    /*    балансировка от node до корня    */
 		{
 			for (; node != nullptr; node = node->parent)
 				node = balance(node);
