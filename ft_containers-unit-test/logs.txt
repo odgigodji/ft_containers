@@ -1,1 +1,94 @@
-
+../map_tests/compare class.cpp:75:40: error: no viable conversion from 'ft::map<int, int, std::__1::plus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = mp3.begin(); it != mp3.end(); it++) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/compare class.cpp:106:72: note: in instantiation of function template specialization 'comparator_test<int, int>' requested here
+    exit(run_map_unit_test<int, int>("compare class", comparator_test, comparator_test));
+                                                                       ^
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::plus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::Node *' for 1st argument
+                        iterator(Node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::plus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:76:40: error: no viable conversion from 'ft::map<int, int, std::__1::plus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = --mp3.end(); it != mp3.begin(); it--) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::plus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::Node *' for 1st argument
+                        iterator(Node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::plus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:79:40: error: no viable conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = mp4.begin(); it != mp4.end(); it++) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::Node *' for 1st argument
+                        iterator(Node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:80:40: error: no viable conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = --mp4.end(); it != mp4.begin(); it--) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::Node *' for 1st argument
+                        iterator(Node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::minus<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:83:40: error: no viable conversion from 'ft::map<int, int, std::__1::greater_equal<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = mp5.begin(); it != mp5.end(); it++) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::greater_equal<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::Node *' for 1st argument
+                        iterator(Node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::greater_equal<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:84:40: error: no viable conversion from 'ft::map<int, int, std::__1::greater_equal<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = --mp5.end(); it != mp5.begin(); it--) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::greater_equal<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::Node *' for 1st argument
+                        iterator(Node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::greater_equal<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:87:40: error: no viable conversion from 'ft::map<int, int, std::__1::multiplies<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = mp6.begin(); it != mp6.end(); it++) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::multiplies<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::Node *' for 1st argument
+                        iterator(Node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::multiplies<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:88:40: error: no viable conversion from 'ft::map<int, int, std::__1::multiplies<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = --mp6.end(); it != mp6.begin(); it--) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::multiplies<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::Node *' for 1st argument
+                        iterator(Node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::multiplies<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:91:40: error: no viable conversion from 'ft::map<int, int, std::__1::bit_xor<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = mp7.begin(); it != mp7.end(); it++) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::bit_xor<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::Node *' for 1st argument
+                        iterator(Node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::bit_xor<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+../map_tests/compare class.cpp:92:40: error: no viable conversion from 'ft::map<int, int, std::__1::bit_xor<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'typename ft::map<int, int>::iterator'
+    for (typename _map<T, V>::iterator it = --mp7.end(); it != mp7.begin(); it--) { v.push_back(it->first); }
+                                       ^    ~~~~~~~~~~~
+../map_tests/../../../MMMAp.hpp:111:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::bit_xor<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::Node *' for 1st argument
+                        iterator(Node *ptr) : _node(ptr) {}
+                        ^
+../map_tests/../../../MMMAp.hpp:113:4: note: candidate constructor not viable: no known conversion from 'ft::map<int, int, std::__1::bit_xor<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator' to 'const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator &' for 1st argument
+                        iterator(const iterator &other) { *this = other; }
+                        ^
+10 errors generated.

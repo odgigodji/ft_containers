@@ -11,15 +11,17 @@ int main() {
 	std::pair<int, std::string> x1(63, "vay");
 
 	ft::map<int, std::string> a;
-	ft::map<int, std::string>::iterator b = a.begin();
 
-
-	std::map<int, std::string> zz;
-	zz.insert(x1);
-	zz.insert(std::make_pair(33, "jesus"));
-
-	a.insert(z);
+//	ft::map<int, std::string>::iterator b = a.begin();
+//
+//
+//	std::map<int, std::string> zz;
+//	zz.insert(x1);
+//	zz.insert(std::make_pair(33, "jesus"));
+//
+//	a.insert(z);
 //	a.insert(x);
+
 //	a.insert(ft::make_pair(33, std::string("hesus")));
 
 //	ft::map<int, std::string>::iterator b;

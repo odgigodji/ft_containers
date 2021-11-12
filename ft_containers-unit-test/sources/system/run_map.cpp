@@ -7,7 +7,7 @@ int main(int argc, char* argv[], char* env[]) {
 	printElement("FUNCTION"); printElement(WHITE + "RESULT" + RESET); printElement(WHITE + "FT TIME" + RESET); printElement(WHITE + "STD TIME" + RESET);
 	printElement(WHITE + "LEAKS" + RESET); cout << endl;
 
-	runNonCompilable("../map_tests/key_redefinition.cpp", argv, env);
+//	runNonCompilable("../map_tests/key_redefinition.cpp", argv, env);
 	runFunctionTest("../map_tests/constructor.cpp", argv, env);
 	runFunctionTest("../map_tests/assign overload.cpp", argv, env);
 	runFunctionTest("../map_tests/iterators.cpp", argv, env);
@@ -33,12 +33,13 @@ int main(int argc, char* argv[], char* env[]) {
 	runFunctionTest("../map_tests/equal_range().cpp", argv, env);
 	runFunctionTest("../map_tests/key_comp().cpp", argv, env);
 	runFunctionTest("../map_tests/using allocator.cpp", argv, env);
-	runFunctionTest("../map_tests/operator ==.cpp", argv, env);
-	runFunctionTest("../map_tests/operator !=.cpp", argv, env);
-	runFunctionTest("../map_tests/operator <.cpp", argv, env);
-	runFunctionTest("../map_tests/operator >.cpp", argv, env);
-	runFunctionTest("../map_tests/operator <=.cpp", argv, env);
-	runFunctionTest("../map_tests/operator >=.cpp", argv, env);
+
+//	runFunctionTest("../map_tests/operator ==.cpp", argv, env);
+//	runFunctionTest("../map_tests/operator !=.cpp", argv, env);
+//	runFunctionTest("../map_tests/operator <.cpp", argv, env);
+//	runFunctionTest("../map_tests/operator >.cpp", argv, env);
+//	runFunctionTest("../map_tests/operator <=.cpp", argv, env);
+//	runFunctionTest("../map_tests/operator >=.cpp", argv, env);
 
     saveResult("map_res");
 	outputCurrentResult("MAP", _MAP_TEST_NUM);

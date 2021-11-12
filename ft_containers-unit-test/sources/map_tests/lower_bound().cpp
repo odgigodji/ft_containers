@@ -43,7 +43,7 @@ std::vector<int> lower_bound_test(std::map<T, V> mp) {
 template <class T, class V>
 std::vector<int> lower_bound_test(_map<T, V> mp) {
     std::vector<int> v;
-    _map<int, int, std::greater<int> > mp2;
+    _map<int, int, std::less<int> > mp2;
     mp.insert(_make_pair(10, 10));
     mp2.insert(_make_pair(10, 10));
     if (mp.lower_bound(11) == mp.end())

@@ -35,33 +35,33 @@ namespace ft
 		*__________________________________Node of tree________________________________*
 		*******************************************************************************/
 	private:
-		struct	node {
+		struct	Node {
 			value_type	value; 			/*    пара ключ - значение            */
 			size_t		height;			/*    высота поддерева                */
-			node*		parent;			/*    указатель на родителя           */
-			node*		right;			/*    указатель на правое поддерево   */
-			node*		left; 			/*    указатель на левое поддерево    */
+			Node*		parent;			/*    указатель на родителя           */
+			Node*		right;			/*    указатель на правое поддерево   */
+			Node*		left; 			/*    указатель на левое поддерево    */
 			bool		isBegin;		/*    true - узел перед минимальным	  */
 			bool		isEnd;			/*    true - узел после максимального */
 
 			/*   					NEW NODE CONSTRUCTORS :					  */
-			node() :							height(0),
+			Node() :							height(0),
 												parent(nullptr),
 												right(nullptr),
 												left(nullptr),
 												isBegin(true),
 												isEnd(true) {}
 
-			explicit node(const_reference val):	value(ft::make_pair(val.first, val.second)),
+			explicit Node(const_reference val):	value(ft::make_pair(val.first, val.second)),
 											   	height(1),
 											   	parent(nullptr),
 											   	right(nullptr),
 											   	left(nullptr),
 											   	isBegin(false),
 											   	isEnd(false) {}
-			node(const node &orig) { *this = orig; }
+			Node(const Node &orig) { *this = orig; }
 
-			~node() {};
+			~Node() {};
 		};
 
 		class value_compare {
@@ -75,19 +75,19 @@ namespace ft
 		};
 
 		/*							Allocator for node 							*/
-		typedef typename allocator_type::template rebind<node>::other	allocator_rebind_node;
+		typedef typename allocator_type::template rebind<Node>::other	allocator_rebind_node;
 
 		/*******************************************************************************
 		*____________________________________Variables_________________________________*
 		*******************************************************************************/
 	private:
-		node*									_tree;
+		Node*									_tree;
 		size_t          						_size;
-		allocator_type							_alloc;
-		node*									_beginNode;
-		node*									_endNode;
+		allocator_type							_allocPair;
+		Node*									_beginNode;
+		Node*									_endNode;
 		key_compare								_cmp;
-		allocator_rebind_node					_nodeAlloc;
+		allocator_rebind_node					_allocNode;
 
 		/*******************************************************************************
 		*_______________________________Iterators_classes______________________________*
@@ -97,22 +97,25 @@ namespace ft
 
 		class    iterator : public ft::iterator_traits<std::bidirectional_iterator_tag, value_type> {
 		private:
-			node*	_node;
+			Node*	_node;
 
-			node*	find_min(node *p) {
+			Node*	find_min(Node *p) {
 				return p->left ? find_min(p->left) : p;
 			}
-			node*	find_max(node *p) {
+			Node*	find_max(Node *p) {
 				return p->right ? find_max(p->right) : p;
 			}
 
 		public:
 			iterator() : _node(nullptr) {}
-			iterator(node *ptr) : _node(ptr) {}
+			iterator(Node *ptr) : _node(ptr) {}
 			~iterator() {}
 			iterator(const iterator &other) { *this = other; }
 
-			node*			getNode() const { return _node; }
+			Node*			getNode() const { return _node; }
+
+//ft::map<int, int, std::__1::greater<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator
+//const ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::iterator
 
 			iterator&		operator = (const iterator &other) {
 				_node = other._node;
@@ -129,7 +132,7 @@ namespace ft
 				else if (_node->right)
 					_node = find_min(_node->right);
 				else {
-					node    *tmp = _node->parent;
+					Node    *tmp = _node->parent;
 					while (tmp && tmp->value.first < _node->value.first)
 						tmp = tmp->parent;
 					_node = tmp;
@@ -143,7 +146,7 @@ namespace ft
 				else if (_node->left)
 					_node = find_max(_node->left);
 				else {
-					node    *tmp = _node->parent;
+					Node    *tmp = _node->parent;
 					while (tmp && tmp->value.first > _node->value.first)
 						tmp = tmp->parent;
 					_node = tmp;
@@ -164,22 +167,23 @@ namespace ft
 			}
 		};
 
+		/*
 		class reverse_iterator : public ft::reverse_iterator<iterator>
 		{
 		private:
-			node *_node;
+			Node *_node;
 
-			node *find_min(node *p)
+			Node *find_min(Node *p)
 			{ return p->left ? find_min(p->left) : p; }
 
-			node *find_max(node *p)
+			Node *find_max(Node *p)
 			{ return p->right ? find_max(p->right) : p; }
 
 		public:
 			reverse_iterator() : _node(nullptr)
 			{}
 
-			reverse_iterator(node *ptr) : _node(ptr)
+			reverse_iterator(Node *ptr) : _node(ptr)
 			{}
 
 			~reverse_iterator()
@@ -188,7 +192,7 @@ namespace ft
 			reverse_iterator(const reverse_iterator &other)
 			{ *this = other; }
 
-			node *getNode() const
+			Node *getNode() const
 			{ return _node; }
 
 			reverse_iterator &operator=(const reverse_iterator &other)
@@ -217,7 +221,7 @@ namespace ft
 					_node = find_max(_node->left);
 				else
 				{
-					node *tmp = _node->parent;
+					Node *tmp = _node->parent;
 					while (tmp && tmp->value.first > _node->value.first)
 						tmp = tmp->parent;
 					_node = tmp;
@@ -233,7 +237,7 @@ namespace ft
 					_node = find_min(_node->right);
 				else
 				{
-					node *tmp = _node->parent;
+					Node *tmp = _node->parent;
 					while (tmp && tmp->value.first < _node->value.first)
 						tmp = tmp->parent;
 					_node = tmp;
@@ -255,6 +259,7 @@ namespace ft
 				return tmp;
 			}
 		};
+		 */
 
 		/*******************************************************************************
 		*===============================MEMBER_FUNCTIONS===============================*
@@ -263,30 +268,44 @@ namespace ft
 		*******************************************************************************/
 
 /*    CONSTRUCTORS    */
-		map() :  _size(0)
+//std::__1::allocator<ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::Node>::construct<ft::map<int, int, std::__1::less<int>,
+//std::__1::allocator<ft::pair<const int, int> > >::Node>
+		explicit map (const key_compare& comp = key_compare(),
+					  const allocator_type& alloc = allocator_type()) :  _size(0)
 		{
-			_tree = new node();
+			_tree = _allocNode.allocate(1);
+			_allocNode.construct(_tree);
+//			_tree = new Node();
 			_beginNode = _endNode = _tree;
 		}
 
-		template<class _InputIt>
-		map(_InputIt first, _InputIt last) :  _size(0)
+		template <class InputIterator> map (InputIterator first, InputIterator last,
+			 const key_compare& comp = key_compare(),
+			 const allocator_type& alloc = allocator_type()) :  _size(0)
 		{
-			_tree = new node();
+//			_tree = new Node();
+			_tree = _allocNode.allocate(1);
+			_allocNode.construct(_tree);
 			_beginNode = _endNode = _tree;
 			insert(first, last);
 		}
 
 		map(const map &other) : _size(0)
 		{
-			_tree = new node();
+//			_tree = new Node();
+			_tree = _allocNode.allocate(1);
+			_allocNode.construct(_tree);
 			_beginNode = _endNode = _tree;
 			*this = other;
 		}
 
 /*    DESTRUCTOR    */
-		~map()
-		{ delete_tree(_tree); }
+		~map() // delete_tree(_tree);
+		{
+			delete_tree(_tree);
+//			_allocNode.destroy(_tree);
+//			_allocNode.deallocate(_tree, 100);
+		}
 
 /*    ASSIGNATION OPERATOR OVERLOAD    */
 		map &operator=(const map &other)
@@ -310,8 +329,9 @@ namespace ft
 //		iterator            cbegin() const { return _size ? ++iterator(_beginNode) : iterator(_beginNode); }
 //		iterator            cend() const { return iterator(_endNode); }
 
-		reverse_iterator        rbegin() { return --reverse_iterator(_endNode); }
-		reverse_iterator        rend() { return reverse_iterator(_beginNode); }
+//		reverse_iterator        rbegin() { return --reverse_iterator(_endNode); } //fixme
+//		reverse_iterator        rend() { return reverse_iterator(_beginNode); }
+
 //		reverse_iterator    rbegin() const { return --reverse_iterator(_endNode); }
 //		reverse_iterator    rend() const { return reverse_iterator(_beginNode); }
 
@@ -323,7 +343,7 @@ namespace ft
 		*******************************************************************************/
 		bool                    empty() const { return _size ? false : true; }
 		size_t                    size() const { return _size; }
-		size_t                    max_size() const { return _alloc.max_size() / 2; }
+		size_t                    max_size() const { return _allocPair.max_size() / 2; }
 
 		/*******************************************************************************
 		*______________________________Element_access__________________________________*
@@ -333,7 +353,7 @@ namespace ft
 
 		mapped_type &at(const key_type &key)
 		{
-			node *res = find_node(_tree, key);
+			Node *res = find_node(_tree, key);
 			if (keyCmp(key, res->value.first) == EQUAL)
 				return res->value.second;
 			else
@@ -353,17 +373,17 @@ namespace ft
 		ft::pair<iterator, bool> insert(const_reference value)
 		{
 //			std::cout << value.first << " " << value.second << std::endl;
-			node *newNode = find_node(_tree,
+			Node *newNode = find_node(_tree,
 									  value.first);    /*    ищем место для добавления элемента    */
 			if (_size && valueCmp(value, newNode->value) ==
 						 EQUAL)    /*    если элемент уже существует    */
 				return ft::make_pair(iterator(newNode), false);
 			if (!_size)    /*    вставка самого первого элемента    */
 			{
-				newNode = new node(
+				newNode = new Node(
 						value);    /*    новый узел для вставки (корень всего дерева)    */
 				newNode->right = _tree;    /*    указатель на .end()    */
-				newNode->left = new node();    /*    указатель на .rend()    */
+				newNode->left = new Node();    /*    указатель на .rend()    */
 				newNode->right->isBegin = 0;
 				newNode->left->isEnd = 0;
 				newNode->left->parent = newNode->right->parent = newNode;
@@ -376,7 +396,7 @@ namespace ft
 				{
 					if (newNode->left)    /*    если newNode - миинимальный элемент дерева    */
 					{
-						node *tmp = new node(
+						Node *tmp = new Node(
 								value);    /*    новый узел для вставки (минимальный элемент)    */
 						tmp->left = newNode->left;    /*    указатель на .rend()    */
 						tmp->left->parent = tmp;
@@ -384,7 +404,7 @@ namespace ft
 						newNode->left = tmp;
 					} else    /*    обычная вставка слева    */
 					{
-						newNode->left = new node(value);
+						newNode->left = new Node(value);
 						newNode->left->parent = newNode;
 					}
 					newNode = newNode->left;    /*    newNode - добавленный узел    */
@@ -393,7 +413,7 @@ namespace ft
 				{
 					if (newNode->right)    /*    если newNode - максимальный элемент дерева    */
 					{
-						node *tmp = new node(
+						Node *tmp = new Node(
 								value);    /*    новый узел для вставки (максимальный элемент)    */
 						tmp->right = newNode->right;    /*    указатель на .end()    */
 						tmp->right->parent = tmp;
@@ -401,7 +421,7 @@ namespace ft
 						newNode->right = tmp;
 					} else    /*    обычная вставка справа    */
 					{
-						newNode->right = new node(value);
+						newNode->right = new Node(value);
 						newNode->right->parent = newNode;
 					}
 					newNode = newNode->right;    /*    newNode - добавленный узел    */
@@ -421,25 +441,30 @@ namespace ft
 				insert(ft::make_pair(first->first, first->second));
 		}
 
+//		void insert (iterator position, const value_type& val) {
+//			;
+//		}
+
+
 		//erase
 		void erase(iterator pos)
 		{
-			node *rm = pos.getNode(); /*    указатель на узел для длаления    */
-			node *l = rm->left;    /*    указатель на левое поддерево узла 'rm'     */
-			node *r = rm->right;    /*    указатель на правое поддерево узла 'rm'    */
-			node *parent = rm->parent; /*    указатель на родителя 'rm'    */
+			Node *rm = pos.getNode(); /*    указатель на узел для длаления    */
+			Node *l = rm->left;    /*    указатель на левое поддерево узла 'rm'     */
+			Node *r = rm->right;    /*    указатель на правое поддерево узла 'rm'    */
+			Node *parent = rm->parent; /*    указатель на родителя 'rm'    */
 			if (rm ==
 				_beginNode->parent)    /*    удаляем минимальный элемент    */
 			{
 				if (_size == 1)
 				{
 					clear();
-					_beginNode = _endNode = _tree = new node();
+					_beginNode = _endNode = _tree = new Node();
 					return;
 				}
 				if (r) /*    если у 'rm' есть правое поддерево, то заменяем 'rm' на минимальный элемент из дерева 'r'    */
 				{
-					node *newBegin = find_min(r);
+					Node *newBegin = find_min(r);
 					if (parent)
 						parent->left = r;
 					else
@@ -463,7 +488,7 @@ namespace ft
 			{
 				if (l) /*    если у 'rm' есть левое поддерево, то заменяем 'rm' на максимальный элемент из дерева 'l'    */
 				{
-					node *newEnd = find_max(l);
+					Node *newEnd = find_max(l);
 					if (parent)
 						parent->right = l;
 					else
@@ -484,7 +509,7 @@ namespace ft
 			}
 			if (l)    /*    удаление элемента с левым поддеревом    */
 			{
-				node *replacement = find_max(
+				Node *replacement = find_max(
 						l);    /* максимальный    элемент из левого поддерева для замены 'rm'    */
 				if (replacement->parent == rm)
 				{
@@ -549,7 +574,7 @@ namespace ft
 
 		size_t erase(const key_type &key)
 		{
-			node *node = find_node(_tree, key);
+			Node *node = find_node(_tree, key);
 
 			if (keyCmp(node->value.first, key) == EQUAL)
 			{
@@ -563,9 +588,9 @@ namespace ft
 		{
 			if (this != &other)
 			{
-				node *treeTmp = this->_tree;
-				node *beginTmp = this->_beginNode;
-				node *endTmp = this->_endNode;
+				Node *treeTmp = this->_tree;
+				Node *beginTmp = this->_beginNode;
+				Node *endTmp = this->_endNode;
 				size_t sizeTmp = this->_size;
 
 				this->_tree = other._tree;
@@ -585,7 +610,7 @@ namespace ft
 			if (_size)
 			{
 				delete_tree(_tree);
-				_tree = new node();
+				_tree = new Node();
 				_beginNode = _endNode = _tree;
 				_size = 0;
 			}
@@ -605,21 +630,21 @@ namespace ft
 		//find
 		iterator find(const key_type &key)
 		{
-			node *res = find_node(_tree, key);
+			Node *res = find_node(_tree, key);
 			return keyCmp(res->value.first, key) == EQUAL ? iterator(res)
 														  : end();
 		}
 
 		iterator find(const key_type &key) const
 		{
-			node *res = find_node(_tree, key);
+			Node *res = find_node(_tree, key);
 			return keyCmp(res->value.first, key) == EQUAL ? iterator(res)
 														  : end();
 		}
 		//count
 		size_t count(const key_type &key) const
 		{
-			node *res = find_node(_tree, key);
+			Node *res = find_node(_tree, key);
 			return keyCmp(key, res->value.first) == EQUAL ? 1 : 0;
 		}
 		//lower_bound
@@ -674,7 +699,7 @@ namespace ft
 		*__________________________________Allocator___________________________________*
 		*******************************************************************************/
 		//get_allocator
-		allocator_type            get_allocator() const { return _alloc; }
+		allocator_type            get_allocator() const { return _allocPair; }
 
 		/*******************************************************************************
 		*__________________________________Utilities___________________________________*
@@ -699,20 +724,20 @@ namespace ft
 			return keyCmp(val1.first, val2.first);
 		}
 
-		size_t height(node *p)    /*    получение высоты поддерева    */
+		size_t height(Node *p)    /*    получение высоты поддерева    */
 		{
 			return p ? p->height : 0;
 		}
 
 		int b_factor(
-				node *p)    /*    balance factor        (-1, 0 или 1) - поддерево сбалансированно    */
+				Node *p)    /*    balance factor        (-1, 0 или 1) - поддерево сбалансированно    */
 		{
 			return height(p->right) -
 				   height(p->left);    /*    (-2 или 2) - требуется балансировка левого или правого поддерева , соответственно    */
 		}
 
 		void fix_height(
-				node *p)    /*    корректировка высоты поддерева после вставки или удаления узла    */
+				Node *p)    /*    корректировка высоты поддерева после вставки или удаления узла    */
 		{
 			size_t hl = height(p->left);
 			size_t hr = height(p->right);
@@ -722,10 +747,10 @@ namespace ft
 		/*    повороты вокруг узла, balance factor корого == 2 или == -2,
 		т.е. возникает расбалансировка одного из поддеревьев    */
 
-		node *
-		rotate_right(node *p)    /*    правый поворот вокруг узла 'p'    */
+		Node *
+		rotate_right(Node *p)    /*    правый поворот вокруг узла 'p'    */
 		{
-			node *q = p->left;    /*    узел, который после поворота займёт место 'p' и станет корнем данного поддерева    */
+			Node *q = p->left;    /*    узел, который после поворота займёт место 'p' и станет корнем данного поддерева    */
 			/*    поворот    */
 			p->left = q->right;
 			q->right = p;
@@ -740,9 +765,9 @@ namespace ft
 			return q;    /*    возвращаем новый корень данного поддерева    */
 		}
 
-		node *rotate_left(node *q)    /*    левый поворот вокруг узла 'q'    */
+		Node *rotate_left(Node *q)    /*    левый поворот вокруг узла 'q'    */
 		{
-			node *p = q->right;    /*    узел, который после поворота займёт место 'q' и станет корнем данного поддерева    */
+			Node *p = q->right;    /*    узел, который после поворота займёт место 'q' и станет корнем данного поддерева    */
 			/*    поворот    */
 			q->right = p->left;
 			p->left = q;
@@ -757,9 +782,9 @@ namespace ft
 			return p;    /*    возвращаем новый корень данного поддерева    */
 		}
 
-		node *balance(node *p)    /*    балансировка узла 'p'    */
+		Node *balance(Node *p)    /*    балансировка узла 'p'    */
 		{
-			node *tmp = p->parent;    /*    запоминаем родителя данного узла    */
+			Node *tmp = p->parent;    /*    запоминаем родителя данного узла    */
 			fix_height(p);    /*    корректировка высоты данного поддерева    */
 			if (b_factor(p) ==
 				2)    /*    правое поддерево от 'p' выше левого    */
@@ -794,20 +819,20 @@ namespace ft
 			return p;    /*    балансировка не потребовалась    */
 		}
 
-		node *find_min(
-				node *p)    /*    поиск узла с минимальным ключом в дереве 'p'    */
+		Node *find_min(
+				Node *p)    /*    поиск узла с минимальным ключом в дереве 'p'    */
 		{
 			return p->left ? find_min(p->left) : p;
 		}
 
-		node *find_max(
-				node *p)    /*    поиск узла с максимальным ключом в дереве 'p'    */
+		Node *find_max(
+				Node *p)    /*    поиск узла с максимальным ключом в дереве 'p'    */
 		{
 			return p->right ? find_max(p->right) : p;
 		}
 
-		node *
-		find_node(node *p, key_type k) const    /*    поиск узла по ключу    */
+		Node *
+		find_node(Node *p, key_type k) const    /*    поиск узла по ключу    */
 		{
 			int compare = keyCmp(k, p->value.first);
 			if (compare == LESS)
@@ -822,7 +847,7 @@ namespace ft
 			return p;    /*    если узел с данным ключом отсутствует, то вернётся узел, ближайший по ключу    */
 		}
 
-		void delete_tree(node *p)    /*    очистка дерева    */
+		void delete_tree(Node *p)    /*    очистка дерева    */
 		{
 			if (p->left != nullptr)
 				delete_tree(p->left);
@@ -832,7 +857,7 @@ namespace ft
 		}
 
 		void
-		makeBalance(node *node)    /*    балансировка от node до корня    */
+		makeBalance(Node *node)    /*    балансировка от node до корня    */
 		{
 			for (; node != nullptr; node = node->parent)
 				node = balance(node);
