@@ -271,28 +271,22 @@ namespace ft
 //std::__1::allocator<ft::map<int, int, std::__1::less<int>, std::__1::allocator<ft::pair<const int, int> > >::Node>::construct<ft::map<int, int, std::__1::less<int>,
 //std::__1::allocator<ft::pair<const int, int> > >::Node>
 		explicit map (const key_compare& comp = key_compare(),
-					  const allocator_type& alloc = allocator_type()) :  _size(0)
-		{
+					  const allocator_type& alloc = allocator_type()) :  _size(0) {
 			_tree = _allocNode.allocate(1);
 			_allocNode.construct(_tree);
-//			_tree = new Node();
 			_beginNode = _endNode = _tree;
 		}
 
 		template <class InputIterator> map (InputIterator first, InputIterator last,
 			 const key_compare& comp = key_compare(),
-			 const allocator_type& alloc = allocator_type()) :  _size(0)
-		{
-//			_tree = new Node();
+			 const allocator_type& alloc = allocator_type()) :  _size(0) {
 			_tree = _allocNode.allocate(1);
 			_allocNode.construct(_tree);
 			_beginNode = _endNode = _tree;
 			insert(first, last);
 		}
 
-		map(const map &x) : _size(0)
-		{
-//			_tree = new Node();
+		map(const map &x) : _size(0) {
 			_tree = _allocNode.allocate(1);
 			_allocNode.construct(_tree);
 			_beginNode = _endNode = _tree;
@@ -309,12 +303,10 @@ namespace ft
 		}
 
 /*    ASSIGNATION OPERATOR OVERLOAD    */
-		map &operator=(const map &other)
-		{
-			if (this != &other)
-			{
+		map &operator=(const map &x) {
+			if (this != &x) {
 				clear();
-				insert(other.begin(), other.end());
+				insert(x.begin(), x.end());
 			}
 			return *this;
 		}
@@ -695,15 +687,13 @@ namespace ft
 
 
 		/*    SECONDARY FUNCTIONS    */
-		int keyCmp(const key_type &key1,
-				   const key_type &key2) const /*    сравнение ключей    */
+		int keyCmp(const key_type &key1, const key_type &key2) const /*    сравнение ключей    */
 		{
-			return _cmp(key1, key2) + _cmp(key2, key1) *
-									  2; /*    0(key1 == key2), 1(key1 < key2), 2(key1 > key2)    */
+			/*    0(key1 == key2), 1(key1 < key2), 2(key1 > key2)    */
+			return _cmp(key1, key2) + _cmp(key2, key1) * 2;
 		}
 
-		int valueCmp(const_reference val1,
-					 const_reference val2) const /*    сравнение двух пар по ключу    */
+		int valueCmp(const_reference val1, const_reference val2) const /*    сравнение двух пар по ключу    */
 		{
 			return keyCmp(val1.first, val2.first);
 		}
