@@ -311,8 +311,7 @@ namespace ft
 		/*******************************************************************************
 		*__________________________________Modifiers___________________________________*
 		*******************************************************************************/
-		ft::pair<iterator, bool> insert(const_reference value)
-		{
+		ft::pair<iterator, bool>	insert(const_reference value) {
 //			std::cout << value.first << " " << value.second << std::endl;
 			Node *newNode = findNode(_base, value.first);    /*	find space for new node	*/
 			/*							if node exist						*/
@@ -343,7 +342,7 @@ namespace ft
 						newNode->left = new Node(value);
 						newNode->left->parent = newNode;
 					}
-					newNode = newNode->left; 	/* newNode - added node */
+					newNode = newNode->left;
 				}
 				/* 					insert to right side */
 				else if (value_compare(value, newNode->content) == IS_GREATER) {
@@ -380,11 +379,12 @@ namespace ft
 
 		void erase(iterator position)
 		{
-			Node *curr = position.getNode(); /*    указатель на узел для удаления    */
-			Node *left = curr->left;    /*    указатель на левое поддерево узла 'rm'     */
-			Node *right = curr->right;    /*    указатель на правое поддерево узла 'rm'    */
-			Node *parent = curr->parent; /*    указатель на родителя 'rm'    */
-			if (curr == _firstNode->parent)    /*    удаляем минимальный элемент    */
+			Node *toDel = position.getNode();	/* node for delete */
+			Node *left = toDel->left;
+			Node *right = toDel->right;
+			Node *parent = toDel->parent;
+			/*							if min elem						*/
+			if (toDel == _firstNode->parent)
 			{
 				if (_size == 1)
 				{
@@ -392,7 +392,7 @@ namespace ft
 					_firstNode = _lastNode = _base = new Node();
 					return;
 				}
-				if (right) /*    если у 'rm' есть правое поддерево, то заменяем 'rm' на минимальный элемент из дерева 'r'    */
+				if (right)	/* if have right	*/
 				{
 					Node *newBegin = findMinNode(right);
 					if (parent)
@@ -402,95 +402,97 @@ namespace ft
 					right->parent = parent;
 					newBegin->left = _firstNode;
 					_firstNode->parent = newBegin;
-				} else    /*    обычное удаление минимального элемента    */
+				} else
 				{
 					parent->left = _firstNode;
 					_firstNode->parent = parent;
 				}
 				if (parent)
 					BalanceTree(parent);
-				delete curr;
+				delete toDel;
 				_size--;
 				return;
 			}
-			if (curr == _lastNode->parent)    /*    удаляем максимальный элемент    */
+			/*						if max elem							*/
+			if (toDel == _lastNode->parent)
 			{
-				if (left) /*    если у 'rm' есть левое поддерево, то заменяем 'rm' на максимальный элемент из дерева 'l'    */
+				if (left)	/* if have right */
 				{
 					Node *newEnd = findMaxNode(left);
-					if (parent)
-						parent->right = left;
+					if (parent) { parent->right = left; }
 					else
 						_base = newEnd;
 					left->parent = parent;
 					newEnd->right = _lastNode;
 					_lastNode->parent = newEnd;
-				} else    /*    обычное удаление максимального элемента    */
+				} else
 				{
 					_lastNode->parent = parent;
 					parent->right = _lastNode;
 				}
 				if (parent)
 					BalanceTree(parent);
-				delete curr;
+				delete toDel;
 				_size--;
 				return;
 			}
-			if (left)    /*    удаление элемента с левым поддеревом    */
+			/*					delete elem with left sub tree				*/
+			if (left)
 			{
-				Node *replacement = findMaxNode(left);    /* максимальный    элемент из левого поддерева для замены 'rm'    */
-				if (replacement->parent == curr)
+				Node *replace = findMaxNode(left);    /* максимальный    элемент из левого поддерева для замены 'rm'    */
+				if (replace->parent == toDel)
 				{
-					replacement->parent = parent;
-					replacement->right = right;
+					replace->parent = parent;
+					replace->right = right;
 					if (right)
-						right->parent = replacement;
+						right->parent = replace;
 					if (parent)
 					{
-						if (parent->left == curr)
-							parent->left = replacement;
+						if (parent->left == toDel)
+							parent->left = replace;
 						else
-							parent->right = replacement;
+							parent->right = replace;
 					} else
-						_base = replacement;
-					BalanceTree(replacement);
-					delete curr;
-					_size--;
+						_base = replace;
+					BalanceTree(replace);
+					delete toDel;
+					--_size;
 					return;
 				}
-				replacement->parent->right = replacement->left;
-				if (replacement->left)
-					replacement->left->parent = replacement->parent;
-				replacement->left = left;
-				left->parent = replacement;
-				replacement->right = right;
+				replace->parent->right = replace->left;
+				if (replace->left)
+					replace->left->parent = replace->parent;
+				replace->left = left;
+				left->parent = replace;
+				replace->right = right;
 				if (right)
-					right->parent = replacement;
-				replacement->parent = parent;
+					right->parent = replace;
+				replace->parent = parent;
 				if (parent)
 				{
-					if (parent->left == curr)
-						parent->left = replacement;
+					if (parent->left == toDel)
+						parent->left = replace;
 					else
-						parent->right = replacement;
+						parent->right = replace;
 				} else
-					_base = replacement;
-				BalanceTree(replacement);
-			} else
+					_base = replace;
+				BalanceTree(replace);
+			}
+			/*					delete elem with right sub tree				*/
+			else
 			{
-				if (parent->left == curr)
+				if (parent->left == toDel)
 				{
-					if ((parent->left = right))
-						parent->left->parent = parent;
-				} else if (parent->right == curr)
+					if ((parent->left = right)) { parent->left->parent = parent; }
+				} else if (parent->right == toDel)
 				{
 					if ((parent->right = right))
 						parent->right->parent = parent;
 				}
 				BalanceTree(parent);
 			}
-			delete curr;
-			_size--;
+			delete toDel;
+			--_size;
 		}
 
 		void erase(iterator first, iterator last) {
