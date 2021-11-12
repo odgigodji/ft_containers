@@ -25,7 +25,6 @@ std::make_pair
 Cтандартный шаблонный класс библиотеки языка программирования C++, предназначенный для реализации абстракции отображения в виде упорядоченного ассоциативного контейнера. Его объявление расположено в пространстве имён std заголовочного файла <map> библиотеки STL.
 
 ## Resources
-  ## Resources
 1. [std::map](https://www.cplusplus.com/reference/map/map/?kw=map)
 2. [std::vector](https://www.cplusplus.com/reference/vector/vector/)
 3. [std::allocator](https://en.cppreference.com/w/cpp/memory/allocator)
