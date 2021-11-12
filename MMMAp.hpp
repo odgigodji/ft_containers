@@ -451,8 +451,7 @@ namespace ft
 			}
 			if (left)    /*    удаление элемента с левым поддеревом    */
 			{
-				Node *replacement = findMaxNode(
-						left);    /* максимальный    элемент из левого поддерева для замены 'rm'    */
+				Node *replacement = findMaxNode(left);    /* максимальный    элемент из левого поддерева для замены 'rm'    */
 				if (replacement->parent == curr)
 				{
 					replacement->parent = parent;
@@ -642,7 +641,14 @@ namespace ft
 		/*    повороты вокруг узла, balance factor корого == 2 или == -2,
 		т.е. возникает расбалансировка одного из поддеревьев    */
 
-		Node * rotate_right(Node *p)    /*    правый поворот вокруг узла 'p'    */
+		//
+		//               Q                                 P              |
+		//              / \     RIGHT ROTATION            / \             |
+		//             P   C  ------------------->>>     A   Q            |
+		//            / \                                   / \           |
+		//           A   B                                 B   C          |
+
+		Node * rotateRight(Node *p)    /*    правый поворот вокруг узла 'p'    */
 		{
 			Node *q = p->left;    /*    узел, который после поворота займёт место 'p' и станет корнем данного поддерева    */
 			/*    поворот    */
@@ -659,7 +665,15 @@ namespace ft
 			return q;    /*    возвращаем новый корень данного поддерева    */
 		}
 
-		Node *rotate_left(Node *q)    /*    левый поворот вокруг узла 'q'    */
+		//
+		//
+		//               Q                                 P              |
+		//              / \          LEFT ROTATION        / \             |
+		//             P   C    <<<-------------------   A   Q            |
+		//            / \                                   / \           |
+		//           A   B                                 B   C          |
+
+		Node *rotateLeft(Node *q)    /*    левый поворот вокруг узла 'q'    */
 		{
 			Node *p = q->right;    /*    узел, который после поворота займёт место 'q' и станет корнем данного поддерева    */
 			/*    поворот    */
@@ -683,26 +697,26 @@ namespace ft
 			if (b_factor(p) == 2)    /*    правое поддерево от 'p' выше левого    */
 			{
 				if (b_factor(p->right) < 0)    /*    требуется поворот правого поддерева от 'p'    */
-					p->right = rotate_right(p->right);
+					p->right = rotateRight(p->right);
 				if (!tmp)    /*    т.е. 'p' - корень всего дерева    */
-					return _base = rotate_left(p);    /*    балансировка корня всего дерева    */
+					return _base = rotateLeft(p);    /*    балансировка корня всего дерева    */
 				/*    балансировка поддерева с корнем 'p'    */
 				if (tmp->left == p)
-					return (tmp->left = rotate_left(p));
+					return (tmp->left = rotateLeft(p));
 				else
-					return (tmp->right = rotate_left(p));
+					return (tmp->right = rotateLeft(p));
 			}
 			if (b_factor(p) == -2)    /*    левое поддерево от 'p' выше правого    */
 			{
 				if (b_factor(p->left) > 0)    /*    требуется поворот левого поддерева от 'p'    */
-					p->left = rotate_left(p->left);
+					p->left = rotateLeft(p->left);
 				if (!tmp)    /*    т.е. 'p' - корень всего дерева    */
-					return _base = rotate_right(p);    /*    балансировка корня всего дерева    */
+					return _base = rotateRight(p);    /*    балансировка корня всего дерева    */
 				/*    балансировка поддерева с корнем 'p'    */
 				if (tmp->right == p)
-					return (tmp->right = rotate_right(p));
+					return (tmp->right = rotateRight(p));
 				else
-					return (tmp->left = rotate_right(p));
+					return (tmp->left = rotateRight(p));
 			}
 			return p;    /*    балансировка не потребовалась    */
 		}
