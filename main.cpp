@@ -2,34 +2,44 @@
 //#include "map.hpp"
 #include "MMMAp.hpp"
 #include <map>
+#include "ft.hpp"
 
 int main() {
 
-	ft::pair<int, std::string> z(51, "hello");
-	ft::pair<int, std::string> x(63, "vay");
-
-	std::pair<int, std::string> x1(63, "vay");
-
+//	ft::pair<int, std::string> z(51, "hello");
+//	ft::pair<int, std::string> x(63, "vay");
+//
+//	std::pair<int, std::string> x1(63, "vay");
+//
 	ft::map<int, std::string> a;
+	ft::map<int, int> mp;
+	std::map<int, int> mp1;
 
-	ft::map<int, std::string>::iterator b = a.begin();
+//
+//	ft::map<int, std::string>::iterator b = a.begin();
+//
+//
+//	std::map<int, std::string> zz;
+//	zz.insert(x1);
+//	zz.insert(std::make_pair(33, "jesus"));
+//
+//	a.insert(z);
+//	a.insert(x);
+//
+//	a.insert(ft::make_pair(33, std::string("hesus")));
+//
+//	ft::map<int, std::string>::iterator bbb;
+//	a.insert(z);
+//	a.insert(x);
+//	b = a.begin();
+	std::cout << mp1.count(0) << std::endl;
+	mp1.insert(std::make_pair(0, 0));
+	std::cout << mp1.count(0) << std::endl;
 
 
-	std::map<int, std::string> zz;
-	zz.insert(x1);
-	zz.insert(std::make_pair(33, "jesus"));
-
-	a.insert(z);
-	a.insert(x);
-
-	a.insert(ft::make_pair(33, std::string("hesus")));
-
-	ft::map<int, std::string>::iterator bbb;
-	a.insert(z);
-	a.insert(x);
-	b = a.begin();
-
-
+	std::cout << mp.count(0) << std::endl;
+	mp.insert(ft::make_pair(0, 0));
+	std::cout << mp.count(0) << std::endl;
 	return 0;
 }
 

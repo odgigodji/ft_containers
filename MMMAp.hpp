@@ -512,32 +512,32 @@ namespace ft
 				erase(first++);
 		}
 
-		size_t erase(const key_type &key) {
-			Node *node = findNode(_base, key);
+		size_t erase(const key_type &k) {
+			Node *node = findNode(_base, k);
 
-			if (keyCmp(node->content.first, key) == IS_EQUAL) {
+			if (keyCmp(node->content.first, k) == IS_EQUAL) {
 				erase(iterator(node));
 				return 1;
 			}
 			return 0;
 		}
 		//swap
-		void swap(map &other) {
-			if (this != &other) {
-				Node *treeTmp = this->_base;
-				Node *beginTmp = this->_firstNode;
-				Node *endTmp = this->_lastNode;
-				size_t sizeTmp = this->_size;
+		void swap(map &x) {
+			if (this != &x) {
+				Node *tmp_base = _base;
+				Node *firstTmp = _firstNode;
+				Node *lastTmp = _lastNode;
+				size_t sizeTmp = _size;
 
-				this->_base = other._base;
-				this->_firstNode = other._firstNode;
-				this->_lastNode = other._lastNode;
-				this->_size = other._size;
+				_base = x._base;
+				_firstNode = x._firstNode;
+				_lastNode = x._lastNode;
+				_size = x._size;
 
-				other._base = treeTmp;
-				other._firstNode = beginTmp;
-				other._lastNode = endTmp;
-				other._size = sizeTmp;
+				x._base = tmp_base;
+				x._firstNode = firstTmp;
+				x._lastNode = lastTmp;
+				x._size = sizeTmp;
 			}
 		}
 		//clear
@@ -545,8 +545,8 @@ namespace ft
 			if (_size) {
 				del_tree(_base);
 				_base = new Node();
-				_firstNode = _lastNode = _base;
 				_size = 0;
+				_firstNode = _lastNode = _base;
 			}
 		}
 
@@ -554,49 +554,49 @@ namespace ft
 		*__________________________________Observers___________________________________*
 		*******************************************************************************/
 		//key_comp
-		//value_comp
 		key_compare				key_comp() const { return _comp; }
+		//value_comp
 		value_compare			value_comp() const { return value_compare(_comp); }
 
 		/*******************************************************************************
 		*__________________________________Operations__________________________________*
 		*******************************************************************************/
 		//find
-		iterator find(const key_type &key) {
-			Node *res = findNode(_base, key);
-			return keyCmp(res->content.first, key) == IS_EQUAL ? iterator(res) : end();
+		iterator find(const key_type &k) {
+			Node *curr = findNode(_base, k);
+			return keyCmp(curr->content.first, k) == IS_EQUAL ? iterator(curr) : end();
 		}
 
-		iterator find(const key_type &key) const {
-			Node *res = findNode(_base, key);
-			return keyCmp(res->content.first, key) == IS_EQUAL ? iterator(res) : end();
+		iterator find(const key_type &k) const {
+			Node *curr = findNode(_base, k);
+			return keyCmp(curr->content.first, k) == IS_EQUAL ? iterator(curr) : end();
 		}
+
 		//count
-		size_t count(const key_type &key) const {
-			Node *res = findNode(_base, key);
-			return keyCmp(key, res->content.first) == IS_EQUAL ? 1 : 0;
+		size_t count(const key_type &k) const {
+			Node *curr = findNode(_base, k);
+			if (curr->content.first == k)
+				return 1;
+			return 0;
 		}
 		//lower_bound
 
-		iterator lower_bound(const key_type &key) const {
-			iterator it(findNode(_base, key));
-			if (keyCmp((*it).first, key) == IS_LESS)
-				++it;
-			return it;
+		iterator lower_bound(const key_type &k) const {
+			iterator iter(findNode(_base, k));
+			if (keyCmp((*iter).first, k) == IS_LESS) { ++iter; }
+			return iter;
 		}
 		//upper_bound
-		iterator upper_bound(const key_type &key) const {
-			iterator it(findNode(_base, key));
-			int compare = keyCmp((*it).first, key);
-			if (compare == IS_LESS || compare == IS_EQUAL)
-				++it;
-			return it;
+		iterator upper_bound(const key_type &k) const {
+			iterator iter(findNode(_base, k));
+			int compare = keyCmp((*iter).first, k);
+			if (compare == IS_LESS || compare == IS_EQUAL) { ++iter; }
+			return iter;
 		}
 
 		//equal_range
 		ft::pair<iterator, iterator> equal_range(const key_type &key) const {
-			return ft::make_pair(iterator(lower_bound(key)),
-								 iterator(upper_bound(key)));
+			return ft::make_pair(iterator(lower_bound(key)), iterator(upper_bound(key)));
 		}
 
 		/*******************************************************************************
