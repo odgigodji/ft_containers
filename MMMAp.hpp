@@ -118,8 +118,7 @@ namespace ft
 			reference	operator*() { return _node->content; }
 			pointer		operator->() { return &_node->content; }
 			bool    operator==(const iterator &rhs) { return this->_node == rhs._node; }
-			bool    operator!=(const iterator &hrs) { return this->_node != hrs._node; }
-
+			bool    operator!=(const iterator &rhs) { return this->_node != rhs._node; }
 			iterator&    operator++() {
 				if (_node->isBegin)
 					_node = _node->parent;
@@ -709,4 +708,14 @@ namespace ft
 			for (; node != nullptr; node = node->parent) { node = balancingNode(node); }
 		}
 	};
+
+	template < class Key, class T, class Compare, class Allocator >
+	bool    operator==(const ft::map<Key, T, Compare, Allocator> &lhs,
+			const ft::map<Key, T, Compare, Allocator> &rhs) {
+		if (lhs.size() == rhs.size()) {
+
+			return true;
+		}
+		return false;
+	}
 }
