@@ -66,8 +66,9 @@ namespace ft
 
 		public:
 			explicit	value_compare(const key_compare &c) : _comp(c) {}
-			bool		operator ()(const_reference val1,
-									const_reference val2) const { return _comp(val1.first, val2.first); }
+			bool		operator ()(const_reference val1, const_reference val2) const {
+				return _comp(val1.first, val2.first);
+			}
 		};
 
 		/*							Allocator for node 							*/
@@ -574,8 +575,7 @@ namespace ft
 		//count
 		size_t count(const key_type &k) const {
 			Node *curr = findNode(_base, k);
-			if (curr->content.first == k)
-				return 1;
+			if (curr->content.first == k) { return 1; }
 			return 0;
 		}
 		//lower_bound
@@ -754,6 +754,5 @@ namespace ft
 			for (; node != nullptr; node = node->parent)
 				node = balance(node);
 		}
-
 	};
 }
