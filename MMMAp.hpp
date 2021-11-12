@@ -363,6 +363,7 @@ namespace ft
 		/*******************************************************************************
 		*__________________________________Modifiers___________________________________*
 		*******************************************************************************/
+		//void construct( pointer p, const_reference val );  value_type* , value_type&
 		ft::pair<iterator, bool> insert(const_reference value)
 		{
 //			std::cout << value.first << " " << value.second << std::endl;
@@ -684,6 +685,7 @@ namespace ft
 		/*    SECONDARY FUNCTIONS    */
 		int keyCmp(const key_type &key1, const key_type &key2) const /*    сравнение ключей    */
 		{
+//			std::cout << "key1 =" << key1 << "|key2 = " << key2 << "|and _cmp=" << _cmp(key1, key2) << std::endl;
 			/*    0(key1 == key2), 1(key1 < key2), 2(key1 > key2)    */
 			return _cmp(key1, key2) + _cmp(key2, key1) * 2;
 		}
@@ -795,8 +797,7 @@ namespace ft
 			return p->right ? find_max(p->right) : p;
 		}
 
-		Node *
-		find_node(Node *p, key_type k) const    /*    поиск узла по ключу    */
+		Node * find_node(Node *p, key_type k) const    /*    поиск узла по ключу    */
 		{
 			int compare = keyCmp(k, p->content.first);
 			if (compare == LESS)
